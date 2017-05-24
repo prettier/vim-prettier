@@ -13,6 +13,9 @@ INTRODUCTION                                        *vim-prettier-introduction*
 A vim plugin wrapper for prettier, pre-configured with 
 custom default prettier settings.
 
+By default it will auto format javascript files that have "@format" 
+annotation in the header of the file.
+
 When installed via vim-plug, a default prettier executable is installed inside
  vim-prettier.
 

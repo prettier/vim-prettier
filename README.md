@@ -2,6 +2,8 @@
 
 A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 
+By default it will auto format javascript files that have "@format" annotation in the header of the file.
+
 ### INSTALL 
 
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and yarn|npm installed globally.

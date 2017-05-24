@@ -1,6 +1,5 @@
 let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-" TODO => check all &ft comparisons and make sure we use match to protect from compound file types
 function! prettier#Prettier() abort
   let l:exec = s:Get_Prettier_Exec()
 
@@ -11,11 +10,11 @@ function! prettier#Prettier() abort
   if exec != -1
     let l:stdout = split(system(exec . s:Get_Prettier_Exec_Args(), getbufline(bufnr('%'), 1, '$')), '\n')
 
-		" delete all lines on the current buffer
-		silent! execute 1 . ',' . line('$') . 'delete _'
+    " delete all lines on the current buffer
+    silent! execute 1 . ',' . line('$') . 'delete _'
 
-		" replace all lines from the current buffer with output from prettier
-		call setline(1, stdout)
+    " replace all lines from the current buffer with output from prettier
+    call setline(1, stdout)
   else
     call s:Suggest_Install_Prettier()
   endif

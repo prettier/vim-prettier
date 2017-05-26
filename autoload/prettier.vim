@@ -10,6 +10,12 @@ function! prettier#Prettier() abort
   if exec != -1
     let l:stdout = split(system(exec . s:Get_Prettier_Exec_Args(), getbufline(bufnr('%'), 1, '$')), '\n')
 
+    " check system exit code
+    if v:shell_error
+      echohl WarningMsg | echom 'Prettier: failed to parse buffer.' | echohl NONE
+      return
+    endif
+
     " delete all lines on the current buffer
     silent! execute 1 . ',' . line('$') . 'delete _'
 

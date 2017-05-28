@@ -14,19 +14,19 @@ if !exists('g:prettier#config#print_width') | let g:prettier#config#print_width 
 if !exists('g:prettier#config#tab_width') | let g:prettier#config#tab_width = 2 | endif
 
 " use tabs over spaces
-if !exists('g:prettier#config#use_tabs') | let g:prettier#config#use_tabs = 0 | endif
+if !exists('g:prettier#config#use_tabs') | let g:prettier#config#use_tabs = 'false' | endif
 
 " print semicolons
-if !exists('g:prettier#config#semi') | let g:prettier#config#semi = 1 | endif
+if !exists('g:prettier#config#semi') | let g:prettier#config#semi = 'true' | endif
 
 " single quotes over double quotes
-if !exists('g:prettier#config#single_quote') | let g:prettier#config#single_quote = 1 | endif
+if !exists('g:prettier#config#single_quote') | let g:prettier#config#single_quote = 'true' | endif
 
 " print spaces between brackets
-if !exists('g:prettier#config#bracket_spacing') | let g:prettier#config#bracket_spacing = 0 | endif
+if !exists('g:prettier#config#bracket_spacing') | let g:prettier#config#bracket_spacing = 'false' | endif
 
 " put > on the last line instead of new line
-if !exists('g:prettier#config#jsx_bracket_same_line') | let g:prettier#config#jsx_bracket_same_line = 1 | endif
+if !exists('g:prettier#config#jsx_bracket_same_line') | let g:prettier#config#jsx_bracket_same_line = 'true' | endif
 
 " none|es5|all
 if !exists('g:prettier#config#trailing_comma') | let g:prettier#config#trailing_comma = 'all' | endif

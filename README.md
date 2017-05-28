@@ -67,19 +67,19 @@ g:prettier#config#print_width = 80
 g:prettier#config#tab_width = 2
 
 " use tabs over spaces
-g:prettier#config#use_tabs = 0
+g:prettier#config#use_tabs = 'false'
 
 " print semicolons
-g:prettier#config#semi = 1
+g:prettier#config#semi = 'true'
 
 " single quotes over double quotes
-g:prettier#config#single_quote = 1
+g:prettier#config#single_quote = 'true' 
 
 " print spaces between brackets
-g:prettier#config#bracket_spacing = 0
+g:prettier#config#bracket_spacing = 'false' 
 
 " put > on the last line instead of new line
-g:prettier#config#jsx_bracket_same_line = 1
+g:prettier#config#jsx_bracket_same_line = 'true' 
 
 " none|es5|all
 g:prettier#config#trailing_comma = 'all'

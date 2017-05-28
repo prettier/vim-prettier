@@ -165,7 +165,7 @@ function! s:Get_Exec(...) abort
   let l:rootDir = a:0 > 0 ? a:1 : 0 
   let l:exec = 0
 
-  if rootDir
+  if isdirectory(rootDir) 
     let l:dir = s:Tranverse_Dir_Search(rootDir) 
     if dir != -1
       let l:exec = s:Get_Path_To_Exec(dir)

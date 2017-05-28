@@ -1,26 +1,21 @@
 let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-function! prettier#Prettier() abort
-  let l:exec = s:Get_Prettier_Exec()
+function! prettier#Prettier(...) abort
+  let l:execCmd = s:Get_Prettier_Exec()
+  let l:async = a:0 > 0 ? a:1 : 0 
 
   if &ft !~ 'javascript'
     return 
   endif
 
-  if exec != -1
-    let l:stdout = split(system(exec . s:Get_Prettier_Exec_Args(), getbufline(bufnr('%'), 1, '$')), '\n')
+  if execCmd != -1
+    let l:cmd = execCmd . s:Get_Prettier_Exec_Args()
 
-    " check system exit code
-    if v:shell_error
-      echohl WarningMsg | echom 'Prettier: failed to parse buffer.' | echohl NONE
-      return
+    if async && v:version >= 800 && exists('*job_start')
+      call s:Prettier_Exec_Async(cmd)
+    else
+      call s:Prettier_Exec_Sync(cmd)
     endif
-
-    " delete all lines on the current buffer
-    silent! execute 1 . ',' . line('$') . 'delete _'
-
-    " replace all lines from the current buffer with output from prettier
-    call setline(1, stdout)
   else
     call s:Suggest_Install_Prettier()
   endif
@@ -38,10 +33,70 @@ function! prettier#Autoformat() abort
 
   " Search starting at the start of the document
   if search(pattern, 'n', maxLineLookup, maxTimeLookupMs) > 0
-    call prettier#Prettier()
+    " autoformat async
+    call prettier#Prettier(1) 
   endif
 
   " Restore the selection and if greater then before it defaults to end
+  call cursor(curPos[1], curPos[2])
+endfunction
+
+function! s:Prettier_Exec_Sync(cmd) abort 
+  let l:out = split(system(a:cmd, getbufline(bufnr('%'), 1, '$')), '\n')
+
+  " check system exit code
+  if v:shell_error
+    call s:Prettier_Parse_Error()
+    return
+  endif
+
+  call s:Apply_Prettier_Format(out)
+endfunction
+
+function! s:Prettier_Exec_Async(cmd) abort 
+    call job_start(a:cmd, {
+      \ 'in_io': 'buffer',
+      \ 'in_name': bufname('%'),
+      \ 'close_cb': 'Prettier_Job_Close',
+      \ 'exit_cb': 'Prettier_Job_Exit' })
+endfunction
+
+function! Prettier_Job_Close(channel) abort 
+  let l:out = []
+
+  while ch_status(a:channel, {'part': 'out'}) == 'buffered'
+    call add(out, ch_read(a:channel))
+  endwhile
+
+  " nothing to update
+  if (getbufline(bufnr('%'), 1, '$') == out)
+    return
+  endif
+  
+  if len(out) 
+    call s:Apply_Prettier_Format(out)
+    write
+  endif
+endfunction
+
+function! Prettier_Job_Exit(job, status) abort 
+  if a:status 
+    call s:Prettier_Parse_Error()
+    return
+  endif
+endfunction
+
+function! s:Apply_Prettier_Format(lines) abort
+  " store cursor position
+  let l:curPos = getpos('.')
+
+  " delete all lines on the current buffer
+  silent! execute 1 . ',' . line('$') . 'delete _'
+
+  " replace all lines from the current buffer with output from prettier
+  call setline(1, a:lines)
+
+  " restore cursor position
   call cursor(curPos[1], curPos[2])
 endfunction
 
@@ -149,6 +204,10 @@ function! s:Tranverse_Dir_Search(rootDir) abort
 
     let l:root = parent
   endwhile
+endfunction
+
+function! s:Prettier_Parse_Error() abort
+  echohl WarningMsg | echom 'Prettier: failed to parse buffer.' | echohl NONE
 endfunction
 
 " If we can't find any prettier installing we then suggest where to get it from

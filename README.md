@@ -31,6 +31,16 @@ vim-prettier executable resolution:
 
 Formats the entire buffer
 
+### Commands
+
+Prettier can be manualy triggered by:
+
+```
+<Leader>p
+```
+
+### Configuration
+
 ```
 :Prettier
 ```

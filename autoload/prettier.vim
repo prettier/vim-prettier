@@ -7,9 +7,12 @@ function! prettier#Prettier(...) abort
   if &ft !~ 'javascript'
     return 
   endif
-
   if execCmd != -1
     let l:cmd = execCmd . s:Get_Prettier_Exec_Args()
+
+    " close quickfix
+    call setqflist([])
+    cclose
 
     if async && v:version >= 800 && exists('*job_start')
       call s:Prettier_Exec_Async(cmd)
@@ -46,7 +49,7 @@ function! s:Prettier_Exec_Sync(cmd) abort
 
   " check system exit code
   if v:shell_error
-    call s:Prettier_Parse_Error()
+    call s:Prettier_Parse_Error(out)
     return
   endif
 
@@ -57,8 +60,8 @@ function! s:Prettier_Exec_Async(cmd) abort
     call job_start(a:cmd, {
       \ 'in_io': 'buffer',
       \ 'in_name': bufname('%'),
-      \ 'close_cb': 'Prettier_Job_Close',
-      \ 'exit_cb': 'Prettier_Job_Exit' })
+      \ 'err_cb': 'Prettier_Job_Error',
+      \ 'close_cb': 'Prettier_Job_Close' })
 endfunction
 
 function! Prettier_Job_Close(channel) abort 
@@ -79,10 +82,28 @@ function! Prettier_Job_Close(channel) abort
   endif
 endfunction
 
-function! Prettier_Job_Exit(job, status) abort 
-  if a:status 
-    call s:Prettier_Parse_Error()
-    return
+function! Prettier_Job_Error(channel, msg) abort 
+    call s:Prettier_Parse_Error(split(a:msg, '\n'))
+endfunction
+
+function! s:Handle_Parsing_Errors(out) abort
+  let l:errors = []
+
+  for line in a:out
+    " matches:
+    " stdin: SyntaxError: Unexpected token (2:8)
+    let match = matchlist(line, '^stdin: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
+    if !empty(match)
+      call add(errors, { "bufnr": bufnr('%'),
+                       \ "text": match[1],
+                       \ "lnum": match[2],
+                       \ "col": match[3] })
+    endif
+  endfor
+
+  if len(errors) 
+    call setqflist(errors)
+        botright copen
   endif
 endfunction
 
@@ -202,8 +223,9 @@ function! s:Tranverse_Dir_Search(rootDir) abort
   endwhile
 endfunction
 
-function! s:Prettier_Parse_Error() abort
+function! s:Prettier_Parse_Error(errors) abort
   echohl WarningMsg | echom 'Prettier: failed to parse buffer.' | echohl NONE
+  call s:Handle_Parsing_Errors(a:errors)
 endfunction
 
 " If we can't find any prettier installing we then suggest where to get it from

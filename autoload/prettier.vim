@@ -132,17 +132,17 @@ endfunction
 " => if all fails suggest install
 function! s:Get_Prettier_Exec() abort
   let l:local_exec = s:Get_Prettier_Local_Exec()
-  if local_exec != -1
+  if executable(local_exec)
     return local_exec
   endif 
 
   let l:global_exec = s:Get_Prettier_Global_Exec()
-  global_exec != -1
+  if executable(l:global_exec)
     return global_exec
   endif 
 
   let l:plugin_exec = s:Get_Prettier_Plugin_Exec()
-  if plugin_exec != -1
+  if executable(l:plugin_exec)
     return plugin_exec
   endif 
 
@@ -163,7 +163,7 @@ endfunction
 
 function! s:Get_Exec(...) abort
   let l:rootDir = a:0 > 0 ? a:1 : 0 
-  let l:exec = 0
+  let l:exec = -1
 
   if isdirectory(rootDir) 
     let l:dir = s:Tranverse_Dir_Search(rootDir) 
@@ -174,11 +174,7 @@ function! s:Get_Exec(...) abort
     let l:exec = s:Get_Path_To_Exec()
   endif
 
-  if executable(exec)
-    return exec
-  endif
-
-  return -1 
+  return exec
 endfunction
 
 function! s:Get_Path_To_Exec(...) abort

@@ -4,35 +4,35 @@ endif
 let g:loaded_prettier = 1
 
 " => Plugin config
-if !exists('g:prettier#autoformat') | let g:prettier#autoformat = 1 | endif
+let g:prettier#autoformat = get(g:, 'g:prettier#autoformat', 1)
 
 " => Prettier CLI config
 " max line lengh that prettier will wrap on
-if !exists('g:prettier#config#print_width') | let g:prettier#config#print_width = 80 | endif
+let g:prettier#config#print_width = get(g:, 'g:prettier#config#print_width', 80)
 
 " number of spaces per indentation level
-if !exists('g:prettier#config#tab_width') | let g:prettier#config#tab_width = 2 | endif
+let g:prettier#config#tab_width = get(g:,'g:prettier#config#tab_width', 2)
 
 " use tabs over spaces
-if !exists('g:prettier#config#use_tabs') | let g:prettier#config#use_tabs = 'false' | endif
+let g:prettier#config#use_tabs = get(g:,'g:prettier#config#use_tabs', 'false')
 
 " print semicolons
-if !exists('g:prettier#config#semi') | let g:prettier#config#semi = 'true' | endif
+let g:prettier#config#semi = get(g:,'g:prettier#config#semi', 'true')
 
 " single quotes over double quotes
-if !exists('g:prettier#config#single_quote') | let g:prettier#config#single_quote = 'true' | endif
+let g:prettier#config#single_quote = get(g:,'g:prettier#config#single_quote', 'true')
 
 " print spaces between brackets
-if !exists('g:prettier#config#bracket_spacing') | let g:prettier#config#bracket_spacing = 'false' | endif
+let g:prettier#config#bracket_spacing = get(g:,'g:prettier#config#bracket_spacing', 'false')
 
 " put > on the last line instead of new line
-if !exists('g:prettier#config#jsx_bracket_same_line') | let g:prettier#config#jsx_bracket_same_line = 'true' | endif
+let g:prettier#config#jsx_bracket_same_line = get(g:,'g:prettier#config#jsx_bracket_same_line', 'true')
 
 " none|es5|all
-if !exists('g:prettier#config#trailing_comma') | let g:prettier#config#trailing_comma = 'all' | endif
+let g:prettier#config#trailing_comma = get(g:,'g:prettier#config#trailing_comma', 'all')
 
 " flow|babylon
-if !exists('g:prettier#config#parser') | let g:prettier#config#parser = 'flow' | endif
+let g:prettier#config#parser = get(g:,'g:prettier#config#parser', 'flow')
 
 command! Prettier call prettier#Prettier()
 

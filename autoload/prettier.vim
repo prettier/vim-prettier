@@ -7,17 +7,18 @@ function! prettier#Prettier(...) abort
   if &ft !~ 'javascript'
     return 
   endif
-  if execCmd != -1
-    let l:cmd = execCmd . s:Get_Prettier_Exec_Args()
+
+  if l:execCmd != -1
+    let l:cmd = l:execCmd . s:Get_Prettier_Exec_Args()
 
     " close quickfix
     call setqflist([])
     cclose
 
-    if async && v:version >= 800 && exists('*job_start')
-      call s:Prettier_Exec_Async(cmd)
+    if l:async && v:version >= 800 && exists('*job_start')
+      call s:Prettier_Exec_Async(l:cmd)
     else
-      call s:Prettier_Exec_Sync(cmd)
+      call s:Prettier_Exec_Sync(l:cmd)
     endif
   else
     call s:Suggest_Install_Prettier()
@@ -35,7 +36,7 @@ function! prettier#Autoformat() abort
   call cursor(1, 1)
 
   " Search starting at the start of the document
-  if search(pattern, 'n', maxLineLookup, maxTimeLookupMs) > 0
+  if search(l:pattern, 'n', l:maxLineLookup, l:maxTimeLookupMs) > 0
     " autoformat async
     call prettier#Prettier(1) 
   endif
@@ -49,11 +50,11 @@ function! s:Prettier_Exec_Sync(cmd) abort
 
   " check system exit code
   if v:shell_error
-    call s:Prettier_Parse_Error(out)
+    call s:Prettier_Parse_Error(l:out)
     return
   endif
 
-  call s:Apply_Prettier_Format(out)
+  call s:Apply_Prettier_Format(l:out)
 endfunction
 
 function! s:Prettier_Exec_Async(cmd) abort 
@@ -68,16 +69,16 @@ function! Prettier_Job_Close(channel) abort
   let l:out = []
 
   while ch_status(a:channel, {'part': 'out'}) == 'buffered'
-    call add(out, ch_read(a:channel))
+    call add(l:out, ch_read(a:channel))
   endwhile
 
   " nothing to update
-  if (getbufline(bufnr('%'), 1, '$') == out)
+  if (getbufline(bufnr('%'), 1, '$') == l:out)
     return
   endif
   
-  if len(out) 
-    call s:Apply_Prettier_Format(out)
+  if len(l:out) 
+    call s:Apply_Prettier_Format(l:out)
     write
   endif
 endfunction
@@ -92,18 +93,18 @@ function! s:Handle_Parsing_Errors(out) abort
   for line in a:out
     " matches:
     " stdin: SyntaxError: Unexpected token (2:8)
-    let match = matchlist(line, '^stdin: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
-    if !empty(match)
-      call add(errors, { "bufnr": bufnr('%'),
-                       \ "text": match[1],
-                       \ "lnum": match[2],
-                       \ "col": match[3] })
+    let l:match = matchlist(line, '^stdin: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
+    if !empty(l:match)
+      call add(l:errors, { 'bufnr': bufnr('%'),
+                         \ 'text': match[1],
+                         \ 'lnum': match[2],
+                         \ 'col': match[3] })
     endif
   endfor
 
-  if len(errors) 
-    call setqflist(errors)
-        botright copen
+  if len(l:errors) 
+    call setqflist(l:errors)
+    botright copen
   endif
 endfunction
 
@@ -118,7 +119,7 @@ function! s:Apply_Prettier_Format(lines) abort
   call setline(1, a:lines)
 
   " restore cursor position
-  call cursor(curPos[1], curPos[2])
+  call cursor(l:curPos[1], l:curPos[2])
 endfunction
 
 " By default we will default to our internal
@@ -153,18 +154,18 @@ endfunction
 " => if all fails suggest install
 function! s:Get_Prettier_Exec() abort
   let l:local_exec = s:Get_Prettier_Local_Exec()
-  if executable(local_exec)
-    return local_exec
+  if executable(l:local_exec)
+    return l:local_exec
   endif 
 
   let l:global_exec = s:Get_Prettier_Global_Exec()
   if executable(l:global_exec)
-    return global_exec
+    return l:global_exec
   endif 
 
   let l:plugin_exec = s:Get_Prettier_Plugin_Exec()
   if executable(l:plugin_exec)
-    return plugin_exec
+    return l:plugin_exec
   endif 
 
   return -1
@@ -186,10 +187,10 @@ function! s:Get_Exec(...) abort
   let l:rootDir = a:0 > 0 ? a:1 : 0 
   let l:exec = -1
 
-  if isdirectory(rootDir) 
-    let l:dir = s:Tranverse_Dir_Search(rootDir) 
+  if isdirectory(l:rootDir) 
+    let l:dir = s:Tranverse_Dir_Search(l:rootDir) 
     if dir != -1
-      let l:exec = s:Get_Path_To_Exec(dir)
+      let l:exec = s:Get_Path_To_Exec(l:dir)
     endif
   else
     let l:exec = s:Get_Path_To_Exec()
@@ -200,7 +201,7 @@ endfunction
 
 function! s:Get_Path_To_Exec(...) abort
   let l:rootDir = a:0 > 0 ? a:1 : -1 
-  let l:dir = rootDir != -1 ? rootDir . '/.bin/' : '' 
+  let l:dir = l:rootDir != -1 ? l:rootDir . '/.bin/' : '' 
   return dir . 'prettier'
 endfunction
 
@@ -210,16 +211,16 @@ function! s:Tranverse_Dir_Search(rootDir) abort
 
   while 1
     let l:search_dir = root . '/' . dir
-    if isdirectory(search_dir) 
-      return search_dir
+    if isdirectory(l:search_dir) 
+      return l:search_dir
     endif
 
     let l:parent = fnamemodify(root, ':h')
-    if parent == root 
+    if l:parent == l:root 
       return -1
     endif
 
-    let l:root = parent
+    let l:root = l:parent
   endwhile
 endfunction
 

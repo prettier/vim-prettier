@@ -2,7 +2,7 @@
 
 A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 
-By default it will auto format javascript files that have "@format" annotation in the header of the file.
+By default it will auto format **javascript**, **typescript**, **less**, **scss** and **css** files that have "@format" annotation in the header of the file.
 
 ![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
 
@@ -11,8 +11,10 @@ By default it will auto format javascript files that have "@format" annotation i
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and yarn|npm installed globally.
 
 ```
-" yarn install | npm install
-Plug 'mitermayer/vim-prettier', { 'do': 'yarn install', 'for': 'javascript' } 
+" post install (yarn install | npm install) then load plugin only for editing supported files
+plug 'mitermayer/vim-prettier', { 
+	\ 'do': 'yarn install', 
+	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] } 
 ```
 
 If using other vim plugin managers or doing manual setup make sure to have `prettier` installed globally or go to your vim-prettier directory and either do `npm install` or `yarn install`
@@ -29,32 +31,35 @@ vim-prettier executable resolution:
 
 ## USAGE
 
-Formats the entire buffer
-
-### Commands
-
-Prettier can be manualy triggered by:
+Prettier by default will run on auto save but can also be manualy triggered by:
 
 ```
 <Leader>p
 ```
-
-### Configuration
+or
 
 ```
 :Prettier
 ```
 
-Disable auto formatting of javascript files that have "@format" tag 
+## Configuration
+
+Disable auto formatting of files that have "@format" tag 
 
 ```
 let g:prettier#autoformat = 0
 ```
 
-Enable vim-prettier to run in javascript files without the "@format" doc tag 
+The command `:Prettier` by default is synchronous but can be forced to be async
 
 ```
-autocmd BufWritePre *.js call prettier#Prettier()
+let g:prettier#exec_cmd_async = 1
+```
+
+Enable vim-prettier to run in files without requiring the "@format" doc tag 
+
+```
+  autocmd BufWritePre *.js,*.css,*.scss,*.less call prettier#Prettier()
 ```
 
 Overwrite default configuration
@@ -84,7 +89,7 @@ g:prettier#config#jsx_bracket_same_line = 'true'
 " none|es5|all
 g:prettier#config#trailing_comma = 'all'
 
-" flow|babylon
+" flow|babylon|typescript|postcss
 g:prettier#config#parser = 'flow'
 
 ```

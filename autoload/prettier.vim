@@ -3,13 +3,10 @@ let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 function! prettier#Prettier(...) abort
   let l:execCmd = s:Get_Prettier_Exec()
   let l:async = a:0 > 0 ? a:1 : 0 
-
-  if &ft !~ 'javascript'
-    return 
-  endif
+  let l:config = getbufvar(bufnr('%'), 'prettier_ft_default_args', {})
 
   if l:execCmd != -1
-    let l:cmd = l:execCmd . s:Get_Prettier_Exec_Args()
+    let l:cmd = l:execCmd . s:Get_Prettier_Exec_Args(l:config)
 
     " close quickfix
     call setqflist([])
@@ -124,25 +121,27 @@ endfunction
 
 " By default we will default to our internal
 " configuration settings for prettier
-function! s:Get_Prettier_Exec_Args() abort
+function! s:Get_Prettier_Exec_Args(config) abort
+  " Allow params to be passed as json format
+  " convert bellow usage of globals to a get function o the params defaulting to global
   let l:cmd = ' --print-width ' .
-          \ g:prettier#config#print_width .
+          \ get(a:config, 'printWidth', g:prettier#config#print_width) .
           \ ' --tab-width ' .
-          \ g:prettier#config#tab_width .
+          \ get(a:config, 'tabWidth', g:prettier#config#tab_width) .
           \ ' --use-tabs ' .
-          \ g:prettier#config#use_tabs .
+          \ get(a:config, 'useTabs', g:prettier#config#use_tabs) .
           \ ' --semi ' .
-          \ g:prettier#config#semi .
+          \ get(a:config, 'semi', g:prettier#config#semi) .
           \ ' --single-quote ' .
-          \ g:prettier#config#single_quote .
+          \ get(a:config, 'singleQuote', g:prettier#config#single_quote) .
           \ ' --bracket-spacing ' .
-          \ g:prettier#config#bracket_spacing .
+          \ get(a:config, 'bracketSpacing', g:prettier#config#bracket_spacing) .
           \ ' --jsx-bracket-same-line ' .
-          \ g:prettier#config#jsx_bracket_same_line .
+          \ get(a:config, 'jsxBracketSameLine', g:prettier#config#jsx_bracket_same_line) .
           \ ' --trailing-comma ' .
-          \ g:prettier#config#trailing_comma .
+          \ get(a:config, 'trailingComma', g:prettier#config#trailing_comma) .
           \ ' --parser ' .
-          \ g:prettier#config#parser .
+          \ get(a:config, 'parser', g:prettier#config#parser) .
           \ ' --stdin '
   return cmd
 endfunction

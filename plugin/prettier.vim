@@ -4,7 +4,11 @@ endif
 let g:loaded_prettier = 1
 
 " => Plugin config
+" autoformating enabled by default upon saving
 let g:prettier#autoformat = get(g:, 'g:prettier#autoformat', 1)
+
+" calling :Prettier by default runs synchronous  
+let g:prettier#exec_cmd_async = get(g:, 'g:prettier#exec_cmd_async', 0)
 
 " => Prettier CLI config
 " max line lengh that prettier will wrap on
@@ -31,11 +35,13 @@ let g:prettier#config#jsx_bracket_same_line = get(g:,'g:prettier#config#jsx_brac
 " none|es5|all
 let g:prettier#config#trailing_comma = get(g:,'g:prettier#config#trailing_comma', 'all')
 
-" flow|babylon
+" flow|babylon|typescript|postcss
 let g:prettier#config#parser = get(g:,'g:prettier#config#parser', 'flow')
 
-command! Prettier call prettier#Prettier()
+" synchronous by default
+command! Prettier call prettier#Prettier(g:prettier#exec_cmd_async)
 
+" map command
 if !hasmapto('<Plug>(Prettier)') && maparg('<Leader>p', 'n') ==# ''
   nmap <unique> <Leader>p <Plug>(Prettier)
 endif

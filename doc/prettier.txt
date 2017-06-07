@@ -65,7 +65,14 @@ The command `:Prettier` by default is synchronous but can be forced to be async
 <
 Enable vim-prettier to run in files without requiring the "@format" doc tag 
 >
-  autocmd BufWritePre *.js,*.css,*.scss,*.less call prettier#Prettier()
+  " => for older vim you can run it synchronous before saving
+  autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
+
+  " => vim greater than 8.0 has async support
+  autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+
+  " => if you want prettier to run when changes happen
+  autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
 <
 Overwrite default configuration
 >

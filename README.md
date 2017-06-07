@@ -10,7 +10,7 @@ By default it will auto format **javascript**, **typescript**, **less**, **scss*
 
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and yarn|npm installed globally.
 
-```
+```vim
 " post install (yarn install | npm install) then load plugin only for editing supported files
 plug 'mitermayer/vim-prettier', { 
 	\ 'do': 'yarn install', 
@@ -33,38 +33,71 @@ vim-prettier executable resolution:
 
 Prettier by default will run on auto save but can also be manualy triggered by:
 
-```
+```vim
 <Leader>p
 ```
 or
 
-```
+```vim
 :Prettier
+```
+
+If your are on vim 8+ you can also trigger async formatting by:
+
+```vim
+:PrettierAsync
 ```
 
 ## Configuration
 
 Disable auto formatting of files that have "@format" tag 
 
-```
+```vim
 let g:prettier#autoformat = 0
 ```
 
 The command `:Prettier` by default is synchronous but can be forced to be async
 
-```
+```vim
 let g:prettier#exec_cmd_async = 1
 ```
 
-Enable vim-prettier to run in files without requiring the "@format" doc tag 
+By default parsing errors will open the quickfix, that behaviour can be controlled by
 
+```vim
+let g:prettier#quickfix_enabled = 0
 ```
-  autocmd BufWritePre *.js,*.css,*.scss,*.less call prettier#Prettier()
+
+To enable vim-prettier to run in files without requiring the "@format" doc tag.
+First disable the default autoformat, then update to your own custom behaviour
+
+Running before saving sync:
+
+```vim
+  let g:prettier#autoformat = 0
+  autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
+```
+
+Running before saving async (vim 8+):
+
+```vim
+  let g:prettier#autoformat = 0
+  autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+```
+
+Running before saving, changing text or leaving insert mode: 
+
+```vim
+" when running at every change you may want to disable quickfix error parsing to reduce noise
+let g:prettier#quickfix_enabled = 0
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
 ```
 
 Overwrite default configuration
 
-```
+```vim
 " max line lengh that prettier will wrap on
 g:prettier#config#print_width = 80
 

@@ -1,4 +1,5 @@
 let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let s:prettier_job_running = 0
 
 function! prettier#Prettier(...) abort
   let l:execCmd = s:Get_Prettier_Exec()
@@ -55,11 +56,14 @@ function! s:Prettier_Exec_Sync(cmd) abort
 endfunction
 
 function! s:Prettier_Exec_Async(cmd) abort 
-    call job_start(a:cmd, {
-      \ 'in_io': 'buffer',
-      \ 'in_name': bufname('%'),
-      \ 'err_cb': 'Prettier_Job_Error',
-      \ 'close_cb': 'Prettier_Job_Close' })
+  if s:prettier_job_running != 1
+      let s:prettier_job_running = 1
+      call job_start(a:cmd, {
+        \ 'in_io': 'buffer',
+        \ 'in_name': bufname('%'),
+        \ 'err_cb': 'Prettier_Job_Error',
+        \ 'close_cb': 'Prettier_Job_Close' })
+  endif
 endfunction
 
 function! Prettier_Job_Close(channel) abort 
@@ -71,17 +75,20 @@ function! Prettier_Job_Close(channel) abort
 
   " nothing to update
   if (getbufline(bufnr('%'), 1, '$') == l:out)
+    let s:prettier_job_running = 0
     return
   endif
   
   if len(l:out) 
     call s:Apply_Prettier_Format(l:out)
     write
+    let s:prettier_job_running = 0
   endif
 endfunction
 
 function! Prettier_Job_Error(channel, msg) abort 
     call s:Prettier_Parse_Error(split(a:msg, '\n'))
+    let s:prettier_job_running = 0
 endfunction
 
 function! s:Handle_Parsing_Errors(out) abort
@@ -225,7 +232,9 @@ endfunction
 
 function! s:Prettier_Parse_Error(errors) abort
   echohl WarningMsg | echom 'Prettier: failed to parse buffer.' | echohl NONE
-  call s:Handle_Parsing_Errors(a:errors)
+  if g:prettier#quickfix_enabled
+    call s:Handle_Parsing_Errors(a:errors)
+  endif
 endfunction
 
 " If we can't find any prettier installing we then suggest where to get it from

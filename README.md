@@ -19,7 +19,7 @@ plug 'mitermayer/vim-prettier', {
 
 If using other vim plugin managers or doing manual setup make sure to have `prettier` installed globally or go to your vim-prettier directory and either do `npm install` or `yarn install`
 
-## Prettier Executable resolution
+### Prettier Executable resolution
 
 When installed via vim-plug, a default prettier executable is installed inside vim-prettier.
 
@@ -29,7 +29,7 @@ vim-prettier executable resolution:
 2. Look for a global prettier installation
 3. Use locally installed vim-prettier prettier executable
 
-## USAGE
+### USAGE
 
 Prettier by default will run on auto save but can also be manualy triggered by:
 
@@ -48,7 +48,7 @@ If your are on vim 8+ you can also trigger async formatting by:
 :PrettierAsync
 ```
 
-## Configuration
+### Configuration
 
 Disable auto formatting of files that have "@format" tag 
 
@@ -56,13 +56,13 @@ Disable auto formatting of files that have "@format" tag
 let g:prettier#autoformat = 0
 ```
 
-The command `:Prettier` by default is synchronous but can be forced to be async
+The command `:Prettier` by default is synchronous but can also be forced async
 
 ```vim
 let g:prettier#exec_cmd_async = 1
 ```
 
-By default parsing errors will open the quickfix, that behaviour can be controlled by
+By default parsing errors will open the quickfix but can also be disabled
 
 ```vim
 let g:prettier#quickfix_enabled = 0
@@ -74,28 +74,28 @@ First disable the default autoformat, then update to your own custom behaviour
 Running before saving sync:
 
 ```vim
-  let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
 ```
 
 Running before saving async (vim 8+):
 
 ```vim
-  let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
 ```
 
 Running before saving, changing text or leaving insert mode: 
 
 ```vim
-" when running at every change you may want to disable quickfix error parsing to reduce noise
+" when running at every change you may want to disable quickfix
 let g:prettier#quickfix_enabled = 0
 
 let g:prettier#autoformat = 0
 autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
 ```
 
-Overwrite default configuration
+### Overwrite default prettier configuration
 
 ```vim
 " max line lengh that prettier will wrap on

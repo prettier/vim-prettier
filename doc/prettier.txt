@@ -52,6 +52,10 @@ or
 >
   :Prettier
 <
+If your are on vim 8+ you can also trigger async formatting by:
+>
+  :PrettierAsync
+<
 ==============================================================================
 CONFIGURATION                                       *vim-prettier-configuration*
 
@@ -59,22 +63,36 @@ Disable auto formatting of files that have "@format" tag
 >
   let g:prettier#autoformat = 0
 <
-The command `:Prettier` by default is synchronous but can be forced to be async
+The command `:Prettier` by default is synchronous but can also be forced async
 >
   let g:prettier#exec_cmd_async = 1
 <
-Enable vim-prettier to run in files without requiring the "@format" doc tag 
+By default parsing errors will open the quickfix but can also be disabled
 >
-  " => for older vim you can run it synchronous before saving
+  let g:prettier#exec_cmd_async = 1
+<
+To enable vim-prettier to run in files without requiring the "@format" doc tag.
+First disable the default autoformat, then update to your own custom behaviour
+
+Running before saving sync:
+>
+  let g:prettier#autoformat = 0
   autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
-
-  " => vim greater than 8.0 has async support
+<
+Running before saving async (vim 8+):
+>
+  let g:prettier#autoformat = 0
   autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+<
+Running before saving, changing text or leaving insert mode: 
+>
+  let g:prettier#autoformat = 0
+  " when running at every change you may want to disable quickfix
+  let g:prettier#quickfix_enabled = 0
 
-  " => if you want prettier to run when changes happen
   autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
 <
-Overwrite default configuration
+Overwrite default prettier configuration
 >
   " max line lengh that prettier will wrap on
   g:prettier#config#print_width = 80

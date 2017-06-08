@@ -12,7 +12,7 @@ Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and 
 
 ```vim
 " post install (yarn install | npm install) then load plugin only for editing supported files
-plug 'mitermayer/vim-prettier', { 
+Plug 'mitermayer/vim-prettier', { 
 	\ 'do': 'yarn install', 
 	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] } 
 ```

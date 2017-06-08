@@ -32,7 +32,7 @@ INSTALL                                                  *vim-prettier-install*
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes 
 node and yarn|npm installed globally.
 >
-  plug 'mitermayer/vim-prettier', { 
+  Plug 'mitermayer/vim-prettier', { 
 	\ 'do': 'yarn install', 
 	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] } 
 <

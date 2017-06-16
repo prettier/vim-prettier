@@ -55,10 +55,10 @@ let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 
 let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
 
 " synchronous by default
-command! Prettier call prettier#Prettier(g:prettier#exec_cmd_async)
+command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
 
 " prettier async
-command! PrettierAsync call prettier#Prettier(1)
+command! -nargs=? -range=% PrettierAsync call prettier#Prettier(1, <line1>, <line2>)
 
 " map command
 if !hasmapto('<Plug>(Prettier)') && maparg('<Leader>p', 'n') ==# ''

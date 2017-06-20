@@ -3,9 +3,9 @@ let s:prettier_job_running = 0
 
 function! prettier#Prettier(...) abort
   let l:execCmd = s:Get_Prettier_Exec()
-  let l:async = a:0 > 0 ? a:1 : 0 
-  let l:startSelection = a:0 > 1 ? a:2 : 1  
-  let l:endSelection = a:0 > 2 ? a:3 : line('$')   
+  let l:async = a:0 > 0 ? a:1 : 0
+  let l:startSelection = a:0 > 1 ? a:2 : 1
+  let l:endSelection = a:0 > 2 ? a:3 : line('$')
   let l:config = getbufvar(bufnr('%'), 'prettier_ft_default_args', {})
 
   if l:execCmd != -1
@@ -27,25 +27,25 @@ endfunction
 
 function! prettier#Autoformat(...) abort
   let l:curPos = getpos('.')
-  let l:maxLineLookup = 50 
-  let l:maxTimeLookupMs = 500 
+  let l:maxLineLookup = 50
+  let l:maxTimeLookupMs = 500
   let l:pattern = '@format'
 
-  " we need to move selection to the top before looking up to avoid 
+  " we need to move selection to the top before looking up to avoid
   " scanning a very long file
   call cursor(1, 1)
 
   " Search starting at the start of the document
   if search(l:pattern, 'n', l:maxLineLookup, l:maxTimeLookupMs) > 0
     " autoformat async
-    call prettier#Prettier(1) 
+    call prettier#Prettier(1)
   endif
 
   " Restore the selection and if greater then before it defaults to end
   call cursor(curPos[1], curPos[2])
 endfunction
 
-function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort 
+function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
   let l:out = split(system(a:cmd, getbufline(bufnr('%'), a:startSelection, a:endSelection)), '\n')
 
   " check system exit code
@@ -54,14 +54,14 @@ function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
     return
   endif
 
-  if (s:Has_Content_Changed(a:startSelection, a:endSelection, l:out) == 0)
+  if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
     return
   endif
 
   call s:Apply_Prettier_Format(l:out, a:startSelection, a:endSelection)
 endfunction
 
-function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort 
+function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
       call job_start(a:cmd, {
@@ -69,12 +69,12 @@ function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
         \ 'in_top': a:startSelection,
         \ 'in_bot': a:endSelection,
         \ 'in_name': bufname('%'),
-        \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(channel, msg)},
+        \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(msg)},
         \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection)}})
   endif
 endfunction
 
-function! s:Prettier_Job_Close(channel, startSelection, endSelection) abort 
+function! s:Prettier_Job_Close(channel, startSelection, endSelection) abort
   let l:out = []
 
   while ch_status(a:channel, {'part': 'out'}) == 'buffered'
@@ -82,19 +82,19 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection) abort
   endwhile
 
   " nothing to update
-  if (s:Has_Content_Changed(a:startSelection, a:endSelection, l:out) == 0)
+  if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
     let s:prettier_job_running = 0
     return
   endif
-  
-  if len(l:out) 
+
+  if len(l:out)
     call s:Apply_Prettier_Format(l:out, a:startSelection, a:endSelection)
     write
     let s:prettier_job_running = 0
   endif
 endfunction
 
-function! s:Prettier_Job_Error(channel, msg) abort 
+function! s:Prettier_Job_Error(msg) abort
     call s:Prettier_Parse_Error(split(a:msg, '\n'))
     let s:prettier_job_running = 0
 endfunction
@@ -114,13 +114,13 @@ function! s:Handle_Parsing_Errors(out) abort
     endif
   endfor
 
-  if len(l:errors) 
+  if len(l:errors)
     call setqflist(l:errors)
     botright copen
   endif
 endfunction
 
-function! s:Has_Content_Changed(startLine, endLine, content) abort
+function! s:Has_Content_Changed(content, startLine, endLine) abort
   return getbufline(bufnr('%'), 1, line('$')) == s:Get_New_Buffer(a:content, a:startLine, a:endLine) ? 0 : 1
 endfunction
 
@@ -172,24 +172,24 @@ endfunction
 
 " By default we will search for the following
 " => locally installed prettier inside node_modules on any parent folder
-" => globally installed prettier 
+" => globally installed prettier
 " => vim-prettier prettier installation
 " => if all fails suggest install
 function! s:Get_Prettier_Exec() abort
   let l:local_exec = s:Get_Prettier_Local_Exec()
   if executable(l:local_exec)
     return l:local_exec
-  endif 
+  endif
 
   let l:global_exec = s:Get_Prettier_Global_Exec()
   if executable(l:global_exec)
     return l:global_exec
-  endif 
+  endif
 
   let l:plugin_exec = s:Get_Prettier_Plugin_Exec()
   if executable(l:plugin_exec)
     return l:plugin_exec
-  endif 
+  endif
 
   return -1
 endfunction
@@ -207,11 +207,11 @@ function! s:Get_Prettier_Plugin_Exec() abort
 endfunction
 
 function! s:Get_Exec(...) abort
-  let l:rootDir = a:0 > 0 ? a:1 : 0 
+  let l:rootDir = a:0 > 0 ? a:1 : 0
   let l:exec = -1
 
-  if isdirectory(l:rootDir) 
-    let l:dir = s:Tranverse_Dir_Search(l:rootDir) 
+  if isdirectory(l:rootDir)
+    let l:dir = s:Tranverse_Dir_Search(l:rootDir)
     if dir != -1
       let l:exec = s:Get_Path_To_Exec(l:dir)
     endif
@@ -223,8 +223,8 @@ function! s:Get_Exec(...) abort
 endfunction
 
 function! s:Get_Path_To_Exec(...) abort
-  let l:rootDir = a:0 > 0 ? a:1 : -1 
-  let l:dir = l:rootDir != -1 ? l:rootDir . '/.bin/' : '' 
+  let l:rootDir = a:0 > 0 ? a:1 : -1
+  let l:dir = l:rootDir != -1 ? l:rootDir . '/.bin/' : ''
   return dir . 'prettier'
 endfunction
 
@@ -234,12 +234,12 @@ function! s:Tranverse_Dir_Search(rootDir) abort
 
   while 1
     let l:search_dir = root . '/' . dir
-    if isdirectory(l:search_dir) 
+    if isdirectory(l:search_dir)
       return l:search_dir
     endif
 
     let l:parent = fnamemodify(root, ':h')
-    if l:parent == l:root 
+    if l:parent == l:root
       return -1
     endif
 

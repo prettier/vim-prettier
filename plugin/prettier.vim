@@ -20,7 +20,7 @@ let g:loaded_prettier = 1
 " autoformating enabled by default upon saving
 let g:prettier#autoformat = get(g:, 'prettier#autoformat', 1)
 
-" calling :Prettier by default runs synchronous  
+" calling :Prettier by default runs synchronous
 let g:prettier#exec_cmd_async = get(g:, 'prettier#exec_cmd_async', 0)
 
 " when having formatting errors will open the quickfix by default

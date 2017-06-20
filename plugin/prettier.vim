@@ -20,7 +20,7 @@ let g:loaded_prettier = 1
 " autoformating enabled by default upon saving
 let g:prettier#autoformat = get(g:, 'prettier#autoformat', 1)
 
-" calling :Prettier by default runs synchronous  
+" calling :Prettier by default runs synchronous
 let g:prettier#exec_cmd_async = get(g:, 'prettier#exec_cmd_async', 0)
 
 " when having formatting errors will open the quickfix by default
@@ -55,10 +55,10 @@ let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 
 let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
 
 " synchronous by default
-command! Prettier call prettier#Prettier(g:prettier#exec_cmd_async)
+command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
 
 " prettier async
-command! PrettierAsync call prettier#Prettier(1)
+command! -nargs=? -range=% PrettierAsync call prettier#Prettier(1, <line1>, <line2>)
 
 " map command
 if !hasmapto('<Plug>(Prettier)') && maparg('<Leader>p', 'n') ==# ''

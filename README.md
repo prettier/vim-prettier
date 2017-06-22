@@ -97,6 +97,8 @@ autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsy
 
 ### Overwrite default prettier configuration
 
+**Note:** vim-prettier default settings differ from prettier intentionally. The default settings used on vim-prettier are meant to follow the same defaults that is used internally at Facebook and on Facebook open source projects.
+
 ```vim
 " max line lengh that prettier will wrap on
 g:prettier#config#print_width = 80

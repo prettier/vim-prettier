@@ -51,7 +51,7 @@ let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracke
 " none|es5|all
 let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'all')
 
-" flow|babylon|typescript|postcss
+" flow|babylon|typescript|postcss|json
 let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
 
 " synchronous by default

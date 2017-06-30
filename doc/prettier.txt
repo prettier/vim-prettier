@@ -15,7 +15,7 @@ A vim plugin wrapper for prettier, pre-configured with
 custom default prettier settings.
 
 By default it will auto format javascript, typescript, less, scss, css,
-and json files that have '@format' annotation in the header of the file.
+json, and graphql files that have '@format' annotation in the header of the file.
 
 When installed via vim-plug, a default prettier executable is installed inside
  vim-prettier.
@@ -34,7 +34,7 @@ node and yarn|npm installed globally.
 >
   Plug 'mitermayer/vim-prettier', { 
 	\ 'do': 'yarn install', 
-	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] } 
+	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] } 
 <
 If using other vim plugin managers or doing manual setup make sure to have 
 `prettier` installed globally or go to your vim-prettier directory and 
@@ -77,12 +77,12 @@ First disable the default autoformat, then update to your own custom behaviour
 Running before saving sync:
 >
   let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less Prettier
+  autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
 <
 Running before saving async (vim 8+):
 >
   let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less PrettierAsync
+  autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
 <
 Running before saving, changing text or leaving insert mode: 
 >
@@ -90,7 +90,7 @@ Running before saving, changing text or leaving insert mode:
   " when running at every change you may want to disable quickfix
   let g:prettier#quickfix_enabled = 0
 
-  autocmd BufWritePre,TextChanged,InsertLeave *.js,*.json,*.css,*.scss,*.less PrettierAsync
+  autocmd BufWritePre,TextChanged,InsertLeave *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
 <
 Overwrite default prettier configuration
 >

@@ -2,7 +2,7 @@
 
 A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 
-By default it will auto format **javascript**, **typescript**, **less**, **scss** and **css** files that have "@format" annotation in the header of the file.
+By default it will auto format **javascript**, **typescript**, **less**, **scss**, **css**, **json**, and **graphql** files that have "@format" annotation in the header of the file.
 
 ![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
 
@@ -14,7 +14,7 @@ Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and 
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'mitermayer/vim-prettier', { 
 	\ 'do': 'yarn install', 
-	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] } 
+	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] } 
 ```
 
 If using other vim plugin managers or doing manual setup make sure to have `prettier` installed globally or go to your vim-prettier directory and either do `npm install` or `yarn install`
@@ -75,14 +75,14 @@ Running before saving sync:
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.css,*.scss,*.less Prettier
+autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
 ```
 
 Running before saving async (vim 8+):
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.css,*.scss,*.less PrettierAsync
+autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
 ```
 
 Running before saving, changing text or leaving insert mode: 
@@ -92,7 +92,7 @@ Running before saving, changing text or leaving insert mode:
 let g:prettier#quickfix_enabled = 0
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less PrettierAsync
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
 ```
 
 ### Overwrite default prettier configuration
@@ -124,7 +124,7 @@ g:prettier#config#jsx_bracket_same_line = 'true'
 " none|es5|all
 g:prettier#config#trailing_comma = 'all'
 
-" flow|babylon|typescript|postcss
+" flow|babylon|typescript|postcss|json|graphql
 g:prettier#config#parser = 'flow'
 
 ```

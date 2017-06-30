@@ -118,7 +118,7 @@ Overwrite default prettier configuration
   " none|es5|all
   g:prettier#config#trailing_comma = 'all'
 
-  " flow|babylon|typescript|postcss|json
+  " flow|babylon|typescript|postcss|json|graphql
   g:prettier#config#parser = 'flow'
 <
 ==============================================================================

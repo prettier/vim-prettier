@@ -122,7 +122,7 @@ g:prettier#config#jsx_bracket_same_line = 'true'
 " none|es5|all
 g:prettier#config#trailing_comma = 'all'
 
-" flow|babylon|typescript|postcss|json
+" flow|babylon|typescript|postcss|json|graphql
 g:prettier#config#parser = 'flow'
 
 ```

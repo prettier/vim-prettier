@@ -46,7 +46,12 @@ function! prettier#Autoformat(...) abort
 endfunction
 
 function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
-  let l:out = split(system(a:cmd, getbufline(bufnr('%'), a:startSelection, a:endSelection)), '\n')
+  let l:bufferLinesList = getbufline(bufnr('%'), a:startSelection, a:endSelection)
+
+  " vim 7 does not have support for passing a list to system()
+  let l:bufferLines = v:version <= 800 ? join(l:bufferLinesList, "\n") : l:bufferLinesList
+
+  let l:out = split(system(a:cmd, l:bufferLines), '\n')
 
   " check system exit code
   if v:shell_error

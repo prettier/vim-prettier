@@ -5,7 +5,7 @@
   "description": "Vim plugin for prettier",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mitermayer/vim-prettier.git"
+    "url": "git://github.com/prettier/vim-prettier.git"
   },
   "dependencies": {
     "prettier": "^1.5.2"

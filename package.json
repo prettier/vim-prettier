@@ -3,6 +3,7 @@
   "author": "Mitermayer Reis <mitermayer.reis@gmail.com>",
   "version": "0.0.11",
   "description": "Vim plugin for prettier",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/prettier/vim-prettier.git"

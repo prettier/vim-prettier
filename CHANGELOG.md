@@ -2,7 +2,14 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.11...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.12...HEAD)
+
+**Implemented enhancements:**
+
+- Include changelog [\#35](https://github.com/prettier/vim-prettier/issues/35)
+
+## [0.0.12](https://github.com/prettier/vim-prettier/tree/0.0.12) (2017-08-06)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.11...0.0.12)
 
 **Implemented enhancements:**
 
@@ -18,6 +25,7 @@
 
 **Merged pull requests:**
 
+- Adding changelog file [\#38](https://github.com/prettier/vim-prettier/pull/38) ([mitermayer](https://github.com/mitermayer))
 - Adding MIT license [\#37](https://github.com/prettier/vim-prettier/pull/37) ([mitermayer](https://github.com/mitermayer))
 - Bumping prettier internal dependencie plugin to 1.5.3 [\#36](https://github.com/prettier/vim-prettier/pull/36) ([mitermayer](https://github.com/mitermayer))
 

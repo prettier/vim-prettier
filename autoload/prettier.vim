@@ -1,5 +1,6 @@
 let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:prettier_job_running = 0
+let s:prettier_quickfix_open = 0
 
 function! prettier#Prettier(...) abort
   let l:execCmd = s:Get_Prettier_Exec()
@@ -11,9 +12,12 @@ function! prettier#Prettier(...) abort
   if l:execCmd != -1
     let l:cmd = l:execCmd . s:Get_Prettier_Exec_Args(l:config)
 
-    " close quickfix
-    call setqflist([])
-    cclose
+    " close quickfix if it is opened 
+    if s:prettier_quickfix_open
+      call setqflist([])
+      cclose
+      let s:prettier_quickfix_open = 0
+    endif
 
     if l:async && v:version >= 800 && exists('*job_start')
       call s:Prettier_Exec_Async(l:cmd, l:startSelection, l:endSelection)
@@ -122,6 +126,7 @@ function! s:Handle_Parsing_Errors(out) abort
   if len(l:errors)
     call setqflist(l:errors)
     botright copen
+    let s:prettier_quickfix_open = 1
   endif
 endfunction
 

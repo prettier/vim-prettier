@@ -8,6 +8,14 @@
 
 - Include changelog [\#35](https://github.com/prettier/vim-prettier/issues/35)
 
+**Fixed bugs:**
+
+- :Prettier causes :Ggrep to lose history [\#39](https://github.com/prettier/vim-prettier/issues/39)
+
+**Merged pull requests:**
+
+- bugfix: should not clear quickfix unless opened by vim-prettier itself [\#40](https://github.com/prettier/vim-prettier/pull/40) ([mitermayer](https://github.com/mitermayer))
+
 ## [0.0.12](https://github.com/prettier/vim-prettier/tree/0.0.12) (2017-08-06)
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.11...0.0.12)
 

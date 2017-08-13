@@ -2,11 +2,7 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.12...HEAD)
-
-**Implemented enhancements:**
-
-- Include changelog [\#35](https://github.com/prettier/vim-prettier/issues/35)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.13...HEAD)
 
 **Fixed bugs:**
 
@@ -15,6 +11,13 @@
 **Merged pull requests:**
 
 - bugfix: should not clear quickfix unless opened by vim-prettier itself [\#40](https://github.com/prettier/vim-prettier/pull/40) ([mitermayer](https://github.com/mitermayer))
+
+## [0.0.13](https://github.com/prettier/vim-prettier/tree/0.0.13) (2017-08-13)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.12...0.0.13)
+
+**Implemented enhancements:**
+
+- Include changelog [\#35](https://github.com/prettier/vim-prettier/issues/35)
 
 ## [0.0.12](https://github.com/prettier/vim-prettier/tree/0.0.12) (2017-08-06)
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.11...0.0.12)

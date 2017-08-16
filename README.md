@@ -50,6 +50,12 @@ If your are on vim 8+ you can also trigger async formatting by:
 
 ### Configuration
 
+Change the mapping to run from the default of `<Leader>p`
+
+```vim
+nmap <Leader>py <Plug>(Prettier)
+```
+
 Disable auto formatting of files that have "@format" tag 
 
 ```vim

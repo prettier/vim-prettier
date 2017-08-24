@@ -2,14 +2,26 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.13...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.14...HEAD)
+
+**Merged pull requests:**
+
+- Async command was not working for windows this patch will make sure it [\#47](https://github.com/prettier/vim-prettier/pull/47) ([mitermayer](https://github.com/mitermayer))
+
+## [0.0.14](https://github.com/prettier/vim-prettier/tree/0.0.14) (2017-08-24)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.13...0.0.14)
 
 **Fixed bugs:**
 
 - :Prettier causes :Ggrep to lose history [\#39](https://github.com/prettier/vim-prettier/issues/39)
 
+**Closed issues:**
+
+- Trailing comma is causing issues with IE10/11 [\#45](https://github.com/prettier/vim-prettier/issues/45)
+
 **Merged pull requests:**
 
+- Add instructions on changing the mapping to README [\#43](https://github.com/prettier/vim-prettier/pull/43) ([eddiezane](https://github.com/eddiezane))
 - bugfix: should not clear quickfix unless opened by vim-prettier itself [\#40](https://github.com/prettier/vim-prettier/pull/40) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.13](https://github.com/prettier/vim-prettier/tree/0.0.13) (2017-08-13)

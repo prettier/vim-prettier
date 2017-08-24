@@ -71,9 +71,15 @@ function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
 endfunction
 
 function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
+  let l:async_cmd = a:cmd
+
+  if has('win32') || has('win64')
+    let l:async_cmd = 'cmd.exe /c ' . a:cmd
+  endif
+
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
-      call job_start(a:cmd, {
+      call job_start(l:async_cmd, {
         \ 'in_io': 'buffer',
         \ 'in_top': a:startSelection,
         \ 'in_bot': a:endSelection,

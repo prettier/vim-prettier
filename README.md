@@ -6,15 +6,15 @@ By default it will auto format **javascript**, **typescript**, **less**, **scss*
 
 ![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
 
-### INSTALL 
+### INSTALL
 
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and yarn|npm installed globally.
 
 ```vim
 " post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 
-	\ 'do': 'yarn install', 
-	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] } 
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 ```
 
 If using other vim plugin managers or doing manual setup make sure to have `prettier` installed globally or go to your vim-prettier directory and either do `npm install` or `yarn install`
@@ -25,7 +25,7 @@ When installed via vim-plug, a default prettier executable is installed inside v
 
 vim-prettier executable resolution:
 
-1. Tranverse parents and search for Prettier installation inside `node_modules`
+1. Traverse parents and search for Prettier installation inside `node_modules`
 2. Look for a global prettier installation
 3. Use locally installed vim-prettier prettier executable
 
@@ -36,6 +36,7 @@ Prettier by default will run on auto save but can also be manualy triggered by:
 ```vim
 <Leader>p
 ```
+
 or
 
 ```vim
@@ -56,7 +57,7 @@ Change the mapping to run from the default of `<Leader>p`
 nmap <Leader>py <Plug>(Prettier)
 ```
 
-Disable auto formatting of files that have "@format" tag 
+Disable auto formatting of files that have "@format" tag
 
 ```vim
 let g:prettier#autoformat = 0
@@ -81,24 +82,24 @@ Running before saving sync:
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql Prettier
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql Prettier
 ```
 
 Running before saving async (vim 8+):
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 ```
 
-Running before saving, changing text or leaving insert mode: 
+Running before saving, changing text or leaving insert mode:
 
 ```vim
 " when running at every change you may want to disable quickfix
 let g:prettier#quickfix_enabled = 0
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 ```
 
 ### Overwrite default prettier configuration
@@ -119,21 +120,21 @@ g:prettier#config#use_tabs = 'false'
 g:prettier#config#semi = 'true'
 
 " single quotes over double quotes
-g:prettier#config#single_quote = 'true' 
+g:prettier#config#single_quote = 'true'
 
 " print spaces between brackets
-g:prettier#config#bracket_spacing = 'false' 
+g:prettier#config#bracket_spacing = 'false'
 
 " put > on the last line instead of new line
-g:prettier#config#jsx_bracket_same_line = 'true' 
+g:prettier#config#jsx_bracket_same_line = 'true'
 
 " none|es5|all
 g:prettier#config#trailing_comma = 'all'
 
 " flow|babylon|typescript|postcss|json|graphql
 g:prettier#config#parser = 'flow'
-
 ```
-### REQUIREMENT(S) 
+
+### REQUIREMENT(S)
 
 If prettier installation can't be found no code formatting will happen

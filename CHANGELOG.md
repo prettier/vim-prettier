@@ -4,8 +4,18 @@
 
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.14...HEAD)
 
+**Fixed bugs:**
+
+- PrettierAsync does not work on Windows [\#46](https://github.com/prettier/vim-prettier/issues/46)
+
+**Closed issues:**
+
+- :Prettier make cursor history wrong when navigating with \<C-O\> [\#48](https://github.com/prettier/vim-prettier/issues/48)
+
 **Merged pull requests:**
 
+- Making sure that after formatting we preserve in the same line [\#50](https://github.com/prettier/vim-prettier/pull/50) ([mitermayer](https://github.com/mitermayer))
+- Added extensions to vim configuration example [\#49](https://github.com/prettier/vim-prettier/pull/49) ([niftylettuce](https://github.com/niftylettuce))
 - Async command was not working for windows this patch will make sure it [\#47](https://github.com/prettier/vim-prettier/pull/47) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.14](https://github.com/prettier/vim-prettier/tree/0.0.14) (2017-08-24)

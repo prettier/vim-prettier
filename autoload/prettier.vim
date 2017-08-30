@@ -34,6 +34,8 @@ function! prettier#Autoformat(...) abort
   let l:maxLineLookup = 50
   let l:maxTimeLookupMs = 500
   let l:pattern = '@format'
+  let l:search = @/
+  let l:winview = winsaveview()
 
   " we need to move selection to the top before looking up to avoid
   " scanning a very long file
@@ -47,6 +49,12 @@ function! prettier#Autoformat(...) abort
 
   " Restore the selection and if greater then before it defaults to end
   call cursor(curPos[1], curPos[2])
+
+  " Restore view
+  call winrestview(l:winview)
+
+  " Restore search
+  let @/=l:search
 endfunction
 
 function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
@@ -145,18 +153,18 @@ function! s:Get_New_Buffer(lines, start, end) abort
 endfunction
 
 function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
-  " store cursor position
-  let l:curPos = getpos('.')
+  " store view
+  let l:winview = winsaveview()
   let l:newBuffer = s:Get_New_Buffer(a:lines, a:startSelection, a:endSelection)
 
   " delete all lines on the current buffer
-  silent! execute 1 . ',' . line('$') . 'delete _'
+  silent! execute len(l:newBuffer) . ',' . line('$') . 'delete _'
 
   " replace all lines from the current buffer with output from prettier
   call setline(1, l:newBuffer)
 
-  " restore cursor position
-  call cursor(l:curPos[1], l:curPos[2])
+  " Restore view
+  call winrestview(l:winview)
 endfunction
 
 " By default we will default to our internal

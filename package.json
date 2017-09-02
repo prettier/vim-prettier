@@ -9,6 +9,6 @@
     "url": "git://github.com/prettier/vim-prettier.git"
   },
   "dependencies": {
-    "prettier": "^1.5.3"
+    "prettier": "^1.6.1"
   }
 }

@@ -133,6 +133,9 @@ g:prettier#config#trailing_comma = 'all'
 
 " flow|babylon|typescript|postcss|json|graphql
 g:prettier#config#parser = 'flow'
+
+" cli-override|file-override|prefer-file
+g:prettier#config#config_precedence = 'prefer-file'
 ```
 
 ### REQUIREMENT(S)

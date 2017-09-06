@@ -54,6 +54,9 @@ let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 
 " flow|babylon|typescript|postcss|json|graphql
 let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
 
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'prefer-file')
+
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
 

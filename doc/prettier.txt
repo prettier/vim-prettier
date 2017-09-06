@@ -123,6 +123,9 @@ However they can be configured by:
 
   " flow|babylon|typescript|postcss|json|graphql
   g:prettier#config#parser = 'flow'
+
+  " cli-override|file-override|prefer-file
+  g:prettier#config#config_precedence = 'prefer-file'
 <
 ==============================================================================
 REQUIREMENT(S)                                      *vim-prettier-requirements*

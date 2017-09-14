@@ -2,6 +2,10 @@
 
 A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 
+**Note:** requires `prettier` version 1.7.0+
+
+***
+
 By default it will auto format **javascript**, **typescript**, **less**, **scss**, **css**, **json**, and **graphql** files that have "@format" annotation in the header of the file.
 
 ![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")

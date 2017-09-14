@@ -5,7 +5,7 @@
 " Name Of File: prettier.vim
 "  Description: A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 "   Maintainer: Mitermayer Reis <mitermayer.reis at gmail.com>
-"      Version: 0.0.15
+"      Version: 0.1.0
 "        Usage: Use :help vim-prettier-usage, or visit https://github.com/prettier/vim-prettier
 "
 "==========================================================================================================
@@ -53,6 +53,9 @@ let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 
 
 " flow|babylon|typescript|postcss|json|graphql
 let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
+
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'prefer-file')
 
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)

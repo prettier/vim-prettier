@@ -2,7 +2,21 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.14...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.0...HEAD)
+
+**Implemented enhancements:**
+
+- Upgrade to support prettier 1.6 [\#51](https://github.com/prettier/vim-prettier/issues/51)
+
+## [0.1.0](https://github.com/prettier/vim-prettier/tree/0.1.0) (2017-09-14)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.15...0.1.0)
+
+**Merged pull requests:**
+
+- Issue/51 adding support for prettier 1.7 [\#52](https://github.com/prettier/vim-prettier/pull/52) ([mitermayer](https://github.com/mitermayer))
+
+## [0.0.15](https://github.com/prettier/vim-prettier/tree/0.0.15) (2017-08-30)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.14...0.0.15)
 
 **Fixed bugs:**
 

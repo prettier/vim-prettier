@@ -258,7 +258,7 @@ function! s:Get_Exec(...) abort
   let l:exec = -1
 
   if isdirectory(l:rootDir)
-    let l:dir = s:Tranverse_Dir_Search(l:rootDir)
+    let l:dir = s:Traverse_Dir_Search(l:rootDir)
     if dir != -1
       let l:exec = s:Get_Path_To_Exec(l:dir)
     endif
@@ -275,7 +275,7 @@ function! s:Get_Path_To_Exec(...) abort
   return dir . 'prettier'
 endfunction
 
-function! s:Tranverse_Dir_Search(rootDir) abort
+function! s:Traverse_Dir_Search(rootDir) abort
   let l:root = a:rootDir
   let l:dir = 'node_modules'
 

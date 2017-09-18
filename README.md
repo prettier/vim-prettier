@@ -53,6 +53,30 @@ If your are on vim 8+ you can also trigger async formatting by:
 :PrettierAsync
 ```
 
+You can check what is the `vim-prettier` plugin version by: 
+
+```vim
+:PrettierVersion
+```
+
+You can send commands to the resolved `prettier` cli by:
+
+```
+:PrettierCli <q-args>
+```
+
+You can check what is the resolved `prettier` cli path by:
+
+```vim
+:PrettierCliPath
+```
+
+You can check what is the resolved `prettier` cli version by: 
+
+```vim
+:PrettierCliVersion
+```
+
 ### Configuration
 
 Change the mapping to run from the default of `<Leader>p`

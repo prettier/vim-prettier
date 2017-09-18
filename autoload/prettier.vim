@@ -2,6 +2,27 @@ let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:prettier_job_running = 0
 let s:prettier_quickfix_open = 0
 
+function! prettier#PrettierCliPath() abort
+  let l:execCmd = s:Get_Prettier_Exec()
+
+  if l:execCmd != -1
+    echom l:execCmd
+  else
+    call s:Suggest_Install_Prettier()
+  endif
+endfunction
+
+function! prettier#PrettierCli(user_input) abort
+  let l:execCmd = s:Get_Prettier_Exec()
+
+  if l:execCmd != -1
+    let l:out = system(l:execCmd. ' ' . a:user_input)
+    echom l:out
+  else
+    call s:Suggest_Install_Prettier()
+  endif
+endfunction
+
 function! prettier#Prettier(...) abort
   let l:execCmd = s:Get_Prettier_Exec()
   let l:async = a:0 > 0 ? a:1 : 0

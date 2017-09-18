@@ -2,7 +2,14 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.0...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.1...HEAD)
+
+**Merged pull requests:**
+
+- feature: Adding more commands [\#54](https://github.com/prettier/vim-prettier/pull/54) ([mitermayer](https://github.com/mitermayer))
+
+## [0.1.1](https://github.com/prettier/vim-prettier/tree/0.1.1) (2017-09-18)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.0...0.1.1)
 
 **Implemented enhancements:**
 

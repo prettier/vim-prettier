@@ -63,9 +63,25 @@ command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_a
 " prettier async
 command! -nargs=? -range=% PrettierAsync call prettier#Prettier(1, <line1>, <line2>)
 
+" prints vim-prettier version
+command! -nargs=? -range=% PrettierVersion echom "0.1.0"
+
+" call prettier cli
+command! -nargs=? -range=% PrettierCli call prettier#PrettierCli(<q-args>)
+
+" call prettier cli to get its version
+command! -nargs=? -range=% PrettierCliVersion call prettier#PrettierCli('--version')
+
+" prints prettier resolved cli path
+command! -nargs=? -range=% PrettierCliPath call prettier#PrettierCliPath()
+
 " map command
 if !hasmapto('<Plug>(Prettier)') && maparg('<Leader>p', 'n') ==# ''
   nmap <unique> <Leader>p <Plug>(Prettier)
 endif
 nnoremap <silent> <Plug>(Prettier) :Prettier<CR>
 nnoremap <silent> <Plug>(PrettierAsync) :PrettierAsync<CR>
+nnoremap <silent> <Plug>(PrettierVersion) :PrettierVersion<CR>
+nnoremap <silent> <Plug>(PrettierCli) :PrettierCli<CR>
+nnoremap <silent> <Plug>(PrettierCliVersion) :PrettierCliVersion<CR>
+nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>

@@ -35,7 +35,7 @@ vim-prettier executable resolution:
 
 ### USAGE
 
-Prettier by default will run on auto save but can also be manualy triggered by:
+Prettier by default will run on auto save but can also be manually triggered by:
 
 ```vim
 <Leader>p
@@ -135,7 +135,7 @@ autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.
 **Note:** vim-prettier default settings differ from prettier intentionally. However they can be configured by:
 
 ```vim
-" max line lengh that prettier will wrap on
+" max line length that prettier will wrap on
 g:prettier#config#print_width = 80
 
 " number of spaces per indentation level

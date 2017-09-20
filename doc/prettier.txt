@@ -46,7 +46,7 @@ either do `npm install` or `yarn install`
 USAGE                                                      *vim-prettier-usage*
 
 Prettier by default will run on auto save but can also 
-be manualy triggered by:
+be manually triggered by:
 >
   <Leader>p
 <
@@ -115,7 +115,7 @@ Overwrite default prettier configuration
 **Note:** vim-prettier default settings differ from prettier intentionally. 
 However they can be configured by:
 >
-  " max line lengh that prettier will wrap on
+  " max line length that prettier will wrap on
   g:prettier#config#print_width = 80
 
   " number of spaces per indentation level

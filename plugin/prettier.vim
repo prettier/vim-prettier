@@ -20,6 +20,9 @@ let g:loaded_prettier = 1
 " autoformating enabled by default upon saving
 let g:prettier#autoformat = get(g:, 'prettier#autoformat', 1)
 
+" path to prettier cli
+let g:prettier#exec_cmd_path = get(g:, 'prettier#exec_cmd_path', 0)
+
 " calling :Prettier by default runs synchronous
 let g:prettier#exec_cmd_async = get(g:, 'prettier#exec_cmd_async', 0)
 

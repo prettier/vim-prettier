@@ -29,9 +29,10 @@ When installed via vim-plug, a default prettier executable is installed inside v
 
 vim-prettier executable resolution:
 
-1. Traverse parents and search for Prettier installation inside `node_modules`
-2. Look for a global prettier installation
-3. Use locally installed vim-prettier prettier executable
+1. Look for user defined prettier cli path from vim configuration file
+2. Traverse parents and search for Prettier installation inside `node_modules`
+3. Look for a global prettier installation
+4. Use locally installed vim-prettier prettier executable
 
 ### USAGE
 
@@ -89,6 +90,12 @@ Disable auto formatting of files that have "@format" tag
 
 ```vim
 let g:prettier#autoformat = 0
+```
+
+Set the prettier CLI executable path
+
+```vim
+let g:prettier#exec_cmd_path = "~/path/to/cli/prettier"
 ```
 
 The command `:Prettier` by default is synchronous but can also be forced async

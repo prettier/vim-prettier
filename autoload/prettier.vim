@@ -218,11 +218,17 @@ function! s:Get_Prettier_Exec_Args(config) abort
 endfunction
 
 " By default we will search for the following
+" => user defined prettier cli path from vim configuration file
 " => locally installed prettier inside node_modules on any parent folder
 " => globally installed prettier
 " => vim-prettier prettier installation
 " => if all fails suggest install
 function! s:Get_Prettier_Exec() abort
+  let l:user_defined_exec_path = fnamemodify(g:prettier#exec_cmd_path, ':p')
+  if executable(l:user_defined_exec_path)
+    return l:user_defined_exec_path
+  endif
+
   let l:local_exec = s:Get_Prettier_Local_Exec()
   if executable(l:local_exec)
     return l:local_exec

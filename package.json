@@ -1,7 +1,7 @@
 {
   "name": "vim-prettier",
   "author": "Mitermayer Reis <mitermayer.reis@gmail.com>",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vim plugin for prettier",
   "license": "MIT",
   "repository": {

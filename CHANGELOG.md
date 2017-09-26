@@ -1,11 +1,16 @@
 # Change Log
 
-## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
+## [0.1.2](https://github.com/prettier/vim-prettier/tree/0.1.2) (2017-09-26)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.1...0.1.2)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.1...HEAD)
+**Implemented enhancements:**
+
+- Allow configuration to set lookup path for `prettier` cli on `.vimrc` [\#56](https://github.com/prettier/vim-prettier/issues/56)
 
 **Merged pull requests:**
 
+- issue/56 - Allowing user path overwrite configuration [\#57](https://github.com/prettier/vim-prettier/pull/57) ([mitermayer](https://github.com/mitermayer))
+- Fixed some typos in the README [\#55](https://github.com/prettier/vim-prettier/pull/55) ([Haegin](https://github.com/Haegin))
 - feature: Adding more commands [\#54](https://github.com/prettier/vim-prettier/pull/54) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.1.1](https://github.com/prettier/vim-prettier/tree/0.1.1) (2017-09-18)

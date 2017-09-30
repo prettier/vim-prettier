@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.3](https://github.com/prettier/vim-prettier/tree/0.1.3) (2017-09-30)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.2...0.1.3)
+
+**Fixed bugs:**
+
+- Non javascript parsers were broken due to parser flag been ignored by prettier when using configPrecedence
+
 ## [0.1.2](https://github.com/prettier/vim-prettier/tree/0.1.2) (2017-09-26)
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.1.1...0.1.2)
 

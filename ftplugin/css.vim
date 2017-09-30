@@ -1,5 +1,6 @@
 let b:prettier_ft_default_args = {
-  \ 'parser': 'css'
+  \ 'parser': 'css',
+  \ 'configPrecedence': 'cli-override',
   \ }
 
 augroup Prettier

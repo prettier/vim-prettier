@@ -2,7 +2,7 @@
 
 A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 
-**Note:** requires `prettier` version 1.7.0
+**Note:** requires `prettier` version 1.7.0+
 
 ***
 

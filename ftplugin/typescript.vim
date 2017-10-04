@@ -1,8 +1,3 @@
-let b:prettier_ft_default_args = {
-  \ 'parser': 'typescript',
-  \ 'configPrecedence': 'cli-override',
-  \ }
-
 augroup Prettier
   autocmd!
   if g:prettier#autoformat

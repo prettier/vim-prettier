@@ -2,7 +2,14 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.1...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.2...HEAD)
+
+**Merged pull requests:**
+
+- Making sure we can still save the results of last prettier async run on [\#65](https://github.com/prettier/vim-prettier/pull/65) ([mitermayer](https://github.com/mitermayer))
+
+## [0.2.2](https://github.com/prettier/vim-prettier/tree/0.2.2) (2017-10-07)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.1...0.2.2)
 
 **Merged pull requests:**
 

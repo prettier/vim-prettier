@@ -129,14 +129,6 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
     call add(l:out, ch_read(a:channel))
   endwhile
 
-  " This is required due to race condition when user quickly switch buffers while the async
-  " cli has not finished running, could be fixed if vim supported passing buffer name to
-  " setline https://github.com/vim/vim/issues/2193
-  if (l:isInsideAnotherBuffer)
-    let s:prettier_job_running = 0
-    return
-  endif
-
   " nothing to update
   if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
     let s:prettier_job_running = 0
@@ -144,10 +136,35 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
   endif
 
   if len(l:out)
-    call s:Apply_Prettier_Format(l:out, a:startSelection, a:endSelection)
-    write
-    let s:prettier_job_running = 0
+      " This is required due to race condition when user quickly switch buffers while the async
+      " cli has not finished running, vim 8.0.1039 has introduced setbufline() which can be used
+      " to fix this issue in a cleaner way, however since we still need to support older vim versions
+      " we will apply a more generic solution
+      if (l:isInsideAnotherBuffer)
+        if (bufloaded(str2nr(a:bufferName)))
+          try
+            silent exec "sp ". escape(bufname(bufnr(a:bufferName)), ' \')
+            call s:Prettier_Format_And_Save(l:out, a:startSelection, a:endSelection)
+          catch
+            echohl WarningMsg | echom 'Prettier: failed to parse buffer: ' . a:bufferName | echohl NONE
+          finally
+            " we should then hide this buffer again
+            if a:bufferName == bufname('%')
+              silent hide
+            endif
+          endtry
+        endif
+      else
+        call s:Prettier_Format_And_Save(l:out, a:startSelection, a:endSelection)
+      endif
+
+      let s:prettier_job_running = 0
   endif
+endfunction
+
+function! s:Prettier_Format_And_Save(lines, start, end) abort
+  call s:Apply_Prettier_Format(a:lines, a:start, a:end)
+  write
 endfunction
 
 function! s:Prettier_Job_Error(msg) abort

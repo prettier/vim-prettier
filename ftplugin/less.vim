@@ -1,6 +1,6 @@
 augroup Prettier
   autocmd!
   if g:prettier#autoformat
-    autocmd BufWritePre <buffer> call prettier#Autoformat()
+    autocmd BufWritePre *.less call prettier#Autoformat()
   endif
 augroup end

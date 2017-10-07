@@ -2,14 +2,23 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.0...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.1...HEAD)
+
+**Merged pull requests:**
+
+- bugfix: Fixing auto command params to use extensions instead of magic [\#64](https://github.com/prettier/vim-prettier/pull/64) ([mitermayer](https://github.com/mitermayer))
+
+## [0.2.1](https://github.com/prettier/vim-prettier/tree/0.2.1) (2017-10-07)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.0...0.2.1)
 
 **Fixed bugs:**
 
+- Overwrites Buffer1 with contents of Buffer2 [\#62](https://github.com/prettier/vim-prettier/issues/62)
 - Confused by file type overrides [\#60](https://github.com/prettier/vim-prettier/issues/60)
 
 **Merged pull requests:**
 
+- bugfix: fixing race condition incorrect buffer formating [\#63](https://github.com/prettier/vim-prettier/pull/63) ([mitermayer](https://github.com/mitermayer))
 - bug: Fixing config overwrite value for non js by levaraging --stdin-f… [\#61](https://github.com/prettier/vim-prettier/pull/61) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.2.0](https://github.com/prettier/vim-prettier/tree/0.2.0) (2017-10-04)

@@ -106,24 +106,36 @@ function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
     let l:async_cmd = 'cmd.exe /c ' . a:cmd
   endif
 
+  let l:bufferName = bufname('%')
+
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
       call job_start(l:async_cmd, {
         \ 'in_io': 'buffer',
         \ 'in_top': a:startSelection,
         \ 'in_bot': a:endSelection,
-        \ 'in_name': bufname('%'),
+        \ 'in_name': l:bufferName,
         \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(msg)},
-        \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection)}})
+        \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection, l:bufferName)}})
   endif
 endfunction
 
-function! s:Prettier_Job_Close(channel, startSelection, endSelection) abort
+function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName) abort
   let l:out = []
+  let l:currentBufferName = bufname('%')
+  let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
 
   while ch_status(a:channel, {'part': 'out'}) == 'buffered'
     call add(l:out, ch_read(a:channel))
   endwhile
+
+  " This is required due to race condition when user quickly switch buffers while the async
+  " cli has not finished running, could be fixed if vim supported passing buffer name to
+  " setline https://github.com/vim/vim/issues/2193
+  if (l:isInsideAnotherBuffer)
+    let s:prettier_job_running = 0
+    return
+  endif
 
   " nothing to update
   if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)

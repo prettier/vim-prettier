@@ -2,7 +2,14 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.2...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.3...HEAD)
+
+**Merged pull requests:**
+
+- adding suppor for vim8 versions older than 8.0.0015 to use async job API [\#66](https://github.com/prettier/vim-prettier/pull/66) ([mitermayer](https://github.com/mitermayer))
+
+## [0.2.3](https://github.com/prettier/vim-prettier/tree/0.2.3) (2017-10-08)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.2...0.2.3)
 
 **Merged pull requests:**
 

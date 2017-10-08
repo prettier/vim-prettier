@@ -125,7 +125,7 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
   let l:currentBufferName = bufname('%')
   let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
 
-  while ch_status(a:channel, {'part': 'out'}) == 'buffered'
+  while ch_status(a:channel) ==# 'buffered'
     call add(l:out, ch_read(a:channel))
   endwhile
 

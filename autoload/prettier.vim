@@ -1,3 +1,16 @@
+" vim-prettier: A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
+"
+" Script Info  {{{
+"==========================================================================================================
+" Name Of File: prettier.vim
+"  Description: A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
+"   Maintainer: Mitermayer Reis <mitermayer.reis at gmail.com>
+"      Version: 0.2.3
+"        Usage: Use :help vim-prettier-usage, or visit https://github.com/prettier/vim-prettier
+"
+"==========================================================================================================
+" }}}
+
 let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:prettier_job_running = 0
 let s:prettier_quickfix_open = 0

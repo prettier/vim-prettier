@@ -1,5 +1,15 @@
 *vim-prettier.txt*        A prettier plugin for vim.
 
+           -------------------------------------------------------
+                 vim-prettier: plugin wrapper for prettier
+           -------------------------------------------------------
+
+Author: Mitermayer Reis <mitermayer.reis@gmail.com>
+WebSite: https://prettier.io/
+Repository: https://github.com/prettier/vim-prettier
+License: MIT style license
+
+==============================================================================
 CONTENTS                                                *vim-prettier-contents*
 
 Introduction                                       |vim-prettier-introduction|

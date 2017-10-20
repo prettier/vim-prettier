@@ -1,11 +1,24 @@
 # Change Log
 
-## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
+## [0.2.4](https://github.com/prettier/vim-prettier/tree/0.2.4) (2017-10-20)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.3...0.2.4)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.3...HEAD)
+**Implemented enhancements:**
+
+- No references to getting help or support [\#67](https://github.com/prettier/vim-prettier/issues/67)
+
+**Fixed bugs:**
+
+- Incorrect resolving of prettier config [\#71](https://github.com/prettier/vim-prettier/issues/71)
+
+**Closed issues:**
+
+- SyntaxError: Unexpected token [\#69](https://github.com/prettier/vim-prettier/issues/69)
 
 **Merged pull requests:**
 
+- Fixing bug where config was not being correctly loaded based on file [\#72](https://github.com/prettier/vim-prettier/pull/72) ([mitermayer](https://github.com/mitermayer))
+- Including extra information on the autoload header and doc header [\#70](https://github.com/prettier/vim-prettier/pull/70) ([mitermayer](https://github.com/mitermayer))
 - adding suppor for vim8 versions older than 8.0.0015 to use async job API [\#66](https://github.com/prettier/vim-prettier/pull/66) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.2.3](https://github.com/prettier/vim-prettier/tree/0.2.3) (2017-10-08)

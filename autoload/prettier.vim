@@ -256,7 +256,7 @@ function! s:Get_Prettier_Exec_Args(config) abort
           \ ' --config-precedence ' .
           \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
           \ ' --stdin-filepath ' .
-          \ simplify(expand("%:t")) .
+          \ simplify(expand("%:p")) .
           \ ' --stdin '
   return l:cmd
 endfunction

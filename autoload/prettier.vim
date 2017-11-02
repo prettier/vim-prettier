@@ -256,7 +256,7 @@ function! s:Get_Prettier_Exec_Args(config) abort
           \ ' --config-precedence ' .
           \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
           \ ' --stdin-filepath ' .
-          \ shellescape(simplify(expand("%:p"))) .
+          \ prettier#Escape(simplify(expand("%:p"))) .
           \ ' --stdin '
   return l:cmd
 endfunction
@@ -354,4 +354,22 @@ endfunction
 " If we can't find any prettier installing we then suggest where to get it from
 function! s:Suggest_Install_Prettier() abort
   echohl WarningMsg | echom 'Prettier: no prettier executable installation found.' | echohl NONE
+endfunction
+
+" Borrowed from https://github.com/w0rp/ale/blob/master/autoload/ale.vim
+function! prettier#Escape(str) abort
+    if fnamemodify(&shell, ':t') is? 'cmd.exe'
+        " If the string contains spaces, it will be surrounded by quotes.
+        " Otherwise, special characters will be escaped with carets (^).
+        return substitute(
+        \   a:str =~# ' '
+        \       ?  '"' .  substitute(a:str, '"', '""', 'g') . '"'
+        \       : substitute(a:str, '\v([&|<>^])', '^\1', 'g'),
+        \   '%',
+        \   '%%',
+        \   'g',
+        \)
+    endif
+
+    return shellescape (a:str)
 endfunction

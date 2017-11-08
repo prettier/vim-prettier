@@ -1,5 +1,26 @@
 # Change Log
 
+## [0.2.5](https://github.com/prettier/vim-prettier/tree/0.2.5) (2017-11-08)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.4...0.2.5)
+
+**Implemented enhancements:**
+
+- Add support for prettier 1.8 [\#77](https://github.com/prettier/vim-prettier/issues/77)
+
+**Fixed bugs:**
+
+- Prettier: failed to parse buffer. Prettier fails on css files. [\#76](https://github.com/prettier/vim-prettier/issues/76)
+
+**Closed issues:**
+
+- prepends `Ignored unknown option: --config-precedence` in buffer [\#73](https://github.com/prettier/vim-prettier/issues/73)
+
+**Merged pull requests:**
+
+- Issue 77/adding support for prettier 1.8 [\#80](https://github.com/prettier/vim-prettier/pull/80) ([mitermayer](https://github.com/mitermayer))
+- issues/76 - the shellescapping util function was breaking async [\#79](https://github.com/prettier/vim-prettier/pull/79) ([mitermayer](https://github.com/mitermayer))
+- Add shellescape for file path [\#74](https://github.com/prettier/vim-prettier/pull/74) ([chemzqm](https://github.com/chemzqm))
+
 ## [0.2.4](https://github.com/prettier/vim-prettier/tree/0.2.4) (2017-10-20)
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.3...0.2.4)
 

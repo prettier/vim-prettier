@@ -1,31 +1,43 @@
 ## vim-prettier
 
-A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
+A vim plugin wrapper for prettier, pre-configured with custom default prettier
+settings.
 
-**Note:** requires `prettier` version 1.7.4+
+---
 
-***
-
-By default it will auto format **javascript**, **typescript**, **less**, **scss**, **css**, **json**, and **graphql** files that have "@format" annotation in the header of the file.
+By default it will auto format **javascript**, **typescript**, **less**,
+**scss**, **css**, **json**, **graphql** and **markdown** files if they
+have/support the "@format" pragma annotation in the header of the file.
 
 ![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
 
 ### INSTALL
 
-Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and yarn|npm installed globally.
+Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and
+yarn|npm installed globally.
 
 ```vim
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
 ```
 
-If using other vim plugin managers or doing manual setup make sure to have `prettier` installed globally or go to your vim-prettier directory and either do `npm install` or `yarn install`
+or simply enable for all formats by:
+
+```vim
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+```
+
+If using other vim plugin managers or doing manual setup make sure to have
+`prettier` installed globally or go to your vim-prettier directory and either do
+`npm install` or `yarn install`
 
 ### Prettier Executable resolution
 
-When installed via vim-plug, a default prettier executable is installed inside vim-prettier.
+When installed via vim-plug, a default prettier executable is installed inside
+vim-prettier.
 
 vim-prettier executable resolution:
 
@@ -54,7 +66,7 @@ If your are on vim 8+ you can also trigger async formatting by:
 :PrettierAsync
 ```
 
-You can check what is the `vim-prettier` plugin version by: 
+You can check what is the `vim-prettier` plugin version by:
 
 ```vim
 :PrettierVersion
@@ -72,7 +84,7 @@ You can check what is the resolved `prettier` cli path by:
 :PrettierCliPath
 ```
 
-You can check what is the resolved `prettier` cli version by: 
+You can check what is the resolved `prettier` cli version by:
 
 ```vim
 :PrettierCliVersion
@@ -117,14 +129,14 @@ Running before saving sync:
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql Prettier
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier
 ```
 
 Running before saving async (vim 8+):
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 ```
 
 Running before saving, changing text or leaving insert mode:
@@ -134,12 +146,13 @@ Running before saving, changing text or leaving insert mode:
 let g:prettier#quickfix_enabled = 0
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 ```
 
 ### Overwrite default prettier configuration
 
-**Note:** vim-prettier default settings differ from prettier intentionally. However they can be configured by:
+**Note:** vim-prettier default settings differ from prettier intentionally.
+However they can be configured by:
 
 ```vim
 " max line length that prettier will wrap on
@@ -166,7 +179,7 @@ g:prettier#config#jsx_bracket_same_line = 'true'
 " none|es5|all
 g:prettier#config#trailing_comma = 'all'
 
-" flow|babylon|typescript|postcss|json|graphql
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown
 g:prettier#config#parser = 'flow'
 
 " cli-override|file-override|prefer-file

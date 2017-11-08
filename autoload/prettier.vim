@@ -190,8 +190,10 @@ function! s:Handle_Parsing_Errors(out) abort
 
   for line in a:out
     " matches:
+    " file.ext: SyntaxError: Unexpected token (2:8)sd
     " stdin: SyntaxError: Unexpected token (2:8)
-    let l:match = matchlist(line, '^stdin: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
+    " [error] file.ext: SyntaxError: Unexpected token (2:8)
+    let l:match = matchlist(line, '^.*: \(.*\) (\(\d\{1,}\):\(\d\{1,}\)*)')
     if !empty(l:match)
       call add(l:errors, { 'bufnr': bufnr('%'),
                          \ 'text': match[1],

@@ -218,6 +218,11 @@ function! s:Get_New_Buffer(lines, start, end) abort
 endfunction
 
 function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
+  
+  " store indentation of first line
+  let l:indentation = substitute(getline(a:startSelection), '\(^\s*\).*', '\1', '')
+  let l:lastLineInBuffer = line('$')
+
   " store view
   let l:winview = winsaveview()
   let l:newBuffer = s:Get_New_Buffer(a:lines, a:startSelection, a:endSelection)
@@ -228,6 +233,10 @@ function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
   " replace all lines from the current buffer with output from prettier
   call setline(1, l:newBuffer)
 
+  let l:addedLines = line('$') - l:lastLineInBuffer
+  let l:endSelection = a:endSelection + l:addedLines
+  " Restore indentation of first line
+  execute a:startSelection.','.l:endSelection.' normal I'.l:indentation
   " Restore view
   call winrestview(l:winview)
 endfunction

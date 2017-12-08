@@ -1,5 +1,19 @@
 # Change Log
 
+## [0.2.6](https://github.com/prettier/vim-prettier/tree/0.2.6) (2017-12-08)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.5...0.2.6)
+
+**Closed issues:**
+
+- Single quote option not working [\#84](https://github.com/prettier/vim-prettier/issues/84)
+- no semicolon not working [\#83](https://github.com/prettier/vim-prettier/issues/83)
+- Slow [\#82](https://github.com/prettier/vim-prettier/issues/82)
+
+**Merged pull requests:**
+
+- Bumping prettier dep to 1.9.1 [\#86](https://github.com/prettier/vim-prettier/pull/86) ([mitermayer](https://github.com/mitermayer))
+- issues-83-and-84 - Fixing prettier 1.9 regression [\#85](https://github.com/prettier/vim-prettier/pull/85) ([mitermayer](https://github.com/mitermayer))
+
 ## [0.2.5](https://github.com/prettier/vim-prettier/tree/0.2.5) (2017-11-08)
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.4...0.2.5)
 

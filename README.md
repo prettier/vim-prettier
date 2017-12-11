@@ -30,6 +30,13 @@ or simply enable for all formats by:
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 ```
 
+```
+For those using [vim-pathogen](https://github.com/tpope/vim-pathogen), you can run the following in a terminal:
+
+cd ~/.vim/bundle
+git clone https://github.com/prettier/prettier
+```
+
 If using other vim plugin managers or doing manual setup make sure to have
 `prettier` installed globally or go to your vim-prettier directory and either do
 `npm install` or `yarn install`

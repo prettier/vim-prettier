@@ -60,6 +60,9 @@ let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
 " cli-override|file-override|prefer-file
 let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'prefer-file')
 
+" always|never|preserve
+let g:prettier#config#prose_wrap = get(g:, 'prettier#config#prose_wrap', 'preserve')
+
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
 

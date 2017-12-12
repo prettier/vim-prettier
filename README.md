@@ -191,6 +191,9 @@ g:prettier#config#parser = 'flow'
 
 " cli-override|file-override|prefer-file
 g:prettier#config#config_precedence = 'prefer-file'
+
+" always|never|preserve
+g:prettier#config#prose_wrap = 'preserve'
 ```
 
 ### REQUIREMENT(S)

@@ -262,7 +262,7 @@ function! s:Get_Prettier_Exec_Args(config) abort
           \ ' --stdin-filepath ' .
           \ simplify(expand("%:p")) .
           \ ' --no-editorconfig '.
-          \ ' --loglevel "error" '.
+          \ ' --loglevel error '.
           \ ' --stdin '
   return l:cmd
 endfunction

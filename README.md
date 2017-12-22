@@ -34,7 +34,7 @@ For those using [vim-pathogen](https://github.com/tpope/vim-pathogen), you can r
 
 ```
 cd ~/.vim/bundle
-git clone https://github.com/prettier/prettier
+git clone https://github.com/prettier/vim-prettier
 ```
 
 If using other vim plugin managers or doing manual setup make sure to have

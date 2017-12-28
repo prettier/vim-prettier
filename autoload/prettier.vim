@@ -222,6 +222,11 @@ function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
   let l:winview = winsaveview()
   let l:newBuffer = s:Get_New_Buffer(a:lines, a:startSelection, a:endSelection)
 
+  " we should not replace contents if the newBuffer is empty
+  if empty(l:newBuffer)
+    return
+  endif
+
   " delete all lines on the current buffer
   silent! execute len(l:newBuffer) . ',' . line('$') . 'delete _'
 

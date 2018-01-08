@@ -163,30 +163,39 @@ However they can be configured by:
 
 ```vim
 " max line length that prettier will wrap on
+" Prettier efault: 80
 g:prettier#config#print_width = 80
 
 " number of spaces per indentation level
+" Prettier default: 2
 g:prettier#config#tab_width = 2
 
 " use tabs over spaces
+" Prettier default: false
 g:prettier#config#use_tabs = 'false'
 
 " print semicolons
+" Prettier default: true
 g:prettier#config#semi = 'true'
 
 " single quotes over double quotes
+" Prettier default: false
 g:prettier#config#single_quote = 'true'
 
 " print spaces between brackets
+" Prettier default: true
 g:prettier#config#bracket_spacing = 'false'
 
 " put > on the last line instead of new line
+" Prettier default: false
 g:prettier#config#jsx_bracket_same_line = 'true'
 
 " none|es5|all
+" Prettier default: none
 g:prettier#config#trailing_comma = 'all'
 
 " flow|babylon|typescript|css|less|scss|json|graphql|markdown
+" Prettier default: babylon
 g:prettier#config#parser = 'flow'
 
 " cli-override|file-override|prefer-file

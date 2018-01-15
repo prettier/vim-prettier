@@ -1,0 +1,7 @@
+---
+language: python
+dist: precise
+install: 
+  - pip install vim-vint
+script: 
+  - vint .

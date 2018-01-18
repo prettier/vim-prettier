@@ -190,6 +190,10 @@ g:prettier#config#bracket_spacing = 'false'
 " Prettier default: false
 g:prettier#config#jsx_bracket_same_line = 'true'
 
+" avoid|always
+" Prettier default: avoid
+g:prettier#config#arrow_parens = 'always'
+
 " none|es5|all
 " Prettier default: none
 g:prettier#config#trailing_comma = 'all'

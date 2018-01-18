@@ -153,7 +153,10 @@ However they can be configured by:
   g:prettier#config#bracket_spacing = 'false' 
 
   " put > on the last line instead of new line
-  g:prettier#config#jsx_bracket_same_line = 'true' 
+  g:prettier#config#jsx_bracket_same_line = 'true'
+
+  " avoid|always
+  g:prettier#config#arrow_parens = 'always'
 
   " none|es5|all
   g:prettier#config#trailing_comma = 'all'

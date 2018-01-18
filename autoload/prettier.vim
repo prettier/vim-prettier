@@ -46,7 +46,7 @@ function! prettier#Prettier(...) abort
   if l:execCmd != -1
     let l:cmd = l:execCmd . s:Get_Prettier_Exec_Args(l:config)
 
-    " close quickfix if it is opened 
+    " close quickfix if it is opened
     if s:prettier_quickfix_open
       call setqflist([])
       cclose
@@ -301,6 +301,8 @@ function! s:Get_Prettier_Exec_Args(config) abort
           \ get(a:config, 'bracketSpacing', g:prettier#config#bracket_spacing) .
           \ ' --jsx-bracket-same-line ' .
           \ get(a:config, 'jsxBracketSameLine', g:prettier#config#jsx_bracket_same_line) .
+          \ ' --arrow-parens ' .
+          \ get(a:config, 'arrowParens', g:prettier#config#arrow_parens) .
           \ ' --trailing-comma ' .
           \ get(a:config, 'trailingComma', g:prettier#config#trailing_comma) .
           \ ' --parser ' .

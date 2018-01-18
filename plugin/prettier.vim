@@ -54,6 +54,9 @@ let g:prettier#config#bracket_spacing = get(g:,'prettier#config#bracket_spacing'
 " put > on the last line instead of new line
 let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracket_same_line', 'true')
 
+" avoid wrapping a single arrow function param in parens
+let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'avoid')
+
 " none|es5|all
 let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'all')
 

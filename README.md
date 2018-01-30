@@ -20,7 +20,7 @@ yarn|npm installed globally.
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
+  \ 'for': ['vue', 'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown'] }
 ```
 
 or simply enable for all formats by:
@@ -136,14 +136,14 @@ Running before saving sync:
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier
+autocmd BufWritePre *.vue,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier
 ```
 
 Running before saving async (vim 8+):
 
 ```vim
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+autocmd BufWritePre *.vue,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 ```
 
 Running before saving, changing text or leaving insert mode:
@@ -153,7 +153,7 @@ Running before saving, changing text or leaving insert mode:
 let g:prettier#quickfix_enabled = 0
 
 let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+autocmd BufWritePre,TextChanged,InsertLeave *.vue,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 ```
 
 ### Overwrite default prettier configuration
@@ -163,7 +163,7 @@ However they can be configured by:
 
 ```vim
 " max line length that prettier will wrap on
-" Prettier efault: 80
+" Prettier default: 80
 g:prettier#config#print_width = 80
 
 " number of spaces per indentation level

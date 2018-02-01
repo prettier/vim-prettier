@@ -333,17 +333,17 @@ function! s:Get_Prettier_Exec() abort
 
   let l:local_exec = s:Get_Prettier_Local_Exec()
   if executable(l:local_exec)
-    return l:local_exec
+    return fnameescape(l:local_exec)
   endif
 
   let l:global_exec = s:Get_Prettier_Global_Exec()
   if executable(l:global_exec)
-    return l:global_exec
+    return fnameescape(l:global_exec)
   endif
 
   let l:plugin_exec = s:Get_Prettier_Plugin_Exec()
   if executable(l:plugin_exec)
-    return l:plugin_exec
+    return fnameescape(l:plugin_exec)
   endif
 
   return -1

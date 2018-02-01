@@ -168,7 +168,7 @@ function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
 
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
-      call job_start(l:async_cmd, {
+      call job_start(['sh', '-c', l:async_cmd], {
         \ 'in_io': 'buffer',
         \ 'in_top': a:startSelection,
         \ 'in_bot': a:endSelection,

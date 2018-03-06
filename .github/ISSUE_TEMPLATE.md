@@ -1,13 +1,12 @@
 **Do you want to request a *feature* or report a *bug*?**
 
-**What is the current behavior? / What is the expected behavior?**
+**What is the current/expected behavior?**
 
-**Which version of `vim-prettier` are you using(can be check by running the command: `:PrettierVersion`) ?**
+**What version of `vim-prettier` are you using - (output of `:PrettierVersion`) ?**
 
-**Which version of `prettier` executable are you using(can be check by running the command: `:PrettierCliVersion`) ?**
+**What version of `prettier` are you using - (output of  `:PrettierCliVersion`) ?**
 
-**What is your `prettier` executable path(can be check by running the command: `:PrettierCliPath`) ?**
+**What is your `prettier` executable path - (output of  `:PrettierCliPath`) ?**
 
-**Did this work in previous versions of vim-prettier?**
+**Did this work in previous versions of vim-prettier and/or prettier ?**
 
-**Did this work in previous versions of prettier?**

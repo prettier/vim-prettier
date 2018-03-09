@@ -9,6 +9,9 @@
     "url": "git://github.com/prettier/vim-prettier.git"
   },
   "dependencies": {
+    "@prettier/plugin-php": "prettier/plugin-php",
+    "@prettier/plugin-python": "prettier/plugin-python",
+    "@prettier/plugin-swift": "prettier/plugin-swift",
     "prettier": "^1.10.2"
   }
 }

@@ -69,6 +69,9 @@ let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_preced
 " always|never|preserve
 let g:prettier#config#prose_wrap = get(g:, 'prettier#config#prose_wrap', 'preserve')
 
+" Don't leave the quicklist focused on error.
+let g:prettier#no_focus_quicklist = get(g:, 'prettier#no_focus_quicklist', 0)
+
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
 

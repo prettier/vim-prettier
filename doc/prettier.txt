@@ -109,6 +109,11 @@ By default parsing errors will open the quickfix but can also be disabled
 >
   let g:prettier#exec_cmd_async = 1
 <
+Have the cursor returned to its original window after the quickfix window is
+shown.
+>
+  let g:prettier#no_focus_quicklist = 1
+<
 To enable vim-prettier to run in files without requiring the "@format" doc tag.
 First disable the default autoformat, then update to your own custom behaviour
 

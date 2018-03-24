@@ -107,7 +107,7 @@ The command `:Prettier` by default is synchronous but can also be forced async
 <
 By default parsing errors will open the quickfix but can also be disabled
 >
-  let g:prettier#exec_cmd_async = 1
+  let g:prettier#quickfix_enabled  = 1
 <
 To enable vim-prettier to run in files without requiring the "@format" doc tag.
 First disable the default autoformat, then update to your own custom behaviour

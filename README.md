@@ -129,11 +129,10 @@ By default parsing errors will open the quickfix but can also be disabled
 let g:prettier#quickfix_enabled = 0
 ```
 
-Have the cursor returned to its original window after the quickfix window is
-shown.
+By default we auto focus on the quickfix when there are errors but can also be disabled
 
 ```vim
-let g:prettier#no_focus_quicklist = 0
+let g:prettier#quickfix_auto_focus = 0
 ```
 
 To enable vim-prettier to run in files without requiring the "@format" doc tag.

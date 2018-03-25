@@ -251,7 +251,7 @@ function! s:Handle_Parsing_Errors(out) abort
     let l:winnr = winnr()
     call setqflist(l:errors, 'r')
     botright copen
-    if g:prettier#no_focus_quicklist
+    if !g:prettier#quickfix_auto_focus
       " Return the cursor back to the main buffer.
       exe l:winnr . 'wincmd w'
     endif

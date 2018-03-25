@@ -48,10 +48,10 @@ vim-prettier.
 
 vim-prettier executable resolution:
 
-1. Look for user defined prettier cli path from vim configuration file
-2. Traverse parents and search for Prettier installation inside `node_modules`
-3. Look for a global prettier installation
-4. Use locally installed vim-prettier prettier executable
+1.  Look for user defined prettier cli path from vim configuration file
+2.  Traverse parents and search for Prettier installation inside `node_modules`
+3.  Look for a global prettier installation
+4.  Use locally installed vim-prettier prettier executable
 
 ### USAGE
 
@@ -127,6 +127,13 @@ By default parsing errors will open the quickfix but can also be disabled
 
 ```vim
 let g:prettier#quickfix_enabled = 0
+```
+
+Have the cursor returned to its original window after the quickfix window is
+shown.
+
+```vim
+let g:prettier#no_focus_quicklist = 0
 ```
 
 To enable vim-prettier to run in files without requiring the "@format" doc tag.

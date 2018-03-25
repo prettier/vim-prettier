@@ -48,7 +48,7 @@ function! prettier#Prettier(...) abort
 
     " close quickfix if it is opened
     if s:prettier_quickfix_open
-      call setqflist([])
+      call setqflist([], 'r')
       cclose
       let s:prettier_quickfix_open = 0
     endif
@@ -248,8 +248,13 @@ function! s:Handle_Parsing_Errors(out) abort
   endfor
 
   if len(l:errors)
-    call setqflist(l:errors)
+    let l:winnr = winnr()
+    call setqflist(l:errors, 'r')
     botright copen
+    if !g:prettier#no_focus_quicklist
+      " Return the cursor back to the main buffer.
+      exe l:winnr . 'wincmd w'
+    endif
     let s:prettier_quickfix_open = 1
   endif
 endfunction

@@ -8,7 +8,7 @@ Please use the simple form below as a guideline for describing your pull request
 
 Thanks for contributing to vim-prettier
 
--
+* * * 
 
 **Summary**
 

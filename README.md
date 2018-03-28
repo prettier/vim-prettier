@@ -170,49 +170,49 @@ However they can be configured by:
 ```vim
 " max line length that prettier will wrap on
 " Prettier default: 80
-g:prettier#config#print_width = 80
+let g:prettier#config#print_width = 80
 
 " number of spaces per indentation level
 " Prettier default: 2
-g:prettier#config#tab_width = 2
+let g:prettier#config#tab_width = 2
 
 " use tabs over spaces
 " Prettier default: false
-g:prettier#config#use_tabs = 'false'
+let g:prettier#config#use_tabs = 'false'
 
 " print semicolons
 " Prettier default: true
-g:prettier#config#semi = 'true'
+let g:prettier#config#semi = 'true'
 
 " single quotes over double quotes
 " Prettier default: false
-g:prettier#config#single_quote = 'true'
+let g:prettier#config#single_quote = 'true'
 
 " print spaces between brackets
 " Prettier default: true
-g:prettier#config#bracket_spacing = 'false'
+let g:prettier#config#bracket_spacing = 'false'
 
 " put > on the last line instead of new line
 " Prettier default: false
-g:prettier#config#jsx_bracket_same_line = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'true'
 
 " avoid|always
 " Prettier default: avoid
-g:prettier#config#arrow_parens = 'always'
+let g:prettier#config#arrow_parens = 'always'
 
 " none|es5|all
 " Prettier default: none
-g:prettier#config#trailing_comma = 'all'
+let g:prettier#config#trailing_comma = 'all'
 
 " flow|babylon|typescript|css|less|scss|json|graphql|markdown
 " Prettier default: babylon
-g:prettier#config#parser = 'flow'
+let g:prettier#config#parser = 'flow'
 
 " cli-override|file-override|prefer-file
-g:prettier#config#config_precedence = 'prefer-file'
+let g:prettier#config#config_precedence = 'prefer-file'
 
 " always|never|preserve
-g:prettier#config#prose_wrap = 'preserve'
+let g:prettier#config#prose_wrap = 'preserve'
 ```
 
 ### REQUIREMENT(S)

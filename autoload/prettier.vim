@@ -5,7 +5,7 @@
 " Name Of File: prettier.vim
 "  Description: A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 "   Maintainer: Mitermayer Reis <mitermayer.reis at gmail.com>
-"      Version: 0.2.7
+"      Version: 0.2.6
 "        Usage: Use :help vim-prettier-usage, or visit https://github.com/prettier/vim-prettier
 "
 "==========================================================================================================
@@ -168,14 +168,14 @@ function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
 
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
-      let l:job =  job_start([&shell, &shellcmdflag, l:async_cmd], {
-        \ 'out_io': 'buffer',
+      call job_start([&shell, &shellcmdflag, l:async_cmd], {
+        \ 'in_io': 'buffer',
+        \ 'in_top': a:startSelection,
+        \ 'in_bot': a:endSelection,
+        \ 'in_name': l:bufferName,
         \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(msg)},
         \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection, l:bufferName)}})
-      let l:stdin = job_getchannel(l:job)
-      call ch_sendraw(l:stdin, join(getbufline(bufnr(l:bufferName), a:startSelection,a:endSelection), "\n"))
-      call ch_close_in(l:stdin)
-    endif
+  endif
 endfunction
 
 function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName) abort
@@ -183,14 +183,13 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
   let l:currentBufferName = bufname('%')
   let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
 
-  let l:buff = ch_getbufnr(a:channel, 'out')
-  let l:out = getbufline(l:buff, 2, '$')
-  execute 'bd!' . l:buff
+  while ch_status(a:channel) ==# 'buffered'
+    call add(l:out, ch_read(a:channel))
+  endwhile
 
   " nothing to update
   if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
     let s:prettier_job_running = 0
-    redraw!
     return
   endif
 
@@ -279,20 +278,73 @@ function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
   endif
 
   " delete all lines on the current buffer
-  silent! execute '%delete _'
+  silent! execute len(l:newBuffer) . ',' . line('$') . 'delete _'
 
   " replace all lines from the current buffer with output from prettier
-  let l:idx = 0
-  for l:line in l:newBuffer
-    silent! call append(l:idx, l:line)
-    let l:idx += 1
-  endfor
-  
-  " delete trailing newline introduced by the above append procedure
-  silent! execute '$delete _'
-  
+  call setline(1, l:newBuffer)
+
   " Restore view
   call winrestview(l:winview)
+endfunction
+
+" Returns either '--use-tabs' or an empty string.
+function! s:Flag_use_tabs(config) abort
+  let l:value = get(a:config, 'useTabs', g:prettier#config#use_tabs)
+  if (l:value ==# 'auto')
+    let l:value = &expandtab ? 'false' : 'true'
+  endif
+
+  if ( l:value ==# 'true' )
+    return '--use-tabs'
+  else
+    return ''
+  endif
+endfunction
+
+" Backwards compatable version of shiftwidth()
+function! s:sw() abort
+  if exists('*shiftwidth')
+    return shiftwidth()
+  else
+    return &shiftwidth
+  endif
+endfunction
+
+" Returns '--tab-width=NN'
+function! s:Flag_tab_width(config) abort
+  let l:value = get(a:config, 'tabWidth', g:prettier#config#tab_width)
+
+  if (l:value ==# 'auto')
+    let l:value = s:sw()
+  endif
+
+  return '--tab-width=' . l:value
+endfunction
+
+" Returns '--print-width=NN' or ''
+function! s:Flag_print_width(config) abort
+  let l:value = get(a:config, 'printWidth', g:prettier#config#print_width)
+
+  if (l:value ==# 'auto')
+    let l:value = &textwidth
+  endif
+
+  if (l:value > 0)
+    return '--print-width=' . l:value
+  else
+    return ''
+  endif
+endfunction
+
+" Returns '--parser=PARSER' or ''
+function! s:Flag_parser(config) abort
+  let l:value = get(a:config, 'parser', g:prettier#config#parser)
+
+  if (l:value !=# '')
+    return '--parser=' . l:value
+  else
+    return ''
+  endif
 endfunction
 
 " By default we will default to our internal
@@ -300,34 +352,18 @@ endfunction
 function! s:Get_Prettier_Exec_Args(config) abort
   " Allow params to be passed as json format
   " convert bellow usage of globals to a get function o the params defaulting to global
-  let l:cmd = ' --print-width ' .
-          \ get(a:config, 'printWidth', g:prettier#config#print_width) .
-          \ ' --tab-width ' .
-          \ get(a:config, 'tabWidth', g:prettier#config#tab_width) .
-          \ ' --use-tabs ' .
-          \ get(a:config, 'useTabs', g:prettier#config#use_tabs) .
-          \ ' --semi ' .
-          \ get(a:config, 'semi', g:prettier#config#semi) .
-          \ ' --single-quote ' .
-          \ get(a:config, 'singleQuote', g:prettier#config#single_quote) .
-          \ ' --bracket-spacing ' .
-          \ get(a:config, 'bracketSpacing', g:prettier#config#bracket_spacing) .
-          \ ' --jsx-bracket-same-line ' .
-          \ get(a:config, 'jsxBracketSameLine', g:prettier#config#jsx_bracket_same_line) .
-          \ ' --arrow-parens ' .
-          \ get(a:config, 'arrowParens', g:prettier#config#arrow_parens) .
-          \ ' --trailing-comma ' .
-          \ get(a:config, 'trailingComma', g:prettier#config#trailing_comma) .
-          \ ' --parser ' .
-          \ get(a:config, 'parser', g:prettier#config#parser) .
-          \ ' --config-precedence ' .
+  " TODO: Use a list, filter() and join() to get a nicer list of args.
+  let l:cmd = s:Flag_use_tabs(a:config) . ' ' .
+          \ s:Flag_tab_width(a:config) . ' ' .
+          \ s:Flag_print_width(a:config) . ' ' .
+          \ s:Flag_parser(a:config) . ' ' .
+          \ ' --config-precedence=' .
           \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
-          \ ' --prose-wrap ' .
+          \ ' --prose-wrap=' .
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
-          \ ' --html-whitespace-sensitivity ' .
-          \ get(a:config, 'htmlWhitespaceSensitivity', g:prettier#config#html_whitespace_sensitivity) .
-          \ ' --stdin-filepath "' .
-          \ simplify(expand('%:p')) . '"' .
+          \ ' --stdin-filepath=' .
+          \ simplify(expand('%:p')) .
+          \ ' --no-editorconfig '.
           \ ' --loglevel error '.
           \ ' --stdin '
   return l:cmd

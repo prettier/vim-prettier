@@ -138,40 +138,31 @@ Overwrite default prettier configuration
 **Note:** vim-prettier default settings differ from prettier intentionally. 
 However they can be configured by:
 >
-  " max line length that prettier will wrap on
-  let g:prettier#config#print_width = 80
+  " Max line length that prettier will wrap on: a number or 'auto' (use
+  " textwidth).
+  " default: 'auto'
+  let g:prettier#config#print_width = 'auto'
 
-  " number of spaces per indentation level
-  let g:prettier#config#tab_width = 2
+  " number of spaces per indentation level: a number or 'auto' (use
+  " softtabstop)
+  " default: 'auto'
+  let g:prettier#config#tab_width = 'auto'
 
-  " use tabs over spaces
-  let g:prettier#config#use_tabs = 'false'
+  " use tabs instead of spaces: true, false, or auto (use the expandtab setting).
+  " default: 'auto'
+  let g:prettier#config#use_tabs = 'auto'
 
-  " print semicolons
-  let g:prettier#config#semi = 'true'
-
-  " single quotes over double quotes
-  let g:prettier#config#single_quote = 'true' 
-
-  " print spaces between brackets
-  let g:prettier#config#bracket_spacing = 'false' 
-
-  " put > on the last line instead of new line
-  let g:prettier#config#jsx_bracket_same_line = 'true'
-
-  " avoid|always
-  let g:prettier#config#arrow_parens = 'always'
-
-  " none|es5|all
-  let g:prettier#config#trailing_comma = 'all'
-
-  " flow|babylon|typescript|css|less|scss|json|graphql|markdown
-  let g:prettier#config#parser = 'flow'
+  " flow|babylon|typescript|css|less|scss|json|graphql|markdown or empty string
+  " (let prettier choose).
+  " default: ''
+  let g:prettier#config#parser = ''
 
   " cli-override|file-override|prefer-file
-  let g:prettier#config#config_precedence = 'prefer-file'
+  " default: 'cli-override'
+  let g:prettier#config#config_precedence = 'cli-override'
 
   " always|never|preserve
+  " default: 'preserve'
   let g:prettier#config#prose_wrap = 'preserve'
 <
 ==============================================================================

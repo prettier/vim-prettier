@@ -33,40 +33,31 @@ let g:prettier#exec_cmd_async = get(g:, 'prettier#exec_cmd_async', 0)
 let g:prettier#quickfix_enabled = get(g:, 'prettier#quickfix_enabled', 1)
 
 " => Prettier CLI config
-" max line lengh that prettier will wrap on
-let g:prettier#config#print_width = get(g:, 'prettier#config#print_width', 80)
+" Max line length that prettier will wrap on: a number or 'auto' (use
+" textwidth).
+" default: 'auto'
+let g:prettier#config#print_width = get(g:, 'prettier#config#print_width', 'auto')
 
-" number of spaces per indentation level
-let g:prettier#config#tab_width = get(g:,'prettier#config#tab_width', 2)
+" number of spaces per indentation level: a number or 'auto' (use
+" softtabstop)
+" default: 'auto'
+let g:prettier#config#tab_width = get(g:,'prettier#config#tab_width', 'auto')
 
-" use tabs over spaces
-let g:prettier#config#use_tabs = get(g:,'prettier#config#use_tabs', 'false')
+" use tabs instead of spaces: true, false, or auto (use the expandtab setting).
+" default: 'auto'
+let g:prettier#config#use_tabs = get(g:,'prettier#config#use_tabs', 'auto')
 
-" print semicolons
-let g:prettier#config#semi = get(g:,'prettier#config#semi', 'true')
-
-" single quotes over double quotes
-let g:prettier#config#single_quote = get(g:,'prettier#config#single_quote', 'true')
-
-" print spaces between brackets
-let g:prettier#config#bracket_spacing = get(g:,'prettier#config#bracket_spacing', 'false')
-
-" put > on the last line instead of new line
-let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracket_same_line', 'true')
-
-" avoid wrapping a single arrow function param in parens
-let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'avoid')
-
-" none|es5|all
-let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'all')
-
-" flow|babylon|typescript|postcss|json|graphql
-let g:prettier#config#parser = get(g:,'prettier#config#parser', 'flow')
+" flow|babylon|typescript|css|less|scss|json|graphql|markdown or empty string
+" (let prettier choose).
+" default: ''
+let g:prettier#config#parser = get(g:,'prettier#config#parser', '')
 
 " cli-override|file-override|prefer-file
-let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'prefer-file')
+" default: 'cli-override'
+let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'cli-override')
 
 " always|never|preserve
+" default: 'preserve'
 let g:prettier#config#prose_wrap = get(g:, 'prettier#config#prose_wrap', 'preserve')
 
 " Don't leave the quicklist focused on error.

@@ -287,36 +287,81 @@ function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
   call winrestview(l:winview)
 endfunction
 
+" Returns either '--use-tabs' or an empty string.
+function! s:Flag_use_tabs(config) abort
+  let l:value = get(a:config, 'useTabs', g:prettier#config#use_tabs)
+  if (l:value ==# 'auto')
+    let l:value = &expandtab ? 'false' : 'true'
+  endif
+
+  if ( l:value ==# 'true' )
+    return '--use-tabs'
+  else
+    return ''
+  endif
+endfunction
+
+" Backwards compatable version of shiftwidth()
+function! s:sw() abort
+  if exists('*shiftwidth')
+    return shiftwidth()
+  else
+    return &shiftwidth
+  endif
+endfunction
+
+" Returns '--tab-width=NN'
+function! s:Flag_tab_width(config) abort
+  let l:value = get(a:config, 'tabWidth', g:prettier#config#tab_width)
+
+  if (l:value ==# 'auto')
+    let l:value = s:sw()
+  endif
+
+  return '--tab-width=' . l:value
+endfunction
+
+" Returns '--print-width=NN' or ''
+function! s:Flag_print_width(config) abort
+  let l:value = get(a:config, 'printWidth', g:prettier#config#print_width)
+
+  if (l:value ==# 'auto')
+    let l:value = &textwidth
+  endif
+
+  if (l:value > 0)
+    return '--print-width=' . l:value
+  else
+    return ''
+  endif
+endfunction
+
+" Returns '--parser=PARSER' or ''
+function! s:Flag_parser(config) abort
+  let l:value = get(a:config, 'parser', g:prettier#config#parser)
+
+  if (l:value !=# '')
+    return '--parser=' . l:value
+  else
+    return ''
+  endif
+endfunction
+
 " By default we will default to our internal
 " configuration settings for prettier
 function! s:Get_Prettier_Exec_Args(config) abort
   " Allow params to be passed as json format
   " convert bellow usage of globals to a get function o the params defaulting to global
-  let l:cmd = ' --print-width ' .
-          \ get(a:config, 'printWidth', g:prettier#config#print_width) .
-          \ ' --tab-width ' .
-          \ get(a:config, 'tabWidth', g:prettier#config#tab_width) .
-          \ ' --use-tabs ' .
-          \ get(a:config, 'useTabs', g:prettier#config#use_tabs) .
-          \ ' --semi ' .
-          \ get(a:config, 'semi', g:prettier#config#semi) .
-          \ ' --single-quote ' .
-          \ get(a:config, 'singleQuote', g:prettier#config#single_quote) .
-          \ ' --bracket-spacing ' .
-          \ get(a:config, 'bracketSpacing', g:prettier#config#bracket_spacing) .
-          \ ' --jsx-bracket-same-line ' .
-          \ get(a:config, 'jsxBracketSameLine', g:prettier#config#jsx_bracket_same_line) .
-          \ ' --arrow-parens ' .
-          \ get(a:config, 'arrowParens', g:prettier#config#arrow_parens) .
-          \ ' --trailing-comma ' .
-          \ get(a:config, 'trailingComma', g:prettier#config#trailing_comma) .
-          \ ' --parser ' .
-          \ get(a:config, 'parser', g:prettier#config#parser) .
-          \ ' --config-precedence ' .
+  " TODO: Use a list, filter() and join() to get a nicer list of args.
+  let l:cmd = s:Flag_use_tabs(a:config) . ' ' .
+          \ s:Flag_tab_width(a:config) . ' ' .
+          \ s:Flag_print_width(a:config) . ' ' .
+          \ s:Flag_parser(a:config) . ' ' .
+          \ ' --config-precedence=' .
           \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
-          \ ' --prose-wrap ' .
+          \ ' --prose-wrap=' .
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
-          \ ' --stdin-filepath ' .
+          \ ' --stdin-filepath=' .
           \ simplify(expand('%:p')) .
           \ ' --no-editorconfig '.
           \ ' --loglevel error '.

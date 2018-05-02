@@ -204,7 +204,7 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
             silent exec 'sp '. escape(bufname(bufnr(a:bufferName)), ' \')
             call s:Prettier_Format_And_Save(l:out, a:startSelection, a:endSelection)
           catch
-            echohl WarningMsg | echom 'Prettier: failed to parse buffer: ' . a:bufferName | echohl NONE
+            call prettier#logging#error#log('PARSING_ERROR', a:bufferName)
           finally
             " we should then hide this buffer again
             if a:bufferName == bufname('%')
@@ -453,7 +453,7 @@ function! s:Traverse_Dir_Search(rootDir) abort
 endfunction
 
 function! s:Prettier_Parse_Error(errors) abort
-  echohl WarningMsg | echom 'Prettier: failed to parse buffer.' | echohl NONE
+  call prettier#logging#error#log('PARSING_ERROR')
   if g:prettier#quickfix_enabled
     call s:Handle_Parsing_Errors(a:errors)
   endif
@@ -461,5 +461,5 @@ endfunction
 
 " If we can't find any prettier installing we then suggest where to get it from
 function! s:Suggest_Install_Prettier() abort
-  echohl WarningMsg | echom 'Prettier: no prettier executable installation found.' | echohl NONE
+  call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
 endfunction

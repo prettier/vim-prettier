@@ -39,7 +39,7 @@ By default it will auto format **javascript**, **typescript**, **less**,
 **scss**, **css**, **json**, **graphql** and **markdown** files if they
 have/support the "@format" pragma annotation in the header of the file.
 
-![vim-prettier](/media/vim-prettier.gif?raw=true 'vim-prettier')
+![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
 
 ### INSTALL
 
@@ -218,8 +218,8 @@ let g:prettier#config#use_tabs = 'auto'
 let g:prettier#config#parser = ''
 
 " cli-override|file-override|prefer-file
-" default: 'cli-override'
-let g:prettier#config#config_precedence = 'cli-override'
+" default: 'prefer-file'
+let g:prettier#config#config_precedence = 'prefer-file'
 
 " always|never|preserve
 " default: 'preserve'

@@ -53,8 +53,8 @@ let g:prettier#config#use_tabs = get(g:,'prettier#config#use_tabs', 'auto')
 let g:prettier#config#parser = get(g:,'prettier#config#parser', '')
 
 " cli-override|file-override|prefer-file
-" default: 'cli-override'
-let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'cli-override')
+" default: 'prefer-file'
+let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_precedence', 'prefer-file')
 
 " always|never|preserve
 " default: 'preserve'

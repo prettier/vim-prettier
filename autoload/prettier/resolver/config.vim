@@ -1,0 +1,72 @@
+" By default we will default to our internal
+" configuration settings for prettier
+function! prettier#resolver#config#buildCliArgs(config) abort
+  " Allow params to be passed as json format
+  " convert bellow usage of globals to a get function o the params defaulting to global
+  " TODO: Use a list, filter() and join() to get a nicer list of args.
+  let l:cmd = s:Flag_use_tabs(a:config) . ' ' .
+          \ s:Flag_tab_width(a:config) . ' ' .
+          \ s:Flag_print_width(a:config) . ' ' .
+          \ s:Flag_parser(a:config) . ' ' .
+          \ ' --config-precedence=' .
+          \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
+          \ ' --prose-wrap=' .
+          \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
+          \ ' --stdin-filepath=' .
+          \ simplify(expand('%:p')) .
+          \ ' --no-editorconfig '.
+          \ ' --loglevel error '.
+          \ ' --stdin '
+  return l:cmd
+endfunction
+
+" Returns '--tab-width=NN'
+function! s:Flag_tab_width(config) abort
+  let l:value = get(a:config, 'tabWidth', g:prettier#config#tab_width)
+
+  if (l:value ==# 'auto')
+    let l:value = prettier#utils#shim#shiftwidth()
+  endif
+
+  return '--tab-width=' . l:value
+endfunction
+
+" Returns either '--use-tabs' or an empty string.
+function! s:Flag_use_tabs(config) abort
+  let l:value = get(a:config, 'useTabs', g:prettier#config#use_tabs)
+  if (l:value ==# 'auto')
+    let l:value = &expandtab ? 'false' : 'true'
+  endif
+
+  if ( l:value ==# 'true' )
+    return '--use-tabs'
+  else
+    return ''
+  endif
+endfunction
+
+" Returns '--print-width=NN' or ''
+function! s:Flag_print_width(config) abort
+  let l:value = get(a:config, 'printWidth', g:prettier#config#print_width)
+
+  if (l:value ==# 'auto')
+    let l:value = &textwidth
+  endif
+
+  if (l:value > 0)
+    return '--print-width=' . l:value
+  else
+    return ''
+  endif
+endfunction
+
+" Returns '--parser=PARSER' or ''
+function! s:Flag_parser(config) abort
+  let l:value = get(a:config, 'parser', g:prettier#config#parser)
+
+  if (l:value !=# '')
+    return '--parser=' . l:value
+  else
+    return ''
+  endif
+endfunction

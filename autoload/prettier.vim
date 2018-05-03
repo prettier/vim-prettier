@@ -16,7 +16,7 @@ let s:prettier_job_running = 0
 let s:prettier_quickfix_open = 0
 
 function! prettier#PrettierCliPath() abort
-  let l:execCmd = s:Get_Prettier_Exec()
+  let l:execCmd = prettier#resolver#executable#getPath()
 
   if l:execCmd != -1
     echom l:execCmd
@@ -26,7 +26,7 @@ function! prettier#PrettierCliPath() abort
 endfunction
 
 function! prettier#PrettierCli(user_input) abort
-  let l:execCmd = s:Get_Prettier_Exec()
+  let l:execCmd = prettier#resolver#executable#getPath()
 
   if l:execCmd != -1
     let l:out = system(l:execCmd. ' ' . a:user_input)
@@ -37,7 +37,7 @@ function! prettier#PrettierCli(user_input) abort
 endfunction
 
 function! prettier#Prettier(...) abort
-  let l:execCmd = s:Get_Prettier_Exec()
+  let l:execCmd = prettier#resolver#executable#getPath()
   let l:async = a:0 > 0 ? a:1 : 0
   let l:startSelection = a:0 > 1 ? a:2 : 1
   let l:endSelection = a:0 > 2 ? a:3 : line('$')
@@ -339,89 +339,6 @@ function! s:Get_Prettier_Exec_Args(config) abort
           \ ' --loglevel error '.
           \ ' --stdin '
   return l:cmd
-endfunction
-
-" By default we will search for the following
-" => user defined prettier cli path from vim configuration file
-" => locally installed prettier inside node_modules on any parent folder
-" => globally installed prettier
-" => vim-prettier prettier installation
-" => if all fails suggest install
-function! s:Get_Prettier_Exec() abort
-  let l:user_defined_exec_path = fnamemodify(g:prettier#exec_cmd_path, ':p')
-  if executable(l:user_defined_exec_path)
-    return l:user_defined_exec_path
-  endif
-
-  let l:local_exec = s:Get_Prettier_Local_Exec()
-  if executable(l:local_exec)
-    return fnameescape(l:local_exec)
-  endif
-
-  let l:global_exec = s:Get_Prettier_Global_Exec()
-  if executable(l:global_exec)
-    return fnameescape(l:global_exec)
-  endif
-
-  let l:plugin_exec = s:Get_Prettier_Plugin_Exec()
-  if executable(l:plugin_exec)
-    return fnameescape(l:plugin_exec)
-  endif
-
-  return -1
-endfunction
-
-function! s:Get_Prettier_Local_Exec() abort
-  return s:Get_Exec(getcwd())
-endfunction
-
-function! s:Get_Prettier_Global_Exec() abort
-  return s:Get_Exec()
-endfunction
-
-function! s:Get_Prettier_Plugin_Exec() abort
-  return s:Get_Exec(s:root_dir)
-endfunction
-
-function! s:Get_Exec(...) abort
-  let l:rootDir = a:0 > 0 ? a:1 : 0
-  let l:exec = -1
-
-  if isdirectory(l:rootDir)
-    let l:dir = s:Traverse_Dir_Search(l:rootDir)
-    if l:dir != -1
-      let l:exec = s:Get_Path_To_Exec(l:dir)
-    endif
-  else
-    let l:exec = s:Get_Path_To_Exec()
-  endif
-
-  return l:exec
-endfunction
-
-function! s:Get_Path_To_Exec(...) abort
-  let l:rootDir = a:0 > 0 ? a:1 : -1
-  let l:dir = l:rootDir != -1 ? l:rootDir . '/.bin/' : ''
-  return l:dir . 'prettier'
-endfunction
-
-function! s:Traverse_Dir_Search(rootDir) abort
-  let l:root = a:rootDir
-  let l:dir = 'node_modules'
-
-  while 1
-    let l:search_dir = l:root . '/' . l:dir
-    if isdirectory(l:search_dir)
-      return l:search_dir
-    endif
-
-    let l:parent = fnamemodify(l:root, ':h')
-    if l:parent == l:root
-      return -1
-    endif
-
-    let l:root = l:parent
-  endwhile
 endfunction
 
 function! s:Prettier_Parse_Error(errors) abort

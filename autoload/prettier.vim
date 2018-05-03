@@ -273,21 +273,12 @@ function! s:Flag_use_tabs(config) abort
   endif
 endfunction
 
-" Backwards compatable version of shiftwidth()
-function! s:sw() abort
-  if exists('*shiftwidth')
-    return shiftwidth()
-  else
-    return &shiftwidth
-  endif
-endfunction
-
 " Returns '--tab-width=NN'
 function! s:Flag_tab_width(config) abort
   let l:value = get(a:config, 'tabWidth', g:prettier#config#tab_width)
 
   if (l:value ==# 'auto')
-    let l:value = s:sw()
+    let l:value = prettier#utils#shim#shiftwidth()
   endif
 
   return '--tab-width=' . l:value

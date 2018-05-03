@@ -21,7 +21,7 @@ function! prettier#PrettierCliPath() abort
   if l:execCmd != -1
     echom l:execCmd
   else
-    call s:Suggest_Install_Prettier()
+    call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
   endif
 endfunction
 
@@ -32,7 +32,7 @@ function! prettier#PrettierCli(user_input) abort
     let l:out = system(l:execCmd. ' ' . a:user_input)
     echom l:out
   else
-    call s:Suggest_Install_Prettier()
+    call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
   endif
 endfunction
 
@@ -61,7 +61,7 @@ function! prettier#Prettier(...) abort
       call s:Prettier_Exec_Sync(l:cmd, l:startSelection, l:endSelection)
     endif
   else
-    call s:Suggest_Install_Prettier()
+    call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
   endif
 endfunction
 
@@ -457,9 +457,4 @@ function! s:Prettier_Parse_Error(errors) abort
   if g:prettier#quickfix_enabled
     call s:Handle_Parsing_Errors(a:errors)
   endif
-endfunction
-
-" If we can't find any prettier installing we then suggest where to get it from
-function! s:Suggest_Install_Prettier() abort
-  call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
 endfunction

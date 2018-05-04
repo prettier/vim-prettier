@@ -13,6 +13,7 @@
 
 let s:prettier_job_running = 0
 
+" Displays the resolve prettier CLI path
 function! prettier#PrettierCliPath() abort
   let l:execCmd = prettier#resolver#executable#getPath()
 
@@ -23,6 +24,7 @@ function! prettier#PrettierCliPath() abort
   endif
 endfunction
 
+" Allows user commands to be passed straight to the prettier CLI
 function! prettier#PrettierCli(user_input) abort
   let l:execCmd = prettier#resolver#executable#getPath()
 
@@ -34,6 +36,7 @@ function! prettier#PrettierCli(user_input) abort
   endif
 endfunction
 
+" Main prettier command
 function! prettier#Prettier(...) abort
   let l:execCmd = prettier#resolver#executable#getPath()
   let l:async = a:0 > 0 ? a:1 : 0

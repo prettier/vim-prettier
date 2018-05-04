@@ -47,9 +47,7 @@ function! prettier#Prettier(...) abort
     " close quickfix if it is opened
     call prettier#utils#quickfix#close()
 
-    if l:async && v:version >= 800 && exists('*job_start')
-      call s:Prettier_Exec_Async(l:cmd, l:startSelection, l:endSelection)
-    elseif l:async && has('nvim') && g:prettier#nvim_unstable_async
+    if l:async && has('nvim') && g:prettier#nvim_unstable_async
       call s:Prettier_Exec_Async_Nvim(l:cmd, l:startSelection, l:endSelection)
     else
       call prettier#job#runner#run(l:cmd, l:startSelection, l:endSelection, l:async)
@@ -129,77 +127,4 @@ function! prettier#Autoformat(...) abort
 
   " Restore search
   let @/=l:search
-endfunction
-
-function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
-  let l:async_cmd = a:cmd
-
-  if has('win32') || has('win64')
-    let l:async_cmd = 'cmd.exe /c ' . a:cmd
-  endif
-
-  let l:bufferName = bufname('%')
-
-  if s:prettier_job_running != 1
-      let s:prettier_job_running = 1
-      call job_start([&shell, &shellcmdflag, l:async_cmd], {
-        \ 'in_io': 'buffer',
-        \ 'in_top': a:startSelection,
-        \ 'in_bot': a:endSelection,
-        \ 'in_name': l:bufferName,
-        \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(msg)},
-        \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection, l:bufferName)}})
-  endif
-endfunction
-
-function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName) abort
-  let l:out = []
-  let l:currentBufferName = bufname('%')
-  let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
-
-  while ch_status(a:channel) ==# 'buffered'
-    call add(l:out, ch_read(a:channel))
-  endwhile
-
-  " nothing to update
-  if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
-    let s:prettier_job_running = 0
-    return
-  endif
-
-  if len(l:out)
-      " This is required due to race condition when user quickly switch buffers while the async
-      " cli has not finished running, vim 8.0.1039 has introduced setbufline() which can be used
-      " to fix this issue in a cleaner way, however since we still need to support older vim versions
-      " we will apply a more generic solution
-      if (l:isInsideAnotherBuffer)
-        if (bufloaded(str2nr(a:bufferName)))
-          try
-            silent exec 'sp '. escape(bufname(bufnr(a:bufferName)), ' \')
-            call s:Prettier_Format_And_Save(l:out, a:startSelection, a:endSelection)
-          catch
-            call prettier#logging#error#log('PARSING_ERROR', a:bufferName)
-          finally
-            " we should then hide this buffer again
-            if a:bufferName == bufname('%')
-              silent hide
-            endif
-          endtry
-        endif
-      else
-        call s:Prettier_Format_And_Save(l:out, a:startSelection, a:endSelection)
-      endif
-
-      let s:prettier_job_running = 0
-  endif
-endfunction
-
-function! s:Prettier_Format_And_Save(lines, start, end) abort
-  call prettier#utils#buffer#replace(a:lines, a:start, a:end)
-  write
-endfunction
-
-function! s:Prettier_Job_Error(msg) abort
-    call prettier#job#runner#onError(split(a:msg, '\n'))
-    let s:prettier_job_running = 0
 endfunction

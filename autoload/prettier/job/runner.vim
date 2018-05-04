@@ -23,11 +23,13 @@ function! prettier#job#runner#onError(errors) abort
   endif
 endfunction
 
-function! s:asyncFormat(cmd, startSelection, endSelection, autoFocus) abort
+function! s:asyncFormat(cmd, startSelection, endSelection) abort
     if s:isAsyncVim
-      echom 'async vim'
-    else
+      call prettier#job#async#vim#run(a:cmd, a:startSelection, a:endSelection)
+    elseif s:isNeoVim
       echom 'neovim'
+    else 
+      call s:format(a:cmd, a:startSelection, a:endSelection)
     endif
 endfunction
 

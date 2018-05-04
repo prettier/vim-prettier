@@ -1,4 +1,7 @@
-function! prettier#bridge#parser#onError(out) abort
+" TODO
+" this function should just returns the parsed errors list instead
+" of opening the quickfix
+function! prettier#bridge#parser#onError(out, autoFocus) abort
   let l:errors = []
 
   for l:line in a:out
@@ -16,13 +19,6 @@ function! prettier#bridge#parser#onError(out) abort
   endfor
 
   if len(l:errors)
-    let l:winnr = winnr()
-    call setqflist(l:errors, 'r')
-    botright copen
-    if !g:prettier#quickfix_auto_focus
-      " Return the cursor back to the main buffer.
-      exe l:winnr . 'wincmd w'
-    endif
-    return 1
+    call prettier#utils#quickfix#open(l:errors, a:autoFocus)
   endif
 endfunction

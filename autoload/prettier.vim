@@ -151,11 +151,11 @@ function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
     return
   endif
 
-  if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
+  if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
     return
   endif
 
-  call s:Apply_Prettier_Format(l:out, a:startSelection, a:endSelection)
+  call prettier#utils#buffer#replace(l:out, a:startSelection, a:endSelection)
 endfunction
 
 function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
@@ -189,7 +189,7 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
   endwhile
 
   " nothing to update
-  if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
+  if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
     let s:prettier_job_running = 0
     return
   endif
@@ -222,41 +222,13 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
 endfunction
 
 function! s:Prettier_Format_And_Save(lines, start, end) abort
-  call s:Apply_Prettier_Format(a:lines, a:start, a:end)
+  call prettier#utils#buffer#replace(a:lines, a:start, a:end)
   write
 endfunction
 
 function! s:Prettier_Job_Error(msg) abort
     call s:Prettier_Parse_Error(split(a:msg, '\n'))
     let s:prettier_job_running = 0
-endfunction
-
-function! s:Has_Content_Changed(content, startLine, endLine) abort
-  return getbufline(bufnr('%'), 1, line('$')) == s:Get_New_Buffer(a:content, a:startLine, a:endLine) ? 0 : 1
-endfunction
-
-function! s:Get_New_Buffer(lines, start, end) abort
-  return getbufline(bufnr('%'), 1, a:start - 1) + a:lines + getbufline(bufnr('%'), a:end + 1, '$')
-endfunction
-
-function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
-  " store view
-  let l:winview = winsaveview()
-  let l:newBuffer = s:Get_New_Buffer(a:lines, a:startSelection, a:endSelection)
-
-  " we should not replace contents if the newBuffer is empty
-  if empty(l:newBuffer)
-    return
-  endif
-
-  " delete all lines on the current buffer
-  silent! execute len(l:newBuffer) . ',' . line('$') . 'delete _'
-
-  " replace all lines from the current buffer with output from prettier
-  call setline(1, l:newBuffer)
-
-  " Restore view
-  call winrestview(l:winview)
 endfunction
 
 function! s:Prettier_Parse_Error(errors) abort

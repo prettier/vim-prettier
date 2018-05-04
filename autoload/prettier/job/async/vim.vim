@@ -50,7 +50,7 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
         if (bufloaded(str2nr(a:bufferName)))
           try
             silent exec 'sp '. escape(bufname(bufnr(a:bufferName)), ' \')
-            call s:formatAndSave(l:out, a:startSelection, a:endSelection)
+            call prettier#utils#buffer#replaceAndSave(l:out, a:startSelection, a:endSelection)
           catch
             call prettier#logging#error#log('PARSING_ERROR', a:bufferName)
           finally
@@ -61,17 +61,9 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
           endtry
         endif
       else
-        call s:formatAndSave(l:out, a:startSelection, a:endSelection)
+        call prettier#utils#buffer#replaceAndSave(l:out, a:startSelection, a:endSelection)
       endif
 
       let s:prettier_job_running = 0
   endif
-endfunction
-
-" TODO
-" make the buffer replace method accerpt an extra arg to 
-" decide if it should save it or not and delete this method
-function! s:formatAndSave(lines, start, end) abort
-  call prettier#utils#buffer#replace(a:lines, a:start, a:end)
-  write
 endfunction

@@ -11,9 +11,7 @@
 "==========================================================================================================
 " }}}
 
-let s:root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:prettier_job_running = 0
-let s:prettier_quickfix_open = 0
 
 function! prettier#PrettierCliPath() abort
   let l:execCmd = prettier#resolver#executable#getPath()
@@ -47,18 +45,14 @@ function! prettier#Prettier(...) abort
     let l:cmd = l:execCmd . prettier#resolver#config#buildCliArgs(l:config)
 
     " close quickfix if it is opened
-    if s:prettier_quickfix_open
-      call setqflist([], 'r')
-      cclose
-      let s:prettier_quickfix_open = 0
-    endif
+    call prettier#utils#quickfix#close()
 
     if l:async && v:version >= 800 && exists('*job_start')
       call s:Prettier_Exec_Async(l:cmd, l:startSelection, l:endSelection)
     elseif l:async && has('nvim') && g:prettier#nvim_unstable_async
       call s:Prettier_Exec_Async_Nvim(l:cmd, l:startSelection, l:endSelection)
     else
-      call s:Prettier_Exec_Sync(l:cmd, l:startSelection, l:endSelection)
+      call prettier#job#runner#run(l:cmd, l:startSelection, l:endSelection, l:async)
     endif
   else
     call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
@@ -137,27 +131,6 @@ function! prettier#Autoformat(...) abort
   let @/=l:search
 endfunction
 
-function! s:Prettier_Exec_Sync(cmd, startSelection, endSelection) abort
-  let l:bufferLinesList = getbufline(bufnr('%'), a:startSelection, a:endSelection)
-
-  " vim 7 does not have support for passing a list to system()
-  let l:bufferLines = v:version <= 800 ? join(l:bufferLinesList, "\n") : l:bufferLinesList
-
-  let l:out = split(system(a:cmd, l:bufferLines), '\n')
-
-  " check system exit code
-  if v:shell_error
-    call s:Prettier_Parse_Error(l:out)
-    return
-  endif
-
-  if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
-    return
-  endif
-
-  call prettier#utils#buffer#replace(l:out, a:startSelection, a:endSelection)
-endfunction
-
 function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
   let l:async_cmd = a:cmd
 
@@ -233,7 +206,7 @@ endfunction
 
 function! s:Prettier_Parse_Error(errors) abort
   call prettier#logging#error#log('PARSING_ERROR')
-  if g:prettier#quickfix_enabled && prettier#bridge#parser#onError(a:errors)
-    let s:prettier_quickfix_open = 1
+  if g:prettier#quickfix_enabled
+    call prettier#bridge#parser#onError(a:errors, g:prettier#quickfix_auto_focus)
   endif
 endfunction

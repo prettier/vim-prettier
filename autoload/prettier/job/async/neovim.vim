@@ -47,5 +47,11 @@ function! s:onExit(status, info, out, err) abort
     return
   endif
 
+  " TODO
+  " move this to the buffer util and let it abstract away the saving buffer
+  " from here
+  "
+  " TODO
+  " we should be auto saving in order to work similar to vim8
   call nvim_buf_set_lines(a:info.buf_nr, a:info.start, a:info.end, 0, l:out)
 endfunction

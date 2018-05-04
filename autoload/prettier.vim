@@ -34,6 +34,7 @@ function! prettier#PrettierCli(user_input) abort
   endif
 endfunction
 
+" Allows @format pragma support
 function! prettier#Autoformat(...) abort
   let l:curPos = getpos('.')
   let l:maxLineLookup = 50

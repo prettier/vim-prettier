@@ -1,6 +1,12 @@
 let s:prettier_job_running = 0
 
 function! prettier#job#async#vim#run(cmd, startSelection, endSelection) abort
+  if s:prettier_job_running == 1
+    return
+  endif 
+
+  let s:prettier_job_running = 1
+
   let l:cmd = a:cmd
 
   if has('win32') || has('win64')
@@ -9,16 +15,13 @@ function! prettier#job#async#vim#run(cmd, startSelection, endSelection) abort
 
   let l:bufferName = bufname('%')
 
-  if s:prettier_job_running != 1
-      let s:prettier_job_running = 1
-      call job_start([&shell, &shellcmdflag, l:cmd], {
-        \ 'in_io': 'buffer',
-        \ 'in_top': a:startSelection,
-        \ 'in_bot': a:endSelection,
-        \ 'in_name': l:bufferName,
-        \ 'err_cb': {channel, msg -> s:onError(msg)},
-        \ 'close_cb': {channel -> s:onClose(channel, a:startSelection, a:endSelection, l:bufferName)}})
-  endif
+  call job_start([&shell, &shellcmdflag, l:cmd], {
+    \ 'in_io': 'buffer',
+    \ 'in_top': a:startSelection,
+    \ 'in_bot': a:endSelection,
+    \ 'in_name': l:bufferName,
+    \ 'err_cb': {channel, msg -> s:onError(msg)},
+    \ 'close_cb': {channel -> s:onClose(channel, a:startSelection, a:endSelection, l:bufferName)}})
 endfunction
 
 function! s:onError(msg) abort

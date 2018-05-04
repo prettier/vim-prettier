@@ -1,8 +1,14 @@
+let s:prettier_job_running = 0
+
 function! prettier#job#async#neovim#run(cmd, startSelection, endSelection) abort
-  let l:async_cmd = a:cmd
+  if s:prettier_job_running == 1
+    return
+  endif
+
+  let l:cmd = a:cmd
 
   if has('win32') || has('win64')
-    let l:async_cmd = 'cmd.exe /c ' . a:cmd
+    let l:cmd = 'cmd.exe /c ' . a:cmd
   endif
 
   let l:lines = getline(a:startSelection, a:endSelection)
@@ -15,16 +21,18 @@ function! prettier#job#async#neovim#run(cmd, startSelection, endSelection) abort
   let l:out = []
   let l:err = []
 
-  let l:job = jobstart([&shell, &shellcmdflag, l:async_cmd], {
+  let l:job = jobstart([&shell, &shellcmdflag, l:cmd], {
     \ 'on_stdout': {job_id, data, event -> extend(l:out, data)},
     \ 'on_stderr': {job_id, data, event -> extend(l:err, data)},
-    \ 'on_exit': {job_id, status, event -> s:Prettier_Job_Nvim_Exit(status, l:dict, l:out, l:err)},
+    \ 'on_exit': {job_id, status, event -> s:onExit(status, l:dict, l:out, l:err)},
     \ })
   call jobsend(l:job, l:lines)
   call jobclose(l:job, 'stdin')
 endfunction
 
-function! s:Prettier_Job_Nvim_Exit(status, info, out, err) abort
+function! s:onExit(status, info, out, err) abort
+  let s:prettier_job_running = 0
+
   if a:status != 0
     echoerr join(a:err, "\n")
     return

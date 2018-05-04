@@ -4,9 +4,9 @@
 " TODO 
 " we are currently feature protecting async on NVIM with g:prettier#nvim_unstable_async
 " we should remove this once its fully supported
+let s:isLegacyVim = v:version < 800
 let s:isNeoVim = has('nvim') && g:prettier#nvim_unstable_async
-let s:isAsyncVim = v:version >= 800 && exists('*job_start')
-let s:isLegacyVim = v:version <= 800
+let s:isAsyncVim = !s:isLegacyVim && exists('*job_start')
 
 function! prettier#job#runner#run(cmd, startSelection, endSelection, async) abort
     if a:async && (s:isAsyncVim || s:isNeoVim)
@@ -37,6 +37,8 @@ function! s:format(cmd, startSelection, endSelection) abort
   " vim 7 does not have support for passing a list to system()
   let l:bufferLines = s:isLegacyVim ? join(l:bufferLinesList, "\n") : l:bufferLinesList
 
+  " TODO
+  " since we are using two different types for system, maybe we should move it to utils shims
   let l:out = split(system(a:cmd, l:bufferLines), '\n')
 
   " check system exit code
@@ -45,6 +47,8 @@ function! s:format(cmd, startSelection, endSelection) abort
     return
   endif
 
+  " TODO
+  " doing 0 checks seems weird can we do this bellow differently ?
   if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
     return
   endif

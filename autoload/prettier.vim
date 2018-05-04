@@ -200,13 +200,6 @@ function! s:Prettier_Format_And_Save(lines, start, end) abort
 endfunction
 
 function! s:Prettier_Job_Error(msg) abort
-    call s:Prettier_Parse_Error(split(a:msg, '\n'))
+    call prettier#job#runner#onError(split(a:msg, '\n'))
     let s:prettier_job_running = 0
-endfunction
-
-function! s:Prettier_Parse_Error(errors) abort
-  call prettier#logging#error#log('PARSING_ERROR')
-  if g:prettier#quickfix_enabled
-    call prettier#bridge#parser#onError(a:errors, g:prettier#quickfix_auto_focus)
-  endif
 endfunction

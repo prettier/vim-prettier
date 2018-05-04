@@ -27,7 +27,7 @@ function! s:asyncFormat(cmd, startSelection, endSelection) abort
     if s:isAsyncVim
       call prettier#job#async#vim#run(a:cmd, a:startSelection, a:endSelection)
     elseif s:isNeoVim
-      echom 'neovim'
+      call prettier#job#async#neovim#run(a:cmd, a:startSelection, a:endSelection)
     else 
       call s:format(a:cmd, a:startSelection, a:endSelection)
     endif

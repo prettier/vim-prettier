@@ -11,8 +11,6 @@
 "==========================================================================================================
 " }}}
 
-let s:prettier_job_running = 0
-
 " Displays the resolve prettier CLI path
 function! prettier#PrettierCliPath() abort
   let l:execCmd = prettier#resolver#executable#getPath()

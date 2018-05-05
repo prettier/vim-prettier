@@ -1,11 +1,7 @@
 " TODO
 " move the bellow vim checks to UTILS
-"
-" TODO 
-" we are currently feature protecting async on NVIM with g:prettier#nvim_unstable_async
-" we should remove this once its fully supported
 let s:isLegacyVim = v:version < 800
-let s:isNeoVim = has('nvim') && g:prettier#nvim_unstable_async
+let s:isNeoVim = has('nvim')
 let s:isAsyncVim = !s:isLegacyVim && exists('*job_start')
 
 function! prettier#job#runner#run(cmd, startSelection, endSelection, async) abort

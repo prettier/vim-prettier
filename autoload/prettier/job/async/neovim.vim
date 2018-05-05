@@ -37,8 +37,6 @@ endfunction
 " 2. extract common functionality either above to the runner or to some other module
 "
 " to test this it rellies on using nvim and having the flag 
-"  g:prettier#nvim_unstable_async=1  - enabled
-"
 "
 "  note that somehow we exectuing both async and sync on nvim when using the autoformat
 function! s:onExit(status, info, out, err) abort

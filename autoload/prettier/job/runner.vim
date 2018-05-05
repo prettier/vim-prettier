@@ -24,12 +24,20 @@ function! prettier#job#runner#onError(errors) abort
 endfunction
 
 function! s:asyncFormat(cmd, startSelection, endSelection) abort
-    if s:isAsyncVim
-      call prettier#job#async#vim#run(a:cmd, a:startSelection, a:endSelection)
-    elseif s:isNeoVim
-      call prettier#job#async#neovim#run(a:cmd, a:startSelection, a:endSelection)
-    else 
+    if !s:isAsyncVim && !s:isNeoVim 
       call s:format(a:cmd, a:startSelection, a:endSelection)
+    endif 
+
+    " required for Windows support on async operations 
+    let l:cmd = a:cmd
+    if has('win32') || has('win64')
+      let l:cmd = 'cmd.exe /c ' . a:cmd
+    endif
+
+    if s:isAsyncVim
+      call prettier#job#async#vim#run(l:cmd, a:startSelection, a:endSelection)
+    else
+      call prettier#job#async#neovim#run(l:cmd, a:startSelection, a:endSelection)
     endif
 endfunction
 

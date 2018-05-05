@@ -4,18 +4,11 @@ function! prettier#job#async#vim#run(cmd, startSelection, endSelection) abort
   if s:prettier_job_running == 1
     return
   endif 
-
   let s:prettier_job_running = 1
-
-  let l:cmd = a:cmd
-
-  if has('win32') || has('win64')
-    let l:cmd = 'cmd.exe /c ' . a:cmd
-  endif
 
   let l:bufferName = bufname('%')
 
-  call job_start([&shell, &shellcmdflag, l:cmd], {
+  call job_start([&shell, &shellcmdflag, a:cmd], {
     \ 'in_io': 'buffer',
     \ 'in_top': a:startSelection,
     \ 'in_bot': a:endSelection,
@@ -30,6 +23,8 @@ function! s:onError(msg) abort
 endfunction
 
 function! s:onClose(channel, startSelection, endSelection, bufferName) abort
+  let s:prettier_job_running = 0
+
   let l:out = []
   let l:currentBufferName = bufname('%')
   let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
@@ -38,35 +33,34 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
     call add(l:out, ch_read(a:channel))
   endwhile
 
+  " we have no prettier output so lets exit
+  if len(l:out) == 0 | return | endif
+
   " nothing to update
   if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
-    let s:prettier_job_running = 0
     return
   endif
 
-  if len(l:out)
-      " This is required due to race condition when user quickly switch buffers while the async
-      " cli has not finished running, vim 8.0.1039 has introduced setbufline() which can be used
-      " to fix this issue in a cleaner way, however since we still need to support older vim versions
-      " we will apply a more generic solution
-      if (l:isInsideAnotherBuffer)
-        if (bufloaded(str2nr(a:bufferName)))
-          try
-            silent exec 'sp '. escape(bufname(bufnr(a:bufferName)), ' \')
-            call prettier#utils#buffer#replaceAndSave(l:out, a:startSelection, a:endSelection)
-          catch
-            call prettier#logging#error#log('PARSING_ERROR', a:bufferName)
-          finally
-            " we should then hide this buffer again
-            if a:bufferName == bufname('%')
-              silent hide
-            endif
-          endtry
-        endif
-      else
+  " This is required due to race condition when user quickly switch buffers while the async
+  " cli has not finished running, vim 8.0.1039 has introduced setbufline() which can be used
+  " to fix this issue in a cleaner way, however since we still need to support older vim versions
+  " we will apply a more generic solution
+  if (l:isInsideAnotherBuffer)
+    " Do no try to format buffers that have been closed
+    if (bufloaded(str2nr(a:bufferName)))
+      try
+        silent exec 'sp '. escape(bufname(bufnr(a:bufferName)), ' \')
         call prettier#utils#buffer#replaceAndSave(l:out, a:startSelection, a:endSelection)
-      endif
-
-      let s:prettier_job_running = 0
+      catch
+        call prettier#logging#error#log('PARSING_ERROR', a:bufferName)
+      finally
+        " we should then hide this buffer again
+        if a:bufferName == bufname('%')
+          silent hide
+        endif
+      endtry
+    endif
+  else
+    call prettier#utils#buffer#replaceAndSave(l:out, a:startSelection, a:endSelection)
   endif
 endfunction

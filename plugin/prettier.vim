@@ -20,9 +20,6 @@ let g:loaded_prettier = 1
 " autoformating enabled by default upon saving
 let g:prettier#autoformat = get(g:, 'prettier#autoformat', 1)
 
-" experimental async flag will be disabled by default until is stable
-let g:prettier#nvim_unstable_async = get(g:,'prettier#nvim_unstable_async', 0)
-
 " path to prettier cli
 let g:prettier#exec_cmd_path = get(g:, 'prettier#exec_cmd_path', 0)
 

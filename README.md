@@ -5,6 +5,12 @@ settings.
 
 ---
 
+**Note:** We are currently working on towards a major release on branch `release/1.x`, while under development bugfixes will be applied to master branch and then ported to `release/1.x` branch.
+
+If you have feature request and/or suggestions please comment on issue [1.0 release](https://github.com/prettier/vim-prettier/issues/126)
+
+---
+
 By default it will auto format **javascript**, **typescript**, **less**,
 **scss**, **css**, **json**, **graphql** and **markdown** files if they
 have/support the "@format" pragma annotation in the header of the file.

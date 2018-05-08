@@ -5,7 +5,7 @@ settings.
 
 ---
 
-**Note:** We are currently working on towards a major release on branch `release/1.x`, while under development bugfixes will be applied to master branch and then ported to `release/1.x` branch.
+**Note:** We are currently working towards a major release on branch `release/1.x`, while under development bugfixes will be applied to master branch and then ported back to `release/1.x` branch.
 
 If you have feature request and/or suggestions please comment on issue [1.0 release](https://github.com/prettier/vim-prettier/issues/126)
 

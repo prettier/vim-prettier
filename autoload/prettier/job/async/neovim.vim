@@ -46,7 +46,7 @@ function! s:onExit(status, info, out, err) abort
   let l:currentBufferNumber =  bufnr('%')
   let l:isInsideAnotherBuffer = a:info.buf_nr != l:currentBufferNumber ? 1 : 0
   let l:last = a:out[len(a:out) - 1]
-  let l:out = l:last ==? '' ? a:out[0:len(a:out) - 3] : a:out
+  let l:out = l:last ==? '' ? a:out[0:len(a:out) - 2] : a:out
 
   " parsing errors
   if a:status != 0

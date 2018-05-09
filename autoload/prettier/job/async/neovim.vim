@@ -17,6 +17,8 @@ function! prettier#job#async#neovim#run(cmd, startSelection, endSelection) abort
   let l:err = []
 
   let l:job = jobstart([&shell, &shellcmdflag, a:cmd], {
+    \ 'stdout_buffered': 1,
+    \ 'stderr_buffered': 1,
     \ 'on_stdout': {job_id, data, event -> extend(l:out, data)},
     \ 'on_stderr': {job_id, data, event -> extend(l:err, data)},
     \ 'on_exit': {job_id, status, event -> s:onExit(status, l:dict, l:out, l:err)},

@@ -72,7 +72,7 @@ function! prettier#Prettier(...) abort
   let l:config = getbufvar(bufnr('%'), 'prettier_ft_default_args', {})
 
   if l:execCmd != -1
-    let l:cmd = l:execCmd . prettier#resolver#config#buildCliArgs(l:config)
+    let l:cmd = l:execCmd . prettier#resolver#config#buildCliArgs(prettier#resolver#preset#build(l:config))
 
     " close quickfix if it is opened
     call prettier#utils#quickfix#close()

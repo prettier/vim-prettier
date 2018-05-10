@@ -5,7 +5,7 @@
 " Name Of File: prettier.vim
 "  Description: A vim plugin wrapper for prettier, pre-configured with custom default prettier settings.
 "   Maintainer: Mitermayer Reis <mitermayer.reis at gmail.com>
-"      Version: 0.2.7
+"      Version: 0.2.6
 "        Usage: Use :help vim-prettier-usage, or visit https://github.com/prettier/vim-prettier
 "
 "==========================================================================================================
@@ -28,6 +28,13 @@ let g:prettier#exec_cmd_async = get(g:, 'prettier#exec_cmd_async', 0)
 
 " when having formatting errors will open the quickfix by default
 let g:prettier#quickfix_enabled = get(g:, 'prettier#quickfix_enabled', 1)
+
+" Don't leave the quicklist focused on error.
+let g:prettier#quickfix_auto_focus = get(g:, 'prettier#quickfix_auto_focus', 1)
+
+" default|fb
+" Use prettier defaults
+let g:prettier#preset#config = get(g:,'prettier#preset#config', 'default')
 
 " => Prettier CLI config
 " Max line length that prettier will wrap on: a number or 'auto' (use
@@ -57,11 +64,31 @@ let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_preced
 " default: 'preserve'
 let g:prettier#config#prose_wrap = get(g:, 'prettier#config#prose_wrap', 'preserve')
 
-" css|strict|ignore
-let g:prettier#config#html_whitespace_sensitivity = get(g:, 'prettier#config#html_whitespace_sensitivity', 'css')
+" print semicolons
+" default: 'true'
+let g:prettier#config#semi = get(g:,'prettier#config#semi', 'true')
 
-" Don't leave the quicklist focused on error.
-let g:prettier#quickfix_auto_focus = get(g:, 'prettier#quickfix_auto_focus', 1)
+" Use single quotes instead of double quotes.
+" default: 'false'
+let g:prettier#config#single_quote = get(g:,'prettier#config#single_quote', 'false')
+
+" print spaces between brackets
+" default: 'true'
+let g:prettier#config#bracket_spacing = get(g:,'prettier#config#bracket_spacing', 'true')
+
+" put > on the last line instead of new line
+" default: 'false'
+let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracket_same_line', 'false')
+
+" avoid wrapping a single arrow function param in parens
+" avoid|always
+" default: 'avoid'
+let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'avoid')
+
+" Print trailing commas wherever possible when multi-line.
+" none|es5|all
+" default: 'none'
+let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'none')
 
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
@@ -70,7 +97,7 @@ command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_a
 command! -nargs=? -range=% PrettierAsync call prettier#Prettier(1, <line1>, <line2>)
 
 " prints vim-prettier version
-command! -nargs=? -range=% PrettierVersion echom '0.2.7'
+command! -nargs=? -range=% PrettierVersion echom '0.2.6'
 
 " call prettier cli
 command! -nargs=? -range=% PrettierCli call prettier#PrettierCli(<q-args>)

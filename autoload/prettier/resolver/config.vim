@@ -8,6 +8,18 @@ function! prettier#resolver#config#buildCliArgs(config) abort
           \ s:Flag_tab_width(a:config) . ' ' .
           \ s:Flag_print_width(a:config) . ' ' .
           \ s:Flag_parser(a:config) . ' ' .
+          \ ' --semi=' .
+          \ get(a:config, 'semi', g:prettier#config#semi) .
+          \ ' --single-quote=' .
+          \ get(a:config, 'singleQuote', g:prettier#config#single_quote) .
+          \ ' --bracket-spacing=' .
+          \ get(a:config, 'bracketSpacing', g:prettier#config#bracket_spacing) .
+          \ ' --jsx-bracket-same-line=' .
+          \ get(a:config, 'jsxBracketSameLine', g:prettier#config#jsx_bracket_same_line) .
+          \ ' --arrow-parens=' .
+          \ get(a:config, 'arrowParens', g:prettier#config#arrow_parens) .
+          \ ' --trailing-comma=' .
+          \ get(a:config, 'trailingComma', g:prettier#config#trailing_comma) .
           \ ' --config-precedence=' .
           \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
           \ ' --prose-wrap=' .
@@ -17,6 +29,8 @@ function! prettier#resolver#config#buildCliArgs(config) abort
           \ ' --no-editorconfig '.
           \ ' --loglevel error '.
           \ ' --stdin '
+          " TODO
+          " check to see if --no-editorconfig is still needed
   return l:cmd
 endfunction
 

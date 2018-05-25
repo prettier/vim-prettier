@@ -168,14 +168,13 @@ function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
 
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
-      call job_start([&shell, &shellcmdflag, l:async_cmd], {
-        \ 'in_io': 'buffer',
-        \ 'in_top': a:startSelection,
-        \ 'in_bot': a:endSelection,
-        \ 'in_name': l:bufferName,
+      let l:job =  job_start([&shell, &shellcmdflag, l:async_cmd], {
         \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(msg)},
         \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection, l:bufferName)}})
-  endif
+      let l:stdin = job_getchannel(l:job)
+      call ch_sendraw(l:stdin, join(getbufline(bufnr(l:bufferName), a:startSelection,a:endSelection), "\n"))
+      call ch_close_in(l:stdin)
+    endif
 endfunction
 
 function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName) abort
@@ -278,11 +277,18 @@ function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
   endif
 
   " delete all lines on the current buffer
-  silent! execute len(l:newBuffer) . ',' . line('$') . 'delete _'
+  silent! execute '%delete _'
 
   " replace all lines from the current buffer with output from prettier
-  call setline(1, l:newBuffer)
-
+  let l:idx = 0
+  for l:line in l:newBuffer
+    silent! call append(l:idx, l:line)
+    let l:idx += 1
+  endfor
+  
+  " delete trailing newline introduced by the above append procedure
+  silent! execute '$delete _'
+  
   " Restore view
   call winrestview(l:winview)
 endfunction

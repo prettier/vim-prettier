@@ -285,7 +285,10 @@ function! s:Apply_Prettier_Format(lines, startSelection, endSelection) abort
     silent! call append(l:idx, l:line)
     let l:idx += 1
   endfor
-
+  
+  " delete trailing newline introduced by the above append procedure
+  silent! execute '$delete _'
+  
   " Restore view
   call winrestview(l:winview)
 endfunction

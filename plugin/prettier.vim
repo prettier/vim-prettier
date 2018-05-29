@@ -32,6 +32,9 @@ let g:prettier#quickfix_enabled = get(g:, 'prettier#quickfix_enabled', 1)
 " Don't leave the quicklist focused on error.
 let g:prettier#quickfix_auto_focus = get(g:, 'prettier#quickfix_auto_focus', 1)
 
+" Send to prettier entire buffer and use --range-start and --range-end as delimter
+let g:prettier#partial_format = get(g:, 'prettier#partial_format', 0)
+
 " default|fb
 " Use prettier defaults
 let g:prettier#preset#config = get(g:,'prettier#preset#config', 'default')
@@ -91,10 +94,10 @@ let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'avo
 let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'none')
 
 " synchronous by default
-command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>)
+command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, g:prettier#partial_format)
 
 " prettier async
-command! -nargs=? -range=% PrettierAsync call prettier#Prettier(1, <line1>, <line2>)
+command! -nargs=? -range=% PrettierAsync call prettier#Prettier(1, <line1>, <line2>, g:prettier#partial_format)
 
 " prints vim-prettier version
 command! -nargs=? -range=% PrettierVersion echom '0.2.6'
@@ -108,12 +111,20 @@ command! -nargs=? -range=% PrettierCliVersion call prettier#PrettierCli('--versi
 " prints prettier resolved cli path
 command! -nargs=? -range=% PrettierCliPath call prettier#PrettierCliPath()
 
+" sends selected text to prettier cli for formatting
+command! -nargs=? -range=% PrettierFragment call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, 0)
+
+" sends entire buffer to prettier cli but format just selection 
+command! -nargs=? -range=% PrettierPartial call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, 1)
+
 " map command
 if !hasmapto('<Plug>(Prettier)') && maparg('<Leader>p', 'n') ==# ''
   nmap <unique> <Leader>p <Plug>(Prettier)
 endif
 nnoremap <silent> <Plug>(Prettier) :Prettier<CR>
 nnoremap <silent> <Plug>(PrettierAsync) :PrettierAsync<CR>
+nnoremap <silent> <Plug>(PrettierFragment) :PrettierFragment<CR>
+nnoremap <silent> <Plug>(PrettierPartial) :PrettierPartial<CR>
 nnoremap <silent> <Plug>(PrettierVersion) :PrettierVersion<CR>
 nnoremap <silent> <Plug>(PrettierCli) :PrettierCli<CR>
 nnoremap <silent> <Plug>(PrettierCliVersion) :PrettierCliVersion<CR>

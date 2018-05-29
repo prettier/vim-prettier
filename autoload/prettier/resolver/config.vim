@@ -1,6 +1,6 @@
 " By default we will default to our internal
 " configuration settings for prettier
-function! prettier#resolver#config#buildCliArgs(config) abort
+function! prettier#resolver#config#resolve(config, hasSelection, start, end) abort
   " Allow params to be passed as json format
   " convert bellow usage of globals to a get function o the params defaulting to global
   " TODO: Use a list, filter() and join() to get a nicer list of args.
@@ -8,6 +8,7 @@ function! prettier#resolver#config#buildCliArgs(config) abort
           \ s:Flag_tab_width(a:config) . ' ' .
           \ s:Flag_print_width(a:config) . ' ' .
           \ s:Flag_parser(a:config) . ' ' .
+          \ s:Flag_range_delimiter(a:config, a:hasSelection, a:start, a:end) . ' ' .
           \ ' --semi=' .
           \ get(a:config, 'semi', g:prettier#config#semi) .
           \ ' --single-quote=' .
@@ -32,6 +33,17 @@ function! prettier#resolver#config#buildCliArgs(config) abort
           " TODO
           " check to see if --no-editorconfig is still needed
   return l:cmd
+endfunction
+
+" Returns either '--range-start X --range-end Y' or an empty string.
+function! s:Flag_range_delimiter(config, partialFormatEnabled, start, end) abort
+  if (!a:partialFormatEnabled)
+    return ''
+  endif
+
+  let l:range = prettier#utils#buffer#getCharRange(a:start, a:end)
+
+  return '--range-start=' . l:range[0] . ' --range-end=' . l:range[1]
 endfunction
 
 " Returns '--tab-width=NN'

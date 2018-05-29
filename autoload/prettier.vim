@@ -69,13 +69,29 @@ function! prettier#Prettier(...) abort
   let l:async = a:0 > 0 ? a:1 : 0
   let l:startSelection = a:0 > 1 ? a:2 : 1
   let l:endSelection = a:0 > 2 ? a:3 : line('$')
+  let l:hasSelection = a:0 > 2 ? 1 : 0
+  let l:partialFormat = a:0 > 3 && a:4 ? a:4 : 0
   let l:config = getbufvar(bufnr('%'), 'prettier_ft_default_args', {})
+  let l:partialFormatEnabled = l:hasSelection && l:partialFormat
 
   if l:execCmd != -1
-    let l:cmd = l:execCmd . prettier#resolver#config#buildCliArgs(prettier#resolver#preset#build(l:config))
+    " TODO
+    " => we should make sure we can resolve --range-start  and --range-end when required
+    "    => when the above is required we should also update l:startSelection to '1' and l:endSelection to line('$')
+    let l:cmd = l:execCmd . prettier#resolver#config#resolve(
+          \ prettier#resolver#preset#resolve(l:config),
+          \ l:partialFormatEnabled,
+          \ l:startSelection, 
+          \ l:endSelection)
 
     " close quickfix if it is opened
     call prettier#utils#quickfix#close()
+
+    " we will be using portion formatting, so we need to send entire buffer to prettier
+    if l:partialFormatEnabled
+      let l:startSelection = 1
+      let l:endSelection = line('$')
+    endif
 
     " format buffer
     call prettier#job#runner#run(l:cmd, l:startSelection, l:endSelection, l:async)

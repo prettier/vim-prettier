@@ -33,3 +33,24 @@ endfunction
 function! prettier#utils#buffer#createBufferFromUpdatedLines(lines, start, end) abort
   return getbufline(bufnr('%'), 1, a:start - 1) + a:lines + getbufline(bufnr('%'), a:end + 1, '$')
 endfunction
+
+" Adapted from https://github.com/farazdagi/vim-go-ide
+function! s:getCharPosition(line, col)
+    if &encoding !=# 'utf-8'
+        " On utf-8 enconding we can't just use bytes so we need to make sure we can count the
+        " characters, we do that by adding the text into a temporary buffer and counting the chars
+        let l:buf = a:line == 1 ? '' : (join(getline(1, a:line - 1), "\n") . "\n")
+        let l:buf .= a:col == 1 ? '' : getline('.')[:a:col - 2]
+        return len(iconv(l:buf, &encoding, 'utf-8'))
+    endif
+    " On non utf-8 the line byte should match the character
+    return line2byte(a:line) + (a:col - 2)
+endfun
+
+" Returns [start, end] byte range when on visual mode
+function! prettier#utils#buffer#getCharRange(startSelection, endSelection) abort
+  let l:range = []
+  call add(l:range, s:getCharPosition(a:startSelection, col("'<")))
+  call add(l:range, s:getCharPosition(a:endSelection, col("'>")))
+  return l:range
+endfunction

@@ -35,7 +35,7 @@ function! prettier#utils#buffer#createBufferFromUpdatedLines(lines, start, end) 
 endfunction
 
 " Adapted from https://github.com/farazdagi/vim-go-ide
-function! s:getCharPosition(line, col)
+function! s:getCharPosition(line, col) abort
     if &encoding !=# 'utf-8'
         " On utf-8 enconding we can't just use bytes so we need to make sure we can count the
         " characters, we do that by adding the text into a temporary buffer and counting the chars

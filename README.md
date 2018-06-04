@@ -79,6 +79,22 @@ If your are on vim 8+ you can also trigger async formatting by:
 :PrettierAsync
 ```
 
+You can send to prettier your entire buffer but ensure that it formats only your selection.
+
+**note: ** differs from `:PrettierFragment` by sending the entire buffer to prettier, allowing identation level to be preserved, but it requires the whole file to be valid.
+
+```vim
+:PrettierPartial
+```
+
+You can send to prettier your current selection as a fragment of same type as the file being edited.
+
+**note: ** differs from `:PrettierFragment` by sending only the current selection to prettier, this allows for faster formatting but wont preserve indentation.
+
+````vim
+:PrettierFragment
+```
+
 You can check what is the `vim-prettier` plugin version by:
 
 ```vim
@@ -133,6 +149,13 @@ By default parsing errors will open the quickfix but can also be disabled
 
 ```vim
 let g:prettier#quickfix_enabled = 0
+```
+
+By default selection formatting will be running `:PrettierFragment` but we can set
+`:PrettierPartial` as the default selection formatting by:
+
+```vim
+let g:prettier#partial_format=1
 ```
 
 By default we auto focus on the quickfix when there are errors but can also be disabled
@@ -205,3 +228,5 @@ let g:prettier#config#prose_wrap = 'preserve'
 ### REQUIREMENT(S)
 
 If prettier installation can't be found no code formatting will happen
+```
+````

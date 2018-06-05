@@ -32,7 +32,7 @@ Plug 'prettier/vim-prettier', {
 or simply enable for all formats by:
 
 ```vim
-" post install (yarn install | npm install) then load plugin only for editing supported files
+" post install (yarn install | npm install)
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 ```
 

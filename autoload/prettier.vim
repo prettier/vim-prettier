@@ -169,6 +169,7 @@ function! s:Prettier_Exec_Async(cmd, startSelection, endSelection) abort
   if s:prettier_job_running != 1
       let s:prettier_job_running = 1
       let l:job =  job_start([&shell, &shellcmdflag, l:async_cmd], {
+        \ 'out_io': 'buffer',
         \ 'err_cb': {channel, msg -> s:Prettier_Job_Error(msg)},
         \ 'close_cb': {channel -> s:Prettier_Job_Close(channel, a:startSelection, a:endSelection, l:bufferName)}})
       let l:stdin = job_getchannel(l:job)
@@ -182,9 +183,9 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
   let l:currentBufferName = bufname('%')
   let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
 
-  while ch_status(a:channel) ==# 'buffered'
-    call add(l:out, ch_read(a:channel))
-  endwhile
+  let l:buff = ch_getbufnr(a:channel, 'out')
+  let l:out = getbufline(l:buff, 2, '$')
+  execute 'bd!' . l:buff
 
   " nothing to update
   if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)

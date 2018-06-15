@@ -190,6 +190,7 @@ function! s:Prettier_Job_Close(channel, startSelection, endSelection, bufferName
   " nothing to update
   if (s:Has_Content_Changed(l:out, a:startSelection, a:endSelection) == 0)
     let s:prettier_job_running = 0
+    redraw!
     return
   endif
 

@@ -23,8 +23,6 @@ function! s:onError(msg) abort
 endfunction
 
 function! s:onClose(channel, startSelection, endSelection, bufferName) abort
-  let s:prettier_job_running = 0
-
   let l:out = []
   let l:currentBufferName = bufname('%')
   let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
@@ -38,6 +36,7 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
 
   " nothing to update
   if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
+    let s:prettier_job_running = 0
     return
   endif
 
@@ -63,4 +62,5 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
   else
     call prettier#utils#buffer#replaceAndSave(l:out, a:startSelection, a:endSelection)
   endif
+  let s:prettier_job_running = 0
 endfunction

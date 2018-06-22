@@ -42,7 +42,6 @@ endfunction
 "
 "  note that somehow we exectuing both async and sync on nvim when using the autoformat
 function! s:onExit(status, info, out, err) abort
-  let s:prettier_job_running = 0
   let l:currentBufferNumber =  bufnr('%')
   let l:isInsideAnotherBuffer = a:info.buf_nr != l:currentBufferNumber ? 1 : 0
   let l:last = a:out[len(a:out) - 1]
@@ -51,6 +50,7 @@ function! s:onExit(status, info, out, err) abort
   " parsing errors
   if a:status != 0
     call prettier#job#runner#onError(a:err)
+    let s:prettier_job_running = 0
     return
   endif
 
@@ -93,4 +93,6 @@ function! s:onExit(status, info, out, err) abort
     call nvim_buf_set_lines(a:info.buf_nr, a:info.start, a:info.end, 0, l:out)
     write
   endif
+
+  let s:prettier_job_running = 0
 endfunction

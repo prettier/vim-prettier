@@ -1,1 +1,3 @@
-autocmd BufNewFile,BufReadPost *.graphql,*.gql setfiletype graphql
+augroup PrettierFileDetect
+  autocmd BufNewFile,BufReadPost *.graphql,*.gql setfiletype graphql
+augroup end

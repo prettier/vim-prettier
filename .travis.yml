@@ -2,6 +2,6 @@
 language: python
 dist: precise
 install: 
-  - pip install vim-vint
+  - pip install enum34 pathlib typing vim-vint
 script: 
   - vint .

@@ -27,7 +27,6 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
           \ ' --stdin-filepath=' .
           \ simplify(expand('%:p')) .
-          \ ' --no-editorconfig '.
           \ ' --loglevel error '.
           \ ' --stdin '
           " TODO

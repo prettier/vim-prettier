@@ -8,13 +8,15 @@ function! prettier#job#async#vim#run(cmd, startSelection, endSelection) abort
 
   let l:bufferName = bufname('%')
 
-  call job_start([&shell, &shellcmdflag, a:cmd], {
-    \ 'in_io': 'buffer',
-    \ 'in_top': a:startSelection,
-    \ 'in_bot': a:endSelection,
-    \ 'in_name': l:bufferName,
+  let l:job = job_start([&shell, &shellcmdflag, a:cmd], {
+    \ 'out_io': 'buffer',
     \ 'err_cb': {channel, msg -> s:onError(msg)},
     \ 'close_cb': {channel -> s:onClose(channel, a:startSelection, a:endSelection, l:bufferName)}})
+
+  let l:stdin = job_getchannel(l:job)
+
+  call ch_sendraw(l:stdin, join(getbufline(bufnr(l:bufferName), a:startSelection, a:endSelection), "\n"))
+  call ch_close_in(l:stdin)
 endfunction
 
 function! s:onError(msg) abort
@@ -27,9 +29,9 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
   let l:currentBufferName = bufname('%')
   let l:isInsideAnotherBuffer = a:bufferName != l:currentBufferName ? 1 : 0
 
-  while ch_status(a:channel) ==# 'buffered'
-    call add(l:out, ch_read(a:channel))
-  endwhile
+  let l:buff = ch_getbufnr(a:channel, 'out')
+  let l:out = getbufline(l:buff, 2, '$')
+  execute 'bd!' . l:buff
 
   " we have no prettier output so lets exit
   if len(l:out) == 0 | return | endif
@@ -37,6 +39,7 @@ function! s:onClose(channel, startSelection, endSelection, bufferName) abort
   " nothing to update
   if (prettier#utils#buffer#willUpdatedLinesChangeBuffer(l:out, a:startSelection, a:endSelection) == 0)
     let s:prettier_job_running = 0
+    redraw!
     return
   endif
 

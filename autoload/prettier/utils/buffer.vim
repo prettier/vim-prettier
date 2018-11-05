@@ -9,10 +9,17 @@ function! prettier#utils#buffer#replace(lines, startSelection, endSelection) abo
   endif
 
   " delete all lines on the current buffer
-  silent! execute len(l:newBuffer) . ',' . line('$') . 'delete _'
+  silent! execute '%delete _'
 
   " replace all lines from the current buffer with output from prettier
-  call setline(1, l:newBuffer)
+  let l:idx = 0
+  for l:line in l:newBuffer
+    silent! call append(l:idx, l:line)
+    let l:idx += 1
+  endfor
+  
+  " delete trailing newline introduced by the above append procedure
+  silent! execute '$delete _'
 
   " Restore view
   call winrestview(l:winview)

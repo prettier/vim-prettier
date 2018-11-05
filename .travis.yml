@@ -2,7 +2,6 @@
 language: python
 dist: precise
 install: 
-  - pip install pathlib
-  - pip install vim-vint
+  - pip install pathlib typing vim-vint
 script: 
   - vint .

@@ -1,6 +1,7 @@
 ---
 language: python
-dist: precise
+python:
+  - "3.6"
 install: 
   - pip install enum34 pathlib typing vim-vint
 script: 

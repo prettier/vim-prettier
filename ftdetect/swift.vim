@@ -1,1 +1,3 @@
-autocmd BufNewFile,BufReadPost *.swift setfiletype swift
+augroup PrettierFileDetect
+  autocmd BufNewFile,BufReadPost *.swift setfiletype swift
+augroup end

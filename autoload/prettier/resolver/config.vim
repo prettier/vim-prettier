@@ -29,8 +29,6 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ simplify(expand('%:p')) .
           \ ' --loglevel error '.
           \ ' --stdin '
-          " TODO
-          " check to see if --no-editorconfig is still needed
   return l:cmd
 endfunction
 

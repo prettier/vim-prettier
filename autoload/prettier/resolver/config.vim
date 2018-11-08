@@ -62,7 +62,7 @@ function! s:Flag_use_tabs(config) abort
   endif
 
   if ( l:value ==# 'true' )
-    return '--use-tabs'
+    return ' --use-tabs'
   else
     return ''
   endif

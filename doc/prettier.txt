@@ -47,7 +47,8 @@ node and yarn|npm installed globally.
   Plug 'prettier/vim-prettier', {
 	\ 'do': 'yarn install',
 	\ 'for': ['javascript', 'typescript', 'css',
-	\         'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml'] }
+	\         'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml',
+	'html'] }
 <
 or simply enable for all formats by:
 >
@@ -119,19 +120,19 @@ First disable the default autoformat, then update to your own custom behaviour
 Running before saving sync:
 >
   let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml Prettier
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 <
 Running before saving async (vim 8+):
 >
   let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml PrettierAsync
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 <
 Running before saving, changing text or leaving insert mode: 
 >
   " when running at every change you may want to disable quickfix
   let g:prettier#quickfix_enabled = 0
   let g:prettier#autoformat = 0
-  autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml PrettierAsync
+  autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 <
 Overwrite default prettier configuration
 

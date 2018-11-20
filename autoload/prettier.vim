@@ -325,8 +325,8 @@ function! s:Get_Prettier_Exec_Args(config) abort
           \ ' --prose-wrap ' .
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
           \ ' --stdin-filepath "' .
-          \ simplify(expand('%:p')) .
-          \ '" --loglevel error '.
+          \ simplify(expand('%:p')) . '"' .
+          \ ' --loglevel error '.
           \ ' --stdin '
   return l:cmd
 endfunction

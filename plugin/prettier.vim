@@ -69,6 +69,9 @@ let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_preced
 " always|never|preserve
 let g:prettier#config#prose_wrap = get(g:, 'prettier#config#prose_wrap', 'preserve')
 
+" css|strict|ignore
+let g:prettier#config#html_whitespace_sensitivity = get(g:, 'prettier#config#html_whitespace_sensitivity', 'css')
+
 " Don't leave the quicklist focused on error.
 let g:prettier#quickfix_auto_focus = get(g:, 'prettier#quickfix_auto_focus', 1)
 

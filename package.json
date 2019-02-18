@@ -11,7 +11,7 @@
   "dependencies": {
     "prettier": "^1.16.4",
     "@prettier/plugin-lua": "0.0.1",
-    "@prettier/plugin-php": "^0.9.0",
+    "@prettier/plugin-php": "^0.10.2",
     "@prettier/plugin-python": "prettier/plugin-python",
     "@prettier/plugin-swift": "prettier/plugin-swift"
   }

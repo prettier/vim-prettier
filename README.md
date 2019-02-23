@@ -217,8 +217,8 @@ let g:prettier#config#use_tabs = 'auto'
 let g:prettier#config#parser = ''
 
 " cli-override|file-override|prefer-file
-" default: 'prefer-file'
-let g:prettier#config#config_precedence = 'prefer-file'
+" default: 'file-override'
+let g:prettier#config#config_precedence = 'file-override'
 
 " always|never|preserve
 " default: 'preserve'

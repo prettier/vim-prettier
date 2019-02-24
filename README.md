@@ -91,7 +91,7 @@ You can send to prettier your current selection as a fragment of same type as th
 
 **note: ** differs from `:PrettierFragment` by sending only the current selection to prettier, this allows for faster formatting but wont preserve indentation.
 
-````vim
+```vim
 :PrettierFragment
 ```
 
@@ -228,5 +228,3 @@ let g:prettier#config#prose_wrap = 'preserve'
 ### REQUIREMENT(S)
 
 If prettier installation can't be found no code formatting will happen
-```
-````

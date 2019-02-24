@@ -9,30 +9,6 @@ settings.
 
 If you have feature request and/or suggestions please comment on issue [1.0 release](https://github.com/prettier/vim-prettier/issues/126)
 
-If you want to try out the `release/1.x` branch feel free to add this to your `.vimrc`
-
-```vim
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
-```
-
 ---
 
 By default it will auto format **javascript**, **typescript**, **less**,
@@ -56,7 +32,7 @@ Plug 'prettier/vim-prettier', {
 or simply enable for all formats by:
 
 ```vim
-" post install (yarn install | npm install)
+" post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 ```
 
@@ -101,6 +77,22 @@ If your are on vim 8+ you can also trigger async formatting by:
 
 ```vim
 :PrettierAsync
+```
+
+You can send to prettier your entire buffer but ensure that it formats only your selection.
+
+**note: ** differs from `:PrettierFragment` by sending the entire buffer to prettier, allowing identation level to be preserved, but it requires the whole file to be valid.
+
+```vim
+:PrettierPartial
+```
+
+You can send to prettier your current selection as a fragment of same type as the file being edited.
+
+**note: ** differs from `:PrettierFragment` by sending only the current selection to prettier, this allows for faster formatting but wont preserve indentation.
+
+```vim
+:PrettierFragment
 ```
 
 You can check what is the `vim-prettier` plugin version by:
@@ -157,6 +149,13 @@ By default parsing errors will open the quickfix but can also be disabled
 
 ```vim
 let g:prettier#quickfix_enabled = 0
+```
+
+By default selection formatting will be running `:PrettierFragment` but we can set
+`:PrettierPartial` as the default selection formatting by:
+
+```vim
+let g:prettier#partial_format=1
 ```
 
 By default we auto focus on the quickfix when there are errors but can also be disabled
@@ -224,11 +223,8 @@ let g:prettier#config#config_precedence = 'file-override'
 " always|never|preserve
 " default: 'preserve'
 let g:prettier#config#prose_wrap = 'preserve'
-
-" css|strict|ignore
-let g:prettier#config#html_whitespace_sensitivity = 'css'
 ```
 
 ### REQUIREMENT(S)
 
-If the `prettier` executable can't be found by Vim, no code formatting will happen
+If prettier installation can't be found no code formatting will happen

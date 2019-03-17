@@ -1,4 +1,5 @@
 TODO
+doc/tags
 node_modules
 .yarn_lock
 yarn.lock

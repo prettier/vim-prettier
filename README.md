@@ -250,4 +250,4 @@ let g:prettier#config#html_whitespace_sensitivity = 'css'
 
 ### REQUIREMENT(S)
 
-If prettier installation can't be found no code formatting will happen
+If the `prettier` executable can't be found by Vim, no code formatting will happen

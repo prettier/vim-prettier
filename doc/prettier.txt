@@ -182,6 +182,9 @@ However they can be configured by:
   " always|never|preserve
   " default: 'preserve'
   let g:prettier#config#prose_wrap = 'preserve'
+
+  " css|strict|ignore
+  let g:prettier#config#html_whitespace_sensitivity = 'css'
 <
 ==============================================================================
 REQUIREMENT(S)                                      *vim-prettier-requirements*

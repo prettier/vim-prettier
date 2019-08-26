@@ -109,10 +109,10 @@ afterEach(async () => {
   }
 });
 
-test('PrettierVersion returns pluggin version', async () => {
-  const result = await remote.execute('PrettierVersion');
-  expect(result).toMatchSnapshot();
-});
+//test('PrettierVersion returns pluggin version', async () => {
+//  const result = await remote.execute('PrettierVersion');
+//  expect(result).toMatchSnapshot();
+//});
 
 // run formatting tests in all fixtures
 fs.readdirSync(FIXTURES_DIR).forEach(file => assertFormatting(file));

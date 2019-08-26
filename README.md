@@ -223,8 +223,13 @@ let g:prettier#config#config_precedence = 'file-override'
 " always|never|preserve
 " default: 'preserve'
 let g:prettier#config#prose_wrap = 'preserve'
+
+" css|strict|ignore
+" default: 'css'
+let g:prettier#config#html_whitespace_sensitivity = 'css'
 ```
 
 ### REQUIREMENT(S)
 
-If prettier installation can't be found no code formatting will happen
+If the `prettier` executable can't be found by Vim, no code formatting will happen
+

@@ -67,6 +67,10 @@ let g:prettier#config#config_precedence = get(g:, 'prettier#config#config_preced
 " default: 'preserve'
 let g:prettier#config#prose_wrap = get(g:, 'prettier#config#prose_wrap', 'preserve')
 
+" css|strict|ignore
+" default: 'css'
+let g:prettier#config#html_whitespace_sensitivity = get(g:, 'prettier#config#html_whitespace_sensitivity', 'css')
+
 " print semicolons
 " default: 'true'
 let g:prettier#config#semi = get(g:,'prettier#config#semi', 'true')

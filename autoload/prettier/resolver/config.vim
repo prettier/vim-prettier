@@ -27,7 +27,7 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
           \ ' --html-whitespace-sensitivity ' .
           \ get(a:config, 'htmlWhitespaceSensitivity', g:prettier#config#html_whitespace_sensitivity) .
-          \ ' --stdin-filepath= "'.simplify(expand('%:p')).'"' .
+          \ ' --stdin-filepath="'.simplify(expand('%:p')).'"' .
           \ ' --loglevel error '.
           \ ' --stdin '
   return l:cmd

@@ -18,4 +18,4 @@ RUN install_vim -tag v7.4.052 -name vim7 -build \
                 -tag neovim:v0.3.5 -name neovim -build 
 
 # install vint
-RUN pip install vim-vint==0.3.19
+RUN pip install typing>=3.6.2 pathlib==1.0.1 enum34>=1.0.4 vim-vint==0.3.19

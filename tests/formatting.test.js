@@ -14,7 +14,7 @@ const getBufferContents = async remote =>
   (await remote.call('getline', [1, '$'])).join('\n');
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const waitUntil = (condition, timeout = 4000) => {
+const waitUntil = (condition, timeout = 2000) => {
   return new Promise(resolve => {
     let isTimedOut = false;
     let timeoutId = null;

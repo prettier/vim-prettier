@@ -1,12 +1,16 @@
 ---
 language: python
 
+node_js:
+  - 8
+
 services:
   - docker
 
 before_install: 
   - docker pull mitermayer/vim-test-bed
+  - npm install
 
 script: 
   - docker run --rm -v $PWD:/testplugin -v $PWD/tests:/home "mitermayer/vim-test-bed" vint testplugin 
-  - docker run --rm --entrypoint=/bin/bash -v $PWD:/testplugin -v $PWD/tests:/home "mitermayer/vim-test-bed" -s npm install && npm test
+  - docker run --rm --entrypoint=/bin/bash -v $PWD:/testplugin -v $PWD/tests:/home "mitermayer/vim-test-bed" -s npm test

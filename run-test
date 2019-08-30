@@ -8,12 +8,12 @@ docker run \
   "mitermayer/vim-test-bed" \
   vint testplugin
 
-#echo "Running tests..."
-#docker run \
-#  --rm \
-#  --entrypoint=/bin/bash \
-#  -v $PWD:/testplugin \
-#  -v $PWD/tests:/home \
-#  "mitermayer/vim-test-bed" \
-#  -s 
-#  npm test
+echo "Running tests..."
+docker run \
+  --rm \
+  --entrypoint=/bin/bash \
+  -v $PWD:/testplugin \
+  -v $PWD/tests:/home \
+  "mitermayer/vim-test-bed" \
+  -s 
+  yarn test

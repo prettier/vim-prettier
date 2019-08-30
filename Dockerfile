@@ -23,5 +23,8 @@ RUN install_vim -tag v7.4.052 -name vim7 -build \
 # alias vim to allow contextual load
 RUN echo 'alias vim="/sbin/run_vim $DEFAULT_VIM"' >> ~/.bashrc
 
+# upgrade node and yarn
+RUN npm install -g npm yarn
+
 # install vint
 RUN pip install typing>=3.6.2 pathlib==1.0.1 enum34>=1.0.4 vim-vint==0.3.19

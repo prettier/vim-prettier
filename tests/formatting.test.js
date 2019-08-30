@@ -52,7 +52,7 @@ const assertFormatting = (file) => {
 
     // we now check that we have indeed formatted the code
     expect(updatedLines).not.toBe(lines);
-  });
+  }, 10000);
 
   test(`Prettier formats ${filename} file with :PrettierAsync command`, async () => {
     await remote.edit(`${FIXTURES_DIR}/${file}`);
@@ -74,7 +74,7 @@ const assertFormatting = (file) => {
 
     // we now check that we have indeed formatted the code
     expect(lines).not.toBe(updatedLines);
-  });
+  }, 10000);
 };
 
 beforeAll(async () => {

@@ -73,7 +73,7 @@ const assertFormatting = (file) => {
     const updatedLines = await getBufferContents(remote);
 
     // we now check that we have indeed formatted the code
-    expect(lines).not.toBe(updatedLines);
+    expect(lines).toBe(updatedLines);
   });
 };
 

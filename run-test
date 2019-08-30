@@ -16,4 +16,4 @@ docker run \
   -v $PWD/tests:/home \
   "mitermayer/vim-test-bed" \
   -s 
-  yarn test
+  vim --version && yarn test

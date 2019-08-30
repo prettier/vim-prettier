@@ -12,6 +12,4 @@ before_install:
   - npm install
 
 script: 
-  - ls -alh $PWD
-  - docker run --rm -v $PWD:/testplugin -v $PWD/tests:/home "mitermayer/vim-test-bed" vint testplugin 
-  - docker run --rm --entrypoint=/bin/bash -v $PWD:/testplugin -v $PWD/tests:/home "mitermayer/vim-test-bed" -s npm test
+  - ./run-test

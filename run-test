@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Running linter..."
+docker run \
+  --rm \
+  -v $PWD:/testplugin \
+  -v $PWD/tests:/home \
+  "mitermayer/vim-test-bed" \
+  vint testplugin
+
+echo "Running tests..."
+docker run \
+  --rm \
+  --entrypoint=/bin/bash \
+  -v $PWD:/testplugin \
+  -v $PWD/tests:/home \
+  "mitermayer/vim-test-bed" \
+  -s 
+  npm test

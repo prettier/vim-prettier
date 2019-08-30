@@ -1,8 +1,5 @@
 FROM testbed/vim:latest
 
-# set vim8 as default vim for the container image
-ENV DEFAULT_VIM=vim8
-
 # install pip
 ENV PACKAGES="\
     bash \
@@ -17,12 +14,8 @@ RUN apk --update add $PACKAGES && \
 
 #  install supported vim8 and neovim 
 RUN install_vim -tag v7.4.052 -name vim7 -build \ 
-                -tag v8.1.0519 -name vim8 -build \
+                -tag v8.1.0519 -name vim -build \
                 -tag neovim:v0.3.5 -name neovim -build 
-
-# alias vim to allow contextual load
-RUN echo 'alias vim="/sbin/run_vim $DEFAULT_VIM"' >> ~/.bashrc
-
 # upgrade node and yarn
 RUN npm install -g npm yarn
 

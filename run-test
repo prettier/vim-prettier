@@ -11,9 +11,7 @@ docker run \
 echo "Running tests..."
 docker run \
   --rm \
-  --entrypoint=/bin/bash \
   -v $PWD:/testplugin \
   -v $PWD/tests:/home \
   "mitermayer/vim-test-bed" \
-  -s 
   vim --version && yarn test

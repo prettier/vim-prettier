@@ -6,12 +6,12 @@ docker run \
   -v $PWD:/testplugin \
   -v $PWD/tests:/home \
   "mitermayer/vim-test-bed" \
-  vint testplugin
+  yarn --cwd testplugin lint
 
-echo "Running tests..."
-docker run \
-  --rm \
-  -v $PWD:/testplugin \
-  -v $PWD/tests:/home \
-  "mitermayer/vim-test-bed" \
-  yarn --cwd testplugin test
+#echo "Running tests..."
+#docker run \
+#  --rm \
+#  -v $PWD:/testplugin \
+#  -v $PWD/tests:/home \
+#  "mitermayer/vim-test-bed" \
+#  yarn --cwd testplugin test

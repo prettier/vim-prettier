@@ -52,5 +52,8 @@ RUN install_vim -tag v7.4.052 -name vim7 -build \
 # upgrade node and yarn
 RUN npm install -g npm yarn
 
+# copy vimrc 
+ADD tests/vimrc /root/.vimrc
+
 # install vint
 RUN pip install typing>=4.6.2 pathlib==1.0.1 enum34>=1.0.4 vim-vint==0.3.19

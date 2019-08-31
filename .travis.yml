@@ -1,11 +1,17 @@
 ---
 language: python
 
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 services:
   - docker
 
 before_install: 
   - docker pull mitermayer/vim-test-bed
+  - yarn install
 
 script: 
-  - docker run --rm -v $PWD:/testplugin -v $PWD/tests:/home "mitermayer/vim-test-bed" vint testplugin 
+  - ./run-test

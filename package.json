@@ -9,7 +9,8 @@
     "url": "git://github.com/prettier/vim-prettier.git"
   },
   "scripts": {
-    "test": "LOG_LEVEL=error jest"
+    "test": "vim --version && LOG_LEVEL=error jest",
+    "lint": "vint --version && vint ."
   },
   "dependencies": {
     "@prettier/plugin-lua": "0.0.1",

@@ -14,4 +14,4 @@ before_install:
   - yarn install
 
 script: 
-  - ./run-test
+  - make lint test

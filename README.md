@@ -227,6 +227,10 @@ let g:prettier#config#prose_wrap = 'preserve'
 " css|strict|ignore
 " default: 'css'
 let g:prettier#config#html_whitespace_sensitivity = 'css'
+
+" false|true
+" default: 'false'
+let g:prettier#config#require_pragma = 'false'
 ```
 
 ### REQUIREMENT(S)

@@ -28,6 +28,8 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ ' --html-whitespace-sensitivity ' .
           \ get(a:config, 'htmlWhitespaceSensitivity', g:prettier#config#html_whitespace_sensitivity) .
           \ ' --stdin-filepath="'.simplify(expand('%:p')).'"' .
+          \ ' --require-pragma=' .
+          \ get(a:config, 'requirePragma', g:prettier#config#require_pragma) .
           \ ' --loglevel error '.
           \ ' --stdin '
   return l:cmd

@@ -97,6 +97,9 @@ let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'avo
 " default: 'none'
 let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'none')
 
+" restrict itself to only format files that contain a special comment @prettier or @format
+let g:prettier#config#require_pragma=  get(g:, 'prettier#config#require_pragma', 'false')
+
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, g:prettier#partial_format)
 
@@ -133,3 +136,10 @@ nnoremap <silent> <Plug>(PrettierVersion) :PrettierVersion<CR>
 nnoremap <silent> <Plug>(PrettierCli) :PrettierCli<CR>
 nnoremap <silent> <Plug>(PrettierCliVersion) :PrettierCliVersion<CR>
 nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>
+
+augroup Prettier
+  autocmd!
+  if g:prettier#autoformat
+    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html call prettier#Autoformat()
+  endif
+augroup end

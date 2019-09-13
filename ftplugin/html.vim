@@ -5,10 +5,3 @@ if &filetype !~# 'markdown'
     \ 'parser': 'html',
     \ }
 endif
-
-augroup Prettier
-  autocmd!
-  if g:prettier#autoformat
-    autocmd BufWritePre *.html call prettier#Autoformat()
-  endif
-augroup end

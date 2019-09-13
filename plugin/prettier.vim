@@ -136,3 +136,10 @@ nnoremap <silent> <Plug>(PrettierVersion) :PrettierVersion<CR>
 nnoremap <silent> <Plug>(PrettierCli) :PrettierCli<CR>
 nnoremap <silent> <Plug>(PrettierCliVersion) :PrettierCliVersion<CR>
 nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>
+
+augroup Prettier
+  autocmd!
+  if g:prettier#autoformat
+    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html call prettier#Autoformat()
+  endif
+augroup end

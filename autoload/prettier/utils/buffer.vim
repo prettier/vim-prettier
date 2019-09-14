@@ -28,7 +28,7 @@ endfunction
 " Replace and save the buffer
 function! prettier#utils#buffer#replaceAndSave(lines, startSelection, endSelection) abort
   call prettier#utils#buffer#replace(a:lines, a:startSelection, a:endSelection)
-  write
+  noautocmd write
 endfunction
 
 " Returns 1 if content has changed

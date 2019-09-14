@@ -73,7 +73,7 @@ function! s:onExit(status, info, out, err) abort
       try
         silent exec 'sp '. escape(bufname(a:info.buf_nr), ' \')
         call nvim_buf_set_lines(a:info.buf_nr, a:info.start, a:info.end, 0, l:out)
-        write
+        noautocmd write
       catch
         call prettier#logging#error#log('PARSING_ERROR')
       finally
@@ -91,7 +91,7 @@ function! s:onExit(status, info, out, err) abort
       " TODO
       " we should be auto saving in order to work similar to vim8
     call nvim_buf_set_lines(a:info.buf_nr, a:info.start, a:info.end, 0, l:out)
-    write
+    noautocmd write
   endif
 
   let s:prettier_job_running = 0

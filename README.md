@@ -15,7 +15,7 @@ By default it will auto format **javascript**, **typescript**, **less**,
 **scss**, **css**, **json**, **graphql** and **markdown** files if they
 have/support the "@format" pragma annotation in the header of the file.
 
-![vim-prettier](/media/vim-prettier.gif?raw=true 'vim-prettier')
+![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
 
 ### INSTALL
 
@@ -127,10 +127,10 @@ Change the mapping to run from the default of `<Leader>p`
 nmap <Leader>py <Plug>(Prettier)
 ```
 
-Disable auto formatting of files that have "@format" tag
+Enable auto formatting of files that have "@format" or "@prettier" tag
 
 ```vim
-let g:prettier#autoformat = 0
+let g:prettier#autoformat = 1
 ```
 
 Set the prettier CLI executable path
@@ -164,20 +164,18 @@ By default we auto focus on the quickfix when there are errors but can also be d
 let g:prettier#quickfix_auto_focus = 0
 ```
 
-To enable vim-prettier to run in files without requiring the "@format" doc tag.
-First disable the default autoformat, then update to your own custom behaviour
+To enable vim-prettier to auto run in files without requiring the "@format" or "@prettier" doc tag.
+First ensure that `g:prettier#autoformat` is not enabled on your `vimrc` (it should be disabled by default), then update to your own custom behaviour
 
 Running before saving sync:
 
 ```vim
-let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 ```
 
 Running before saving async (vim 8+):
 
 ```vim
-let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 ```
 
@@ -187,7 +185,6 @@ Running before saving, changing text or leaving insert mode:
 " when running at every change you may want to disable quickfix
 let g:prettier#quickfix_enabled = 0
 
-let g:prettier#autoformat = 0
 autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 ```
 

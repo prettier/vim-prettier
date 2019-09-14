@@ -18,7 +18,7 @@ let g:loaded_prettier = 1
 
 " => Plugin config
 " autoformating enabled by default upon saving
-let g:prettier#autoformat = get(g:, 'prettier#autoformat', 1)
+let g:prettier#autoformat = get(g:, 'prettier#autoformat', 0)
 
 " path to prettier cli
 let g:prettier#exec_cmd_path = get(g:, 'prettier#exec_cmd_path', 0)

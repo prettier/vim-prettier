@@ -114,6 +114,16 @@ CONFIGURATION                                       *vim-prettier-configuration*
 Enable auto formatting of files that have "@format" or "@prettier" tag
 >
   let g:prettier#autoformat = 1
+
+Enable auto formatting of files based on whether a Prettier configuration file has been
+found in the project directory or any parent directories.
+>
+  let g:prettier#autoformat_config_present = 1
+
+Configuration file names to search for when attempting to find an appropriate
+Prettier configuration file for the current project.
+>
+  let g:prettier#autoformat_config_files = [...]
 <
 Set the prettier CLI executable path
 >

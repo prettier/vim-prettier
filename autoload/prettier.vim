@@ -78,3 +78,13 @@ function! prettier#Prettier(...) abort
     call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
   endif
 endfunction
+
+" Set autoformat toggle based on whether config file was found.
+function! prettier#IsConfigPresent(config_files)
+  for config_file in a:config_files
+    if filereadable(findfile(config_file, '.;'))
+      return 1
+    endif
+  endfor
+  return 0
+endfunction

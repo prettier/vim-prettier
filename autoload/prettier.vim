@@ -80,7 +80,7 @@ function! prettier#Prettier(...) abort
 endfunction
 
 " Set autoformat toggle based on whether config file was found.
-function! prettier#IsConfigPresent(config_files)
+function! prettier#IsConfigPresent(config_files) abort
   for config_file in a:config_files
     if filereadable(findfile(config_file, '.;'))
       return 1

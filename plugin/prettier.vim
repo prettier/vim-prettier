@@ -20,6 +20,19 @@ let g:loaded_prettier = 1
 " autoformating disabled by default upon saving
 let g:prettier#autoformat = get(g:, 'prettier#autoformat', 0)
 
+" whether to turn autoformatting on if a prettier config file is found
+let g:prettier#autoformat_config_present = get(g:, 'prettier#autoformat_config_present', 0)
+
+" prettier config files to search current directory and parent directories for
+let g:prettier#autoformat_config_files = get(g:, 'prettier#autoformat_config_files', [
+      \'.prettierrc',
+      \'.prettierrc.yml',
+      \'.prettierrc.yaml',
+      \'.prettierrc.js',
+      \'.prettierrc.config.js',
+      \'.prettierrc.json'
+      \'.prettierrc.toml'])
+
 " path to prettier cli
 let g:prettier#exec_cmd_path = get(g:, 'prettier#exec_cmd_path', 0)
 
@@ -139,6 +152,14 @@ nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>
 
 augroup Prettier
   autocmd!
+  if g:prettier#autoformat_config_present
+    if prettier#IsConfigPresent(g:prettier#autoformat_config_files)
+      let g:prettier#autoformat = 1
+    else
+      let g:prettier#autoformat = 0
+    endif
+  endif
+
   if g:prettier#autoformat
     autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html noautocmd | call prettier#Autoformat()
   endif

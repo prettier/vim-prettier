@@ -5,7 +5,7 @@ settings.
 
 ---
 
-**NOTE**: If you want to fallback to older version of prettier please add this to your `.vimrc`:
+**NOTE**: If you want to fallback to older version of prettier/vim-prettier please add this to your `.vimrc`:
 
 ```vim
 Plug 'prettier/vim-prettier', {

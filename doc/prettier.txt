@@ -8,7 +8,7 @@ Author: Mitermayer Reis <mitermayer.reis@gmail.com>
 WebSite: https://prettier.io/
 Repository: https://github.com/prettier/vim-prettier
 License: MIT style license
-Version: 0.2.7
+Version: 1.0.0-alpha
 
 ==============================================================================
 CONTENTS                                                *vim-prettier-contents*
@@ -90,13 +90,40 @@ You can check what is the resolved `prettier` cli path by:
 You can check what is the resolved `prettier` cli version by: 
 >
   :PrettierCliVersion
-<
+
+You can send to prettier your entire buffer but ensure that it
+formats only your selection.
+
+**note: ** differs from `:PrettierFragment` by sending the entire buffer
+to prettier, allowing identation level to be preserved, but it requires
+the whole file to be valid.
+>
+  :PrettierPartial
+
+You can send to prettier your current selection as a fragment of same type as
+the file being edited.
+
+**note: ** differs from `:PrettierPartial` by sending only the current selection
+to prettier, this allows for faster formatting but wont preserve indentation.
+>
+  :PrettierFragment
+
 ==============================================================================
 CONFIGURATION                                       *vim-prettier-configuration*
 
-Disable auto formatting of files that have "@format" tag 
+Enable auto formatting of files that have "@format" or "@prettier" tag
 >
-  let g:prettier#autoformat = 0
+  let g:prettier#autoformat = 1
+
+Enable auto formatting of files based on whether a Prettier configuration file has been
+found in the project directory or any parent directories.
+>
+  let g:prettier#autoformat_config_present = 1
+
+Configuration file names to search for when attempting to find an appropriate
+Prettier configuration file for the current project.
+>
+  let g:prettier#autoformat_config_files = [...]
 <
 Set the prettier CLI executable path
 >
@@ -114,24 +141,21 @@ By default we auto focus on the quickfix when there are errors but can also be d
 >
   let g:prettier#quickfix_auto_focus = 0
 <
-To enable vim-prettier to run in files without requiring the "@format" doc tag.
-First disable the default autoformat, then update to your own custom behaviour
+To enable vim-prettier to auto run in files without requiring the "@format" or "@prettier" doc tag.
+First ensure that `g:prettier#autoformat` is not enabled on your `vimrc` (it should be disabled by default), then update to your own custom behaviour
 
 Running before saving sync:
 >
-  let g:prettier#autoformat = 0
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 <
 Running before saving async (vim 8+):
 >
-  let g:prettier#autoformat = 0
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 <
 Running before saving, changing text or leaving insert mode: 
 >
   " when running at every change you may want to disable quickfix
   let g:prettier#quickfix_enabled = 0
-  let g:prettier#autoformat = 0
   autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 <
 Overwrite default prettier configuration
@@ -139,44 +163,39 @@ Overwrite default prettier configuration
 **Note:** vim-prettier default settings differ from prettier intentionally. 
 However they can be configured by:
 >
-  " max line length that prettier will wrap on
-  let g:prettier#config#print_width = 80
+  " Max line length that prettier will wrap on: a number or 'auto' (use
+  " textwidth).
+  " default: 'auto'
+  let g:prettier#config#print_width = 'auto'
 
-  " number of spaces per indentation level
-  let g:prettier#config#tab_width = 2
+  " number of spaces per indentation level: a number or 'auto' (use
+  " softtabstop)
+  " default: 'auto'
+  let g:prettier#config#tab_width = 'auto'
 
-  " use tabs over spaces
-  let g:prettier#config#use_tabs = 'false'
+  " use tabs instead of spaces: true, false, or auto (use the expandtab setting).
+  " default: 'auto'
+  let g:prettier#config#use_tabs = 'auto'
 
-  " print semicolons
-  let g:prettier#config#semi = 'true'
-
-  " single quotes over double quotes
-  let g:prettier#config#single_quote = 'true' 
-
-  " print spaces between brackets
-  let g:prettier#config#bracket_spacing = 'false' 
-
-  " put > on the last line instead of new line
-  let g:prettier#config#jsx_bracket_same_line = 'true'
-
-  " avoid|always
-  let g:prettier#config#arrow_parens = 'always'
-
-  " none|es5|all
-  let g:prettier#config#trailing_comma = 'all'
-
-  " flow|babylon|typescript|css|less|scss|json|graphql|markdown
-  let g:prettier#config#parser = 'flow'
+  " flow|babylon|typescript|css|less|scss|json|graphql|markdown or empty string
+  " (let prettier choose).
+  " default: ''
+  let g:prettier#config#parser = ''
 
   " cli-override|file-override|prefer-file
-  let g:prettier#config#config_precedence = 'prefer-file'
+  " default: 'file-override'
+  let g:prettier#config#config_precedence = 'file-override'
 
   " always|never|preserve
+  " default: 'preserve'
   let g:prettier#config#prose_wrap = 'preserve'
 
   " css|strict|ignore
   let g:prettier#config#html_whitespace_sensitivity = 'css'
+
+  " false|true
+  " default: 'false'
+  let g:prettier#config#require_pragma = 'false'
 <
 ==============================================================================
 REQUIREMENT(S)                                      *vim-prettier-requirements*

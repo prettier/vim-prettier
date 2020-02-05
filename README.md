@@ -5,9 +5,14 @@ settings.
 
 ---
 
-**Note:** We are currently working towards a major release on branch `release/1.x`, while under development bugfixes will be applied to master branch and then ported back to `release/1.x` branch.
+**NOTE**: If you want to fallback to older version of prettier please add this to your `.vimrc`:
 
-If you have feature request and/or suggestions please comment on issue [1.0 release](https://github.com/prettier/vim-prettier/issues/126)
+```vim
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/0.x'
+}
+```
 
 ---
 
@@ -15,7 +20,7 @@ By default it will auto format **javascript**, **typescript**, **less**,
 **scss**, **css**, **json**, **graphql** and **markdown** files if they
 have/support the "@format" pragma annotation in the header of the file.
 
-![vim-prettier](/media/vim-prettier.gif?raw=true "vim-prettier")
+![vim-prettier](/media/vim-prettier.gif?raw=true 'vim-prettier')
 
 ### INSTALL
 
@@ -133,7 +138,7 @@ Enable auto formatting of files that have "@format" or "@prettier" tag
 let g:prettier#autoformat = 1
 ```
 
-Toggle the `g:prettier#autoformat` setting based on whether a config file can be found in the current directory or any parent directory.  Note that this will override the `g:prettier#autoformat` setting!
+Toggle the `g:prettier#autoformat` setting based on whether a config file can be found in the current directory or any parent directory. Note that this will override the `g:prettier#autoformat` setting!
 
 ```vim
 let g:prettier#autoformat_config_present = 1

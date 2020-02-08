@@ -20,6 +20,9 @@ let g:loaded_prettier = 1
 " autoformating disabled by default upon saving
 let g:prettier#autoformat = get(g:, 'prettier#autoformat', 0)
 
+" autoformating requires pragma by default
+let g:prettier#autoformat_require_pragma = get(g:, 'prettier#autoformat_require_pragma', 1)
+
 " whether to turn autoformatting on if a prettier config file is found
 let g:prettier#autoformat_config_present = get(g:, 'prettier#autoformat_config_present', 0)
 

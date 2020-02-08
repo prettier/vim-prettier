@@ -36,7 +36,9 @@ endfunction
 
 " Allows @format and @prettier pragma support upon saving
 function! prettier#Autoformat(...) abort
-  call prettier#Prettier(1, 1, line('$'), 0, { 'requirePragma': 'true'})
+  call prettier#Prettier(1, 1, line('$'), 0, {
+    \ 'requirePragma': g:prettier#autoformat_require_pragma ? 'true' : 'false'
+    \ })
 endfunction
 
 " Main prettier command

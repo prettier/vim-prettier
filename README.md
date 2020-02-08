@@ -138,6 +138,12 @@ Enable auto formatting of files that have "@format" or "@prettier" tag
 let g:prettier#autoformat = 1
 ```
 
+Allow auto formatting for files without "@format" or "@prettier" tag
+
+```vim
+let g:prettier#autoformat_require_pragma = 0
+```
+
 Toggle the `g:prettier#autoformat` setting based on whether a config file can be found in the current directory or any parent directory. Note that this will override the `g:prettier#autoformat` setting!
 
 ```vim
@@ -181,28 +187,13 @@ By default we auto focus on the quickfix when there are errors but can also be d
 let g:prettier#quickfix_auto_focus = 0
 ```
 
-To enable vim-prettier to auto run in files without requiring the "@format" or "@prettier" doc tag.
-First ensure that `g:prettier#autoformat` is not enabled on your `vimrc` (it should be disabled by default), then update to your own custom behaviour
-
-Running before saving sync:
-
-```vim
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
-```
-
-Running before saving async (vim 8+):
-
-```vim
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-```
-
-Running before saving, changing text or leaving insert mode:
+To running vim-prettier not only before saving, but also after changing text or leaving insert mode:
 
 ```vim
 " when running at every change you may want to disable quickfix
 let g:prettier#quickfix_enabled = 0
 
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 ```
 
 ### Overwrite default prettier configuration

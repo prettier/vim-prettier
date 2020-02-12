@@ -1,0 +1,8 @@
+{
+  baz {
+    blah, ...name }
+  bean{foo, blah,bleh}
+  bar {
+    ...name
+  }
+}

@@ -2,10 +2,27 @@
 
 ## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.7...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/1.0.0-alpha...HEAD)
 
 **Implemented enhancements:**
 
+- 1.0 release [\#126](https://github.com/prettier/vim-prettier/issues/126)
+
+**Closed issues:**
+
+- styling over scp [\#149](https://github.com/prettier/vim-prettier/issues/149)
+
+**Merged pull requests:**
+
+- New option: prettier\#autoformat\_require\_pragma [\#224](https://github.com/prettier/vim-prettier/pull/224) ([simnalamburt](https://github.com/simnalamburt))
+
+## [1.0.0-alpha](https://github.com/prettier/vim-prettier/tree/1.0.0-alpha) (2020-02-05)
+
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/0.2.7...1.0.0-alpha)
+
+**Implemented enhancements:**
+
+- Add A "Close Empty JSX Element" Option Like On VS Code's Prettier [\#202](https://github.com/prettier/vim-prettier/issues/202)
 - Support custom prettier plugins [\#119](https://github.com/prettier/vim-prettier/issues/119)
 - Add support for neovim async [\#99](https://github.com/prettier/vim-prettier/issues/99)
 - Formatting with visual selection doesn't respect indentation [\#75](https://github.com/prettier/vim-prettier/issues/75)
@@ -14,12 +31,20 @@
 
 **Fixed bugs:**
 
+- First undo after :Prettier takes me to the top of the file [\#184](https://github.com/prettier/vim-prettier/issues/184)
+- Prettier: failed to parse buffer \(PrettierAsync\) for every JS file [\#171](https://github.com/prettier/vim-prettier/issues/171)
 - Vim-prettier doesn't use project config [\#162](https://github.com/prettier/vim-prettier/issues/162)
 - Error infinite loop Prettier: failed to parse buffer [\#113](https://github.com/prettier/vim-prettier/issues/113)
+- vim-prettier not working when editing files that have white spaces on its path [\#108](https://github.com/prettier/vim-prettier/issues/108)
 
 **Closed issues:**
 
+- Bug: Bracket spacing is ignored [\#222](https://github.com/prettier/vim-prettier/issues/222)
+- E121: Undefined variable: g:prettier\#autoformat [\#216](https://github.com/prettier/vim-prettier/issues/216)
+- Plugin should load project config if available [\#213](https://github.com/prettier/vim-prettier/issues/213)
+- incosistent with prettier cli and introducing syntaxt error. [\#200](https://github.com/prettier/vim-prettier/issues/200)
 - For "in-memory" buffers \(not saved to file system\): `Prettier: failed to parse buffer` [\#199](https://github.com/prettier/vim-prettier/issues/199)
+- Loading global .prettierrc from user's home ? [\#197](https://github.com/prettier/vim-prettier/issues/197)
 - Can I automatically disable vim-prettier if .prettierrc is doesn't exists in project folder? [\#195](https://github.com/prettier/vim-prettier/issues/195)
 - make prettier respect eslint [\#194](https://github.com/prettier/vim-prettier/issues/194)
 - Window is unexpectedly scrolled after :Prettier [\#192](https://github.com/prettier/vim-prettier/issues/192)
@@ -38,6 +63,7 @@
 - Error parsing Typescript [\#153](https://github.com/prettier/vim-prettier/issues/153)
 - Restarting development from today [\#152](https://github.com/prettier/vim-prettier/issues/152)
 - Unexpected cursor movement [\#151](https://github.com/prettier/vim-prettier/issues/151)
+- Adding support for lint tools custom executables after prettier \(like lint-staged\) [\#148](https://github.com/prettier/vim-prettier/issues/148)
 - Prettier: failed to parse buffer.  [\#147](https://github.com/prettier/vim-prettier/issues/147)
 - my config single\_quote is ignored [\#146](https://github.com/prettier/vim-prettier/issues/146)
 - Prettier: failed to parse buffer. [\#145](https://github.com/prettier/vim-prettier/issues/145)
@@ -49,6 +75,12 @@
 
 **Merged pull requests:**
 
+- Use `get\(\)` to check `g:prettier\#autoformat` safely in ftplugin [\#217](https://github.com/prettier/vim-prettier/pull/217) ([hankchiutw](https://github.com/hankchiutw))
+- Toggle the autoformat setting based on config file presence. [\#212](https://github.com/prettier/vim-prettier/pull/212) ([atomdmac](https://github.com/atomdmac))
+- making-auto-format-disabled-by-default - Making autoformat disabled by [\#208](https://github.com/prettier/vim-prettier/pull/208) ([mitermayer](https://github.com/mitermayer))
+- Issues/184 fixing undo step [\#207](https://github.com/prettier/vim-prettier/pull/207) ([mitermayer](https://github.com/mitermayer))
+- Adding support for require-pragma and depracting previous naive implemenation [\#206](https://github.com/prettier/vim-prettier/pull/206) ([mitermayer](https://github.com/mitermayer))
+- moving-build-to-make-file - Adding build file [\#203](https://github.com/prettier/vim-prettier/pull/203) ([mitermayer](https://github.com/mitermayer))
 - enabling-tests-on-ci - Enabling tests as part of the CI run [\#201](https://github.com/prettier/vim-prettier/pull/201) ([mitermayer](https://github.com/mitermayer))
 - updating-travis-to-use-docker - Moving to use vint from docker image [\#198](https://github.com/prettier/vim-prettier/pull/198) ([mitermayer](https://github.com/mitermayer))
 - Shore/master rebasing [\#196](https://github.com/prettier/vim-prettier/pull/196) ([mitermayer](https://github.com/mitermayer))
@@ -57,6 +89,7 @@
 - Ignore generated help tags file [\#181](https://github.com/prettier/vim-prettier/pull/181) ([mikesep](https://github.com/mikesep))
 - Fix README markdown. [\#179](https://github.com/prettier/vim-prettier/pull/179) ([Onra](https://github.com/Onra))
 - Integrating vim driver [\#176](https://github.com/prettier/vim-prettier/pull/176) ([mitermayer](https://github.com/mitermayer))
+- Release/1.x [\#175](https://github.com/prettier/vim-prettier/pull/175) ([mitermayer](https://github.com/mitermayer))
 - Make markdown check more resilient [\#173](https://github.com/prettier/vim-prettier/pull/173) ([rivertam](https://github.com/rivertam))
 - Fix markdown mangling issue [\#169](https://github.com/prettier/vim-prettier/pull/169) ([rivertam](https://github.com/rivertam))
 - Add option for html whitespace sensitivity [\#165](https://github.com/prettier/vim-prettier/pull/165) ([dewyze](https://github.com/dewyze))

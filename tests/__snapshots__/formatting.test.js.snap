@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Prettier formats foo.css file with :Prettier command 1`] = `
+".redClass {
+    background: \\"red\\";
+}
+#redId {
+    background: \\"red\\";
+}"
+`;
+
+exports[`Prettier formats foo.css file with :PrettierAsync command 1`] = `
+".redClass {
+    background: \\"red\\";
+}
+#redId {
+    background: \\"red\\";
+}"
+`;
+
+exports[`Prettier formats foo.graphql file with :Prettier command 1`] = `
+"{
+    baz {
+        blah
+        ...name
+    }
+    bean {
+        foo
+        blah
+        bleh
+    }
+    bar {
+        ...name
+    }
+}"
+`;
+
+exports[`Prettier formats foo.graphql file with :PrettierAsync command 1`] = `
+"{
+    baz {
+        blah
+        ...name
+    }
+    bean {
+        foo
+        blah
+        bleh
+    }
+    bar {
+        ...name
+    }
+}"
+`;
+
+exports[`Prettier formats foo.html file with :Prettier command 1`] = `
+"<html>
+    <head>
+        <title>foo</title>
+    </head>
+    <body>
+        <h1>foo</h1>
+    </body>
+</html>"
+`;
+
+exports[`Prettier formats foo.html file with :PrettierAsync command 1`] = `
+"<html>
+    <head>
+        <title>foo</title>
+    </head>
+    <body>
+        <h1>foo</h1>
+    </body>
+</html>"
+`;
+
+exports[`Prettier formats foo.js file with :Prettier command 1`] = `
+"const a = () => {
+    return 2;
+};"
+`;
+
+exports[`Prettier formats foo.js file with :PrettierAsync command 1`] = `
+"const a = () => {
+    return 2;
+};"
+`;
+
+exports[`Prettier formats foo.json file with :Prettier command 1`] = `
+"{
+    \\"name\\": \\"foo\\",
+    \\"bar\\": \\"baz\\"
+}"
+`;
+
+exports[`Prettier formats foo.json file with :PrettierAsync command 1`] = `
+"{
+    \\"name\\": \\"foo\\",
+    \\"bar\\": \\"baz\\"
+}"
+`;
+
+exports[`Prettier formats foo.less file with :Prettier command 1`] = `
+".redClass {
+    background: \\"red\\";
+}
+#redId {
+    background: \\"red\\";
+}"
+`;
+
+exports[`Prettier formats foo.less file with :PrettierAsync command 1`] = `
+".redClass {
+    background: \\"red\\";
+}
+#redId {
+    background: \\"red\\";
+}"
+`;
+
+exports[`Prettier formats foo.md file with :Prettier command 1`] = `
+"## foo
+
+Lorem ipsum dolor amet
+
+### bar
+
+-   a
+-   b
+-   c"
+`;
+
+exports[`Prettier formats foo.md file with :PrettierAsync command 1`] = `
+"## foo
+
+Lorem ipsum dolor amet
+
+### bar
+
+-   a
+-   b
+-   c"
+`;
+
+exports[`Prettier formats foo.php file with :Prettier command 1`] = `
+"<?php
+$a = 'a';
+
+$b = $a . $a . ' asda';"
+`;
+
+exports[`Prettier formats foo.php file with :PrettierAsync command 1`] = `
+"<?php
+$a = 'a';
+
+$b = $a . $a . ' asda';"
+`;
+
+exports[`Prettier formats foo.scss file with :Prettier command 1`] = `
+".redClass {
+    background: \\"red\\";
+}
+#redId {
+    background: \\"red\\";
+}"
+`;
+
+exports[`Prettier formats foo.scss file with :PrettierAsync command 1`] = `
+".redClass {
+    background: \\"red\\";
+}
+#redId {
+    background: \\"red\\";
+}"
+`;
+
+exports[`Prettier formats foo.ts file with :Prettier command 1`] = `
+"const a: () => number = () => {
+    return 2;
+};"
+`;
+
+exports[`Prettier formats foo.ts file with :PrettierAsync command 1`] = `
+"const a: () => number = () => {
+    return 2;
+};"
+`;
+
+exports[`Prettier formats foo.vue file with :Prettier command 1`] = `
+"<template>
+    <div class=\\"example\\">{{ msg }}</div>
+</template>
+
+<script>
+export default {
+    data() {
+        return { msg: \\"Hello world!\\" };
+    }
+};
+</script>
+
+<style>
+.example {
+    color: red;
+}
+</style>
+
+<custom1>
+  This could be e.g. documentation for the component.
+</custom1>"
+`;
+
+exports[`Prettier formats foo.vue file with :PrettierAsync command 1`] = `
+"<template>
+    <div class=\\"example\\">{{ msg }}</div>
+</template>
+
+<script>
+export default {
+    data() {
+        return { msg: \\"Hello world!\\" };
+    }
+};
+</script>
+
+<style>
+.example {
+    color: red;
+}
+</style>
+
+<custom1>
+  This could be e.g. documentation for the component.
+</custom1>"
+`;
+
+exports[`Prettier formats foo.yaml file with :Prettier command 1`] = `
+"foo:
+    bar:
+        baz:
+            bleh: ./foo
+            foobar: foobar
+            args:
+                buildno: 1"
+`;
+
+exports[`Prettier formats foo.yaml file with :PrettierAsync command 1`] = `
+"foo:
+    bar:
+        baz:
+            bleh: ./foo
+            foobar: foobar
+            args:
+                buildno: 1"
+`;

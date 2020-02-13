@@ -54,6 +54,9 @@ const assertFormatting = (file) => {
 
     // we now check that we have indeed formatted the code
     expect(updatedLines).not.toBe(lines);
+
+    // check snapshot
+    expect(updatedLines).toMatchSnapshot();
   });
 
   test(`Prettier formats ${filename} file with :PrettierAsync command`, async () => {
@@ -76,6 +79,9 @@ const assertFormatting = (file) => {
 
     // we now check that we have indeed formatted the code
     expect(lines).not.toBe(updatedLines);
+
+    // check snapshot
+    expect(updatedLines).toMatchSnapshot();
   });
 };
 

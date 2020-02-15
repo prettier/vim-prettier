@@ -118,6 +118,24 @@ exports[`Prettier formats foo.less file with :PrettierAsync command 1`] = `
 }"
 `;
 
+exports[`Prettier formats foo.lua file with :Prettier command 1`] = `
+"function deepcopy(orig)
+	local orig_type = type(orig)
+	local copy
+
+	return copy
+end"
+`;
+
+exports[`Prettier formats foo.lua file with :PrettierAsync command 1`] = `
+"function deepcopy(orig)
+	local orig_type = type(orig)
+	local copy
+
+	return copy
+end"
+`;
+
 exports[`Prettier formats foo.md file with :Prettier command 1`] = `
 "## foo
 

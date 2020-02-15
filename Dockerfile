@@ -33,6 +33,9 @@ COPY --from=builder /usr/local/share/vim  /usr/local/share/vim
 ENV PACKAGES="\
     bash \
     git \
+    ruby \
+    ruby-dev \
+    ruby-json \
     python \
     python3 \
     py-pip \

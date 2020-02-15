@@ -34,6 +34,7 @@ ENV PACKAGES="\
     bash \
     git \
     python \
+    python3 \
     py-pip \
     nodejs \
     npm \

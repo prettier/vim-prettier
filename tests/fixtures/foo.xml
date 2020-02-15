@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+              "https://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+  <?xml-model href="project.rnc" type="application/relax-ng-compact-syntax"?>
+<!-- foo -->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="200"
+          height="100"
+    viewBox="0 0 200 100"
+>
+  <title>foo</title>
+  <desc _attr="attr">
+    bar
+  </desc>
+  <style></style>
+</svg>
+<!-- bar -->

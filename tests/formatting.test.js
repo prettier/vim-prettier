@@ -10,7 +10,7 @@ const FIXTURES_DIR = `${__dirname}/fixtures`;
 let server;
 let remote;
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 const getBufferContents = async remote =>
   (await remote.call('getline', [1, '$'])).join('\n');

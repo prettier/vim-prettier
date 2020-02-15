@@ -11,7 +11,7 @@ settings.
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/0.x'
-}
+  \ }
 ```
 
 ---

@@ -3119,7 +3119,7 @@ preserve@^0.2.0:
 
 prettier@>=1.10, prettier@^1.16.4, prettier@^1.18.2:
   version "1.19.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
 prettier@prettier/prettier#d05a29da05b2084790491eaef85917ce584e4fbd:

@@ -15,6 +15,16 @@ test:
 		"mitermayer/vim-test-bed" \
 		yarn --cwd testplugin test
 
+test-update-snapshot:
+	echo "Running tests..."
+	docker run \
+		-t \
+		--rm \
+		-v ${PWD}:/testplugin \
+		-v ${PWD}/tests:/home \
+		"mitermayer/vim-test-bed" \
+		yarn --cwd testplugin test -u
+
 lint:
 	echo "Running linter..."
 	docker run \

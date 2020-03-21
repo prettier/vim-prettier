@@ -174,24 +174,6 @@ $a = 'a';
 $b = $a . $a . ' asda';"
 `;
 
-exports[`Prettier formats foo.py file with :Prettier command 1`] = `
-"def foo(a, *, example=False, **kwargs):
-    print(\\"hello world\\", example)
-
-
-def i18n_patterns(*urls, prefix_default_language=True):
-    pass"
-`;
-
-exports[`Prettier formats foo.py file with :PrettierAsync command 1`] = `
-"def foo(a, *, example=False, **kwargs):
-    print(\\"hello world\\", example)
-
-
-def i18n_patterns(*urls, prefix_default_language=True):
-    pass"
-`;
-
 exports[`Prettier formats foo.rb file with :Prettier command 1`] = `
 "[1, 2, 3].each do |i|
     p i

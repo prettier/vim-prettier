@@ -51,7 +51,7 @@ RUN apk --update add $PACKAGES && \
 # install supported vim8 and neovim
 RUN install_vim -tag v7.4.052 -name vim7 -build \
                 -tag v8.1.0519 -name vim8 -build \
-                -tag neovim:v0.3.5 -name neovim -build
+                -tag neovim:v0.4.3 -name neovim -build
 
 # set default vim install
 RUN cp /vim-build/bin/vim8 /usr/local/bin/vim

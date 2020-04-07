@@ -4,7 +4,5 @@ let b:prettier_ft_default_args = {
 
 augroup Prettier
   autocmd!
-  if get(g:, 'prettier#autoformat')
-    autocmd BufWritePre *.lua call prettier#Autoformat()
-  endif
+  autocmd BufWritePre *.lua call prettier#Autoformat()
 augroup end

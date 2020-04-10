@@ -36,9 +36,15 @@ endfunction
 
 " Allows @format and @prettier pragma support upon saving
 function! prettier#Autoformat(...) abort
-  call prettier#Prettier(1, 1, line('$'), 0, {
-    \ 'requirePragma': g:prettier#autoformat_require_pragma ? 'true' : 'false'
-    \ })
+  let l:autoformat = g:prettier#autoformat_config_present ?
+        \ prettier#IsConfigPresent(g:prettier#autoformat_config_files) :
+        \ g:prettier#autoformat
+
+  if l:autoformat
+    call prettier#Prettier(1, 1, line('$'), 0, {
+      \ 'requirePragma': g:prettier#autoformat_require_pragma ? 'true' : 'false'
+      \ })
+  endif
 endfunction
 
 " Main prettier command

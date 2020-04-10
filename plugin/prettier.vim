@@ -155,15 +155,5 @@ nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>
 
 augroup Prettier
   autocmd!
-  if g:prettier#autoformat_config_present
-    if prettier#IsConfigPresent(g:prettier#autoformat_config_files)
-      let g:prettier#autoformat = 1
-    else
-      let g:prettier#autoformat = 0
-    endif
-  endif
-
-  if g:prettier#autoformat
-    autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html noautocmd | call prettier#Autoformat()
-  endif
+  autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html noautocmd | call prettier#Autoformat()
 augroup end

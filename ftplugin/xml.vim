@@ -8,7 +8,5 @@ endif
 
 augroup Prettier
   autocmd!
-  if get(g:, 'prettier#autoformat')
-    autocmd BufWritePre *.xml call prettier#Autoformat()
-  endif
+  autocmd BufWritePre *.xml call prettier#Autoformat()
 augroup end

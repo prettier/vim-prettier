@@ -248,6 +248,11 @@ let g:prettier#config#html_whitespace_sensitivity = 'css'
 " false|true
 " default: 'false'
 let g:prettier#config#require_pragma = 'false'
+
+" Define the flavor of line endings
+" lf|crlf|cr|all
+" defaut: 'lf'
+let g:prettier#config#end_of_line = get(g:, 'prettier#config#end_of_line', 'lf')
 ```
 
 ### REQUIREMENT(S)

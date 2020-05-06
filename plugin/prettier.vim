@@ -33,7 +33,7 @@ let g:prettier#autoformat_config_files = get(g:, 'prettier#autoformat_config_fil
       \'.prettierrc.yaml',
       \'.prettierrc.js',
       \'.prettierrc.config.js',
-      \'.prettierrc.json'
+      \'.prettierrc.json',
       \'.prettierrc.toml'])
 
 " path to prettier cli

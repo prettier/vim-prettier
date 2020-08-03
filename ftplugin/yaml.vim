@@ -4,5 +4,5 @@ let b:prettier_ft_default_args = {
 
 augroup Prettier
   autocmd!
-  autocmd BufWritePre *.yaml call prettier#Autoformat()
+  autocmd BufWritePre *.yml,*.yaml call prettier#Autoformat()
 augroup end

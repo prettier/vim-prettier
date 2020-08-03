@@ -24,6 +24,18 @@ have/support the "@format" pragma annotation in the header of the file.
 
 ### INSTALL
 
+To install with vim 8+ plugins, simply clone to your `~/.vim/pack/plugins/start` directory, and add `packloadall` to your `.vimrc` (if you haven't already).
+
+```bash
+mkdir -p ~/.vim/pack/plugins/start
+git clone https://github.com/prettier/vim-prettier ~/.vim/pack/plugins/start/vim-prettier
+```
+
+`.vimrc`:
+```vim
+packloadall
+```
+
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and
 yarn|npm installed globally.
 

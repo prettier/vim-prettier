@@ -76,6 +76,20 @@ vim-prettier executable resolution:
 3.  Look for a global prettier installation
 4.  Use locally installed vim-prettier prettier executable
 
+### Prettier Stylelint
+
+To use an alternative command, like
+[`prettier-stylelint`](https://github.com/hugomrdias/prettier-stylelint), set
+this at the buffer level, e.g.:
+
+```vim
+au FileType css,scss,scss.css let b:prettier_exec_cmd = "prettier-stylelint"
+```
+
+vim-prettier will look for the executable in the same places it looks for
+`prettier`, and will fall back to `prettier` if it can't find
+`b:prettier_exec_cmd`
+
 ### USAGE
 
 Prettier by default will run on auto save but can also be manually triggered by:

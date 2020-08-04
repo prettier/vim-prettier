@@ -83,7 +83,7 @@ To use an alternative command, like
 this at the buffer level, e.g.:
 
 ```vim
-au FileType css,scss,scss.css let b:prettier_exec_cmd = "prettier-stylelint"
+au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
 ```
 
 vim-prettier will look for the executable in the same places it looks for

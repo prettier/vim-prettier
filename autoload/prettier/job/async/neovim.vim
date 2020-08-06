@@ -42,6 +42,8 @@ endfunction
 "
 "  note that somehow we exectuing both async and sync on nvim when using the autoformat
 function! s:onExit(status, info, out, err) abort
+  if len(a:out) == 0 | return | endif
+
   let l:currentBufferNumber =  bufnr('%')
   let l:isInsideAnotherBuffer = a:info.buf_nr != l:currentBufferNumber ? 1 : 0
   let l:last = a:out[len(a:out) - 1]

@@ -158,6 +158,17 @@ Running before saving, changing text or leaving insert mode:
   let g:prettier#quickfix_enabled = 0
   autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 <
+Buffer-level custom commands
+
+To use an alternative command, like `prettier-stylelint`, set this at the
+buffer level with `b:prettier_exec_cmd`, e.g.:
+>
+  au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
+<
+vim-prettier will look for the executable in the same places it looks for
+`prettier`, and will fall back to `prettier` if it can't find
+`b:prettier_exec_cmd`
+
 Overwrite default prettier configuration
 
 **Note:** vim-prettier default settings differ from prettier intentionally. 

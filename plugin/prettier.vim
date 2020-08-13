@@ -105,13 +105,13 @@ let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracke
 
 " avoid wrapping a single arrow function param in parens
 " avoid|always
-" default: 'avoid'
-let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'avoid')
+" default: 'always'
+let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'always')
 
 " Print trailing commas wherever possible when multi-line.
 " none|es5|all
-" default: 'none'
-let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'none')
+" default: 'es5'
+let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 'es5')
 
 " restrict itself to only format files that contain a special comment @prettier or @format
 let g:prettier#config#require_pragma=  get(g:, 'prettier#config#require_pragma', 'false')

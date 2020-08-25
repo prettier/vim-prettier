@@ -24,6 +24,18 @@ have/support the "@format" pragma annotation in the header of the file.
 
 ### INSTALL
 
+To install with vim 8+ plugins, simply clone to your `~/.vim/pack/plugins/start` directory, and add `packloadall` to your `.vimrc` (if you haven't already).
+
+```bash
+mkdir -p ~/.vim/pack/plugins/start
+git clone https://github.com/prettier/vim-prettier ~/.vim/pack/plugins/start/vim-prettier
+```
+
+`.vimrc`:
+```vim
+packloadall
+```
+
 Install with [vim-plug](https://github.com/junegunn/vim-plug), assumes node and
 yarn|npm installed globally.
 
@@ -63,6 +75,20 @@ vim-prettier executable resolution:
 2.  Traverse parents and search for Prettier installation inside `node_modules`
 3.  Look for a global prettier installation
 4.  Use locally installed vim-prettier prettier executable
+
+### Prettier Stylelint
+
+To use an alternative command, like
+[`prettier-stylelint`](https://github.com/hugomrdias/prettier-stylelint), set
+this at the buffer level, e.g.:
+
+```vim
+au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
+```
+
+vim-prettier will look for the executable in the same places it looks for
+`prettier`, and will fall back to `prettier` if it can't find
+`b:prettier_exec_cmd`
 
 ### USAGE
 

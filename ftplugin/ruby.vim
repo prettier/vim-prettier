@@ -4,7 +4,5 @@ let b:prettier_ft_default_args = {
 
 augroup Prettier
   autocmd!
-  if get(g:, 'prettier#autoformat')
-    autocmd BufWritePre *.ruby call prettier#Autoformat()
-  endif
+  autocmd BufWritePre *.rb,*.ruby call prettier#Autoformat()
 augroup end

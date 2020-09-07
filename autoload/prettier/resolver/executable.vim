@@ -33,7 +33,12 @@ endfunction
 function! s:GetExecPath(...) abort
   let l:rootDir = a:0 > 0 ? a:1 : -1
   let l:dir = l:rootDir != -1 ? l:rootDir . '/.bin/' : ''
-  return l:dir . 'prettier'
+  let l:path = l:dir . get(b:, 'prettier_exec_cmd', 'prettier')
+  if executable(l:path)
+    return l:path
+  else
+    return l:dir . 'prettier'
+  endif
 endfunction
 
 " Searches for the existence of a directory accross 

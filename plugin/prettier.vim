@@ -120,6 +120,11 @@ let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracke
 " See more: https://prettier.io/docs/en/options.html#arrow-function-parentheses
 let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'always')
 
+" Define the flavor of line endings
+" lf|crlf|cr|all
+" defaut: 'lf' 
+let g:prettier#config#end_of_line = get(g:, 'prettier#config#end_of_line', 'lf')
+
 " Print trailing commas wherever possible when multi-line.
 " none|es5|all
 " default: 'es5'

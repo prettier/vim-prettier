@@ -1,19 +1,59 @@
-# Change Log
+# Changelog
 
-## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
+## [1.0.0-beta](https://github.com/prettier/vim-prettier/tree/1.0.0-beta) (2020-09-07)
 
-[Full Changelog](https://github.com/prettier/vim-prettier/compare/1.0.0-alpha...HEAD)
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/1.0.0-alpha...1.0.0-beta)
 
 **Implemented enhancements:**
 
+- Toggle autoformat feature and/or documentation [\#170](https://github.com/prettier/vim-prettier/issues/170)
 - 1.0 release [\#126](https://github.com/prettier/vim-prettier/issues/126)
+
+**Fixed bugs:**
+
+- formatting by saving works only for languages of last opened file [\#185](https://github.com/prettier/vim-prettier/issues/185)
+- bugfix/issue-229-fixing-neovim-0-4-compatibility [\#231](https://github.com/prettier/vim-prettier/pull/231) ([mitermayer](https://github.com/mitermayer))
 
 **Closed issues:**
 
+- Support prettier-stylelint [\#255](https://github.com/prettier/vim-prettier/issues/255)
+- Autoformat on save does not work on yaml files [\#245](https://github.com/prettier/vim-prettier/issues/245)
+- PrettierFragment not work  [\#241](https://github.com/prettier/vim-prettier/issues/241)
+- Error when running :Prettier on gvim [\#240](https://github.com/prettier/vim-prettier/issues/240)
+- Installation fails in post-update hook using vim plug [\#237](https://github.com/prettier/vim-prettier/issues/237)
+- `autoformat\_config\_present` does not re-evaluate the presence of the prettier config file after vim is started [\#233](https://github.com/prettier/vim-prettier/issues/233)
+- Add support for `prettier 2.x`  [\#232](https://github.com/prettier/vim-prettier/issues/232)
+- PrettierAsync moves cursor to top of buffer [\#229](https://github.com/prettier/vim-prettier/issues/229)
+- Autoformatting Stops Working [\#228](https://github.com/prettier/vim-prettier/issues/228)
+- /\* prettier-ignore \*/ inside CSS file not working [\#227](https://github.com/prettier/vim-prettier/issues/227)
+- How do I run prettier for markdown files for Hugo the static site generator? [\#223](https://github.com/prettier/vim-prettier/issues/223)
+- Package.json configuration not loaded properly \(release 1.x\) [\#221](https://github.com/prettier/vim-prettier/issues/221)
+- TypeScript is formatted as PHP \(1.x\) [\#219](https://github.com/prettier/vim-prettier/issues/219)
+- How configure  [\#218](https://github.com/prettier/vim-prettier/issues/218)
+- Error on `:wq` [\#215](https://github.com/prettier/vim-prettier/issues/215)
+- Bug: failed to parse buffer.  [\#214](https://github.com/prettier/vim-prettier/issues/214)
+- release/1.x: prettier plugins do not work when installed with pnpm [\#211](https://github.com/prettier/vim-prettier/issues/211)
+- .prettierignore appends a bunch of nonsense [\#189](https://github.com/prettier/vim-prettier/issues/189)
+- Failed to parse buffer import.meta.url [\#188](https://github.com/prettier/vim-prettier/issues/188)
+- Document how to add q-args [\#168](https://github.com/prettier/vim-prettier/issues/168)
+- Document how to add custom extensions [\#167](https://github.com/prettier/vim-prettier/issues/167)
 - styling over scp [\#149](https://github.com/prettier/vim-prettier/issues/149)
 
 **Merged pull requests:**
 
+- Uses default cli configs [\#260](https://github.com/prettier/vim-prettier/pull/260) ([ethan605](https://github.com/ethan605))
+- Add buffer-level prettier exec command to doc [\#259](https://github.com/prettier/vim-prettier/pull/259) ([jsit](https://github.com/jsit))
+- Add support for buffer-level prettier\_exec\_cmd, for prettier-stylelint for instance [\#256](https://github.com/prettier/vim-prettier/pull/256) ([jsit](https://github.com/jsit))
+- Bump acorn from 5.7.3 to 5.7.4 [\#254](https://github.com/prettier/vim-prettier/pull/254) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump lodash from 4.17.15 to 4.17.19 [\#253](https://github.com/prettier/vim-prettier/pull/253) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Fix error when quitting Neovim with :wq [\#252](https://github.com/prettier/vim-prettier/pull/252) ([mrnugget](https://github.com/mrnugget))
+- Add missing ".yml" in autocmd [\#246](https://github.com/prettier/vim-prettier/pull/246) ([raxell](https://github.com/raxell))
+- Fix string concatenation typo [\#243](https://github.com/prettier/vim-prettier/pull/243) ([coolreader18](https://github.com/coolreader18))
+- issue/232-adding-support-for-prettier-2.x - Adding support for prettier 2x [\#238](https://github.com/prettier/vim-prettier/pull/238) ([mitermayer](https://github.com/mitermayer))
+- Add instructions for installing with vim 8+ [\#236](https://github.com/prettier/vim-prettier/pull/236) ([coolaj86](https://github.com/coolaj86))
+- Autoformat .rb files [\#235](https://github.com/prettier/vim-prettier/pull/235) ([jamesbvaughan](https://github.com/jamesbvaughan))
+- Force reevaluation of autoformat settings at buffer write time [\#234](https://github.com/prettier/vim-prettier/pull/234) ([cjlarose](https://github.com/cjlarose))
+- Fix readme to properly reflect how to downgrade [\#225](https://github.com/prettier/vim-prettier/pull/225) ([ParamagicDev](https://github.com/ParamagicDev))
 - New option: prettier\#autoformat\_require\_pragma [\#224](https://github.com/prettier/vim-prettier/pull/224) ([simnalamburt](https://github.com/simnalamburt))
 
 ## [1.0.0-alpha](https://github.com/prettier/vim-prettier/tree/1.0.0-alpha) (2020-02-05)
@@ -32,7 +72,6 @@
 **Fixed bugs:**
 
 - First undo after :Prettier takes me to the top of the file [\#184](https://github.com/prettier/vim-prettier/issues/184)
-- Prettier: failed to parse buffer \(PrettierAsync\) for every JS file [\#171](https://github.com/prettier/vim-prettier/issues/171)
 - Vim-prettier doesn't use project config [\#162](https://github.com/prettier/vim-prettier/issues/162)
 - Error infinite loop Prettier: failed to parse buffer [\#113](https://github.com/prettier/vim-prettier/issues/113)
 - vim-prettier not working when editing files that have white spaces on its path [\#108](https://github.com/prettier/vim-prettier/issues/108)
@@ -104,6 +143,8 @@
 - Enable the default editorconfig support again [\#144](https://github.com/prettier/vim-prettier/pull/144) ([oskarrough](https://github.com/oskarrough))
 - Fix PrettierAsync ignored file contents mangling [\#142](https://github.com/prettier/vim-prettier/pull/142) ([SamHowie](https://github.com/SamHowie))
 - Remove wrong comment on README.md comment example [\#139](https://github.com/prettier/vim-prettier/pull/139) ([vieiralucas](https://github.com/vieiralucas))
+- use buffered mode for neovim job [\#136](https://github.com/prettier/vim-prettier/pull/136) ([chemzqm](https://github.com/chemzqm))
+- Start using prettier default arguments [\#130](https://github.com/prettier/vim-prettier/pull/130) ([docwhat](https://github.com/docwhat))
 
 ## [0.2.7](https://github.com/prettier/vim-prettier/tree/0.2.7) (2018-05-25)
 
@@ -137,9 +178,7 @@
 **Merged pull requests:**
 
 - Fix PrettierAsync segmentation fault [\#138](https://github.com/prettier/vim-prettier/pull/138) ([SamHowie](https://github.com/SamHowie))
-- use buffered mode for neovim job [\#136](https://github.com/prettier/vim-prettier/pull/136) ([chemzqm](https://github.com/chemzqm))
 - Adding discord link [\#131](https://github.com/prettier/vim-prettier/pull/131) ([mitermayer](https://github.com/mitermayer))
-- Start using prettier default arguments [\#130](https://github.com/prettier/vim-prettier/pull/130) ([docwhat](https://github.com/docwhat))
 - git: ignore unix yarn.lock file [\#129](https://github.com/prettier/vim-prettier/pull/129) ([docwhat](https://github.com/docwhat))
 - Amend syntax in documentation around config overrides [\#127](https://github.com/prettier/vim-prettier/pull/127) ([chris-kobrzak](https://github.com/chris-kobrzak))
 - Updating the logic for controlling the quickfix flag [\#125](https://github.com/prettier/vim-prettier/pull/125) ([mitermayer](https://github.com/mitermayer))
@@ -158,7 +197,7 @@
 - Add default option values from Prettier for configuration [\#94](https://github.com/prettier/vim-prettier/pull/94) ([maurobringolf](https://github.com/maurobringolf))
 - bugfix - making sure we do not replace content with empty buffer [\#93](https://github.com/prettier/vim-prettier/pull/93) ([mitermayer](https://github.com/mitermayer))
 - fix typo in pathogen install method [\#91](https://github.com/prettier/vim-prettier/pull/91) ([nicoder](https://github.com/nicoder))
-- Add --prose-wrap option [\#90](https://github.com/prettier/vim-prettier/pull/90) ([ffky](https://github.com/ffky))
+- Add --prose-wrap option [\#90](https://github.com/prettier/vim-prettier/pull/90) ([frankychung](https://github.com/frankychung))
 - Just a simple documentation for vim-pathogen [\#87](https://github.com/prettier/vim-prettier/pull/87) ([gustavo-gimenez](https://github.com/gustavo-gimenez))
 - Add async support for neovim [\#81](https://github.com/prettier/vim-prettier/pull/81) ([chemzqm](https://github.com/chemzqm))
 
@@ -219,7 +258,6 @@
 
 - Fixing bug where config was not being correctly loaded based on file [\#72](https://github.com/prettier/vim-prettier/pull/72) ([mitermayer](https://github.com/mitermayer))
 - Including extra information on the autoload header and doc header [\#70](https://github.com/prettier/vim-prettier/pull/70) ([mitermayer](https://github.com/mitermayer))
-- adding suppor for vim8 versions older than 8.0.0015 to use async job API [\#66](https://github.com/prettier/vim-prettier/pull/66) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.2.3](https://github.com/prettier/vim-prettier/tree/0.2.3) (2017-10-08)
 
@@ -227,7 +265,7 @@
 
 **Merged pull requests:**
 
-- Making sure we can still save the results of last prettier async run on [\#65](https://github.com/prettier/vim-prettier/pull/65) ([mitermayer](https://github.com/mitermayer))
+- adding suppor for vim8 versions older than 8.0.0015 to use async job API [\#66](https://github.com/prettier/vim-prettier/pull/66) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.2.2](https://github.com/prettier/vim-prettier/tree/0.2.2) (2017-10-07)
 
@@ -235,7 +273,7 @@
 
 **Merged pull requests:**
 
-- bugfix: Fixing auto command params to use extensions instead of magic [\#64](https://github.com/prettier/vim-prettier/pull/64) ([mitermayer](https://github.com/mitermayer))
+- Making sure we can still save the results of last prettier async run on [\#65](https://github.com/prettier/vim-prettier/pull/65) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.2.1](https://github.com/prettier/vim-prettier/tree/0.2.1) (2017-10-07)
 
@@ -248,8 +286,8 @@
 
 **Merged pull requests:**
 
+- bugfix: Fixing auto command params to use extensions instead of magic [\#64](https://github.com/prettier/vim-prettier/pull/64) ([mitermayer](https://github.com/mitermayer))
 - bugfix: fixing race condition incorrect buffer formating [\#63](https://github.com/prettier/vim-prettier/pull/63) ([mitermayer](https://github.com/mitermayer))
-- bug: Fixing config overwrite value for non js by levaraging --stdin-f… [\#61](https://github.com/prettier/vim-prettier/pull/61) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.2.0](https://github.com/prettier/vim-prettier/tree/0.2.0) (2017-10-04)
 
@@ -258,6 +296,10 @@
 **Fixed bugs:**
 
 - `--parser` with value `postcss` is deprecated [\#59](https://github.com/prettier/vim-prettier/issues/59)
+
+**Merged pull requests:**
+
+- bug: Fixing config overwrite value for non js by levaraging --stdin-f… [\#61](https://github.com/prettier/vim-prettier/pull/61) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.1.3](https://github.com/prettier/vim-prettier/tree/0.1.3) (2017-09-30)
 
@@ -275,7 +317,6 @@
 
 - issue/56 - Allowing user path overwrite configuration [\#57](https://github.com/prettier/vim-prettier/pull/57) ([mitermayer](https://github.com/mitermayer))
 - Fixed some typos in the README [\#55](https://github.com/prettier/vim-prettier/pull/55) ([Haegin](https://github.com/Haegin))
-- feature: Adding more commands [\#54](https://github.com/prettier/vim-prettier/pull/54) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.1.1](https://github.com/prettier/vim-prettier/tree/0.1.1) (2017-09-18)
 
@@ -287,11 +328,15 @@
 
 **Merged pull requests:**
 
-- Issue/51 adding support for prettier 1.7 [\#52](https://github.com/prettier/vim-prettier/pull/52) ([mitermayer](https://github.com/mitermayer))
+- feature: Adding more commands [\#54](https://github.com/prettier/vim-prettier/pull/54) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.1.0](https://github.com/prettier/vim-prettier/tree/0.1.0) (2017-09-14)
 
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.15...0.1.0)
+
+**Merged pull requests:**
+
+- Issue/51 adding support for prettier 1.7 [\#52](https://github.com/prettier/vim-prettier/pull/52) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.15](https://github.com/prettier/vim-prettier/tree/0.0.15) (2017-08-30)
 
@@ -309,7 +354,6 @@
 
 - Making sure that after formatting we preserve in the same line [\#50](https://github.com/prettier/vim-prettier/pull/50) ([mitermayer](https://github.com/mitermayer))
 - Added extensions to vim configuration example [\#49](https://github.com/prettier/vim-prettier/pull/49) ([niftylettuce](https://github.com/niftylettuce))
-- Async command was not working for windows this patch will make sure it [\#47](https://github.com/prettier/vim-prettier/pull/47) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.14](https://github.com/prettier/vim-prettier/tree/0.0.14) (2017-08-24)
 
@@ -325,8 +369,8 @@
 
 **Merged pull requests:**
 
+- Async command was not working for windows this patch will make sure it [\#47](https://github.com/prettier/vim-prettier/pull/47) ([mitermayer](https://github.com/mitermayer))
 - Add instructions on changing the mapping to README [\#43](https://github.com/prettier/vim-prettier/pull/43) ([eddiezane](https://github.com/eddiezane))
-- bugfix: should not clear quickfix unless opened by vim-prettier itself [\#40](https://github.com/prettier/vim-prettier/pull/40) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.13](https://github.com/prettier/vim-prettier/tree/0.0.13) (2017-08-13)
 
@@ -338,7 +382,7 @@
 
 **Merged pull requests:**
 
-- Adding changelog file [\#38](https://github.com/prettier/vim-prettier/pull/38) ([mitermayer](https://github.com/mitermayer))
+- bugfix: should not clear quickfix unless opened by vim-prettier itself [\#40](https://github.com/prettier/vim-prettier/pull/40) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.12](https://github.com/prettier/vim-prettier/tree/0.0.12) (2017-08-06)
 
@@ -358,9 +402,9 @@
 
 **Merged pull requests:**
 
+- Adding changelog file [\#38](https://github.com/prettier/vim-prettier/pull/38) ([mitermayer](https://github.com/mitermayer))
 - Adding MIT license [\#37](https://github.com/prettier/vim-prettier/pull/37) ([mitermayer](https://github.com/mitermayer))
 - Bumping prettier internal dependencie plugin to 1.5.3 [\#36](https://github.com/prettier/vim-prettier/pull/36) ([mitermayer](https://github.com/mitermayer))
-- adding-support-for-vim7 - adding support for vim7 [\#29](https://github.com/prettier/vim-prettier/pull/29) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.11](https://github.com/prettier/vim-prettier/tree/0.0.11) (2017-07-12)
 
@@ -372,7 +416,7 @@
 
 **Merged pull requests:**
 
-- bugfix: json parser should not add extra comma to the end [\#27](https://github.com/prettier/vim-prettier/pull/27) ([mitermayer](https://github.com/mitermayer))
+- adding-support-for-vim7 - adding support for vim7 [\#29](https://github.com/prettier/vim-prettier/pull/29) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.10](https://github.com/prettier/vim-prettier/tree/0.0.10) (2017-07-02)
 
@@ -384,7 +428,7 @@
 
 **Merged pull requests:**
 
-- feature/add-filetype-support - Adding filetype detection support when [\#24](https://github.com/prettier/vim-prettier/pull/24) ([mitermayer](https://github.com/mitermayer))
+- bugfix: json parser should not add extra comma to the end [\#27](https://github.com/prettier/vim-prettier/pull/27) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.9](https://github.com/prettier/vim-prettier/tree/0.0.9) (2017-07-01)
 
@@ -397,7 +441,7 @@
 
 **Merged pull requests:**
 
-- Add JSON/GraphQL parser \(prettier 1.5\) [\#17](https://github.com/prettier/vim-prettier/pull/17) ([vutran](https://github.com/vutran))
+- feature/add-filetype-support - Adding filetype detection support when [\#24](https://github.com/prettier/vim-prettier/pull/24) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.8](https://github.com/prettier/vim-prettier/tree/0.0.8) (2017-06-30)
 
@@ -413,8 +457,7 @@
 
 **Merged pull requests:**
 
-- Fix default settings [\#16](https://github.com/prettier/vim-prettier/pull/16) ([vutran](https://github.com/vutran))
-- feature: enabling partial buffer conversion [\#15](https://github.com/prettier/vim-prettier/pull/15) ([mitermayer](https://github.com/mitermayer))
+- Add JSON/GraphQL parser \(prettier 1.5\) [\#17](https://github.com/prettier/vim-prettier/pull/17) ([vutran](https://github.com/vutran))
 
 ## [0.0.7](https://github.com/prettier/vim-prettier/tree/0.0.7) (2017-06-20)
 
@@ -422,12 +465,16 @@
 
 **Merged pull requests:**
 
+- feature: enabling partial buffer conversion [\#15](https://github.com/prettier/vim-prettier/pull/15) ([mitermayer](https://github.com/mitermayer))
 - fixed typo [\#13](https://github.com/prettier/vim-prettier/pull/13) ([wangsongiam](https://github.com/wangsongiam))
-- Adding async command and configuration controls [\#12](https://github.com/prettier/vim-prettier/pull/12) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.6](https://github.com/prettier/vim-prettier/tree/0.0.6) (2017-06-07)
 
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.5...0.0.6)
+
+**Merged pull requests:**
+
+- Adding async command and configuration controls [\#12](https://github.com/prettier/vim-prettier/pull/12) ([mitermayer](https://github.com/mitermayer))
 
 ## [0.0.5](https://github.com/prettier/vim-prettier/tree/0.0.5) (2017-06-06)
 
@@ -463,6 +510,7 @@
 
 **Merged pull requests:**
 
+- Fix default settings [\#16](https://github.com/prettier/vim-prettier/pull/16) ([vutran](https://github.com/vutran))
 - Prettier CLI seems to expect 'false' for some parameters instead of 0 [\#10](https://github.com/prettier/vim-prettier/pull/10) ([mitermayer](https://github.com/mitermayer))
 - bugfix: fixing bug where prettier installation of the plugin was never [\#8](https://github.com/prettier/vim-prettier/pull/8) ([mitermayer](https://github.com/mitermayer))
 - Adding support for async formating and making it default for autosave [\#6](https://github.com/prettier/vim-prettier/pull/6) ([mitermayer](https://github.com/mitermayer))
@@ -486,4 +534,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

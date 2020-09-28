@@ -120,7 +120,7 @@ You can send to prettier your entire buffer but ensure that it formats only your
 
 You can send to prettier your current selection as a fragment of same type as the file being edited.
 
-**note: ** differs from `:PrettierFragment` by sending only the current selection to prettier, this allows for faster formatting but wont preserve indentation.
+**note: ** differs from `:PrettierPartial` by sending only the current selection to prettier, this allows for faster formatting but wont preserve indentation.
 
 ```vim
 :PrettierFragment

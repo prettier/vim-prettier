@@ -5,8 +5,3 @@ if expand('%:e') ==# 'html'
     \ 'parser': 'html',
     \ }
 endif
-
-augroup Prettier
-  autocmd!
-  autocmd BufWritePre *.html call prettier#Autoformat()
-augroup end

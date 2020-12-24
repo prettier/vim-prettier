@@ -5,8 +5,3 @@ if expand('%:e') ==# 'xml'
     \ 'parser': 'xml',
     \ }
 endif
-
-augroup Prettier
-  autocmd!
-  autocmd BufWritePre *.xml call prettier#Autoformat()
-augroup end

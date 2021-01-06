@@ -4,5 +4,5 @@ let b:prettier_ft_default_args = {
 
 augroup Prettier
   autocmd!
-  autocmd BufWritePre *.markdown,*.md,*.mdown,*.mkd,*.mkdn call prettier#Autoformat()
+  autocmd BufWritePre *.markdown,*.md,*.mdown,*.mkd,*.mkdn,*.mdx call prettier#Autoformat()
 augroup end

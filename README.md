@@ -1,4 +1,4 @@
-## vim-prettier [![Travis CI Build Status](https://travis-ci.org/prettier/vim-prettier.svg?branch=master)](https://travis-ci.org/prettier/vim-prettier) [![Discord](https://img.shields.io/discord/435481502113857536.svg)](https://discord.gg/9bWM9PH)
+## vim-prettier 
 
 A vim plugin wrapper for prettier, pre-configured with custom default prettier
 settings.

@@ -60,6 +60,12 @@ cd ~/.vim/bundle
 git clone https://github.com/prettier/vim-prettier
 ```
 
+If using [dein](https://github.com/Shougo/dein.vim), add the following to your dein config:
+
+```vim
+call dein#add('prettier/vim-prettier', {'build': 'npm install'})
+```
+
 If using other vim plugin managers or doing manual setup make sure to have
 `prettier` installed globally or go to your vim-prettier directory and either do
 `npm install` or `yarn install`

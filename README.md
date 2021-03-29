@@ -219,7 +219,7 @@ By default we auto focus on the quickfix when there are errors but can also be d
 let g:prettier#quickfix_auto_focus = 0
 ```
 
-To running vim-prettier not only before saving, but also after changing text or leaving insert mode:
+To run vim-prettier not only before saving, but also after changing text or leaving insert mode:
 
 ```vim
 " when running at every change you may want to disable quickfix

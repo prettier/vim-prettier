@@ -9,7 +9,7 @@ settings.
 
 ```vim
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile',
+  \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'branch': 'release/0.x'
   \ }
 ```
@@ -42,7 +42,7 @@ yarn|npm installed globally.
 ```vim
 " post install (yarn install | npm install) then load plugin only for editing supported files
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile',
+  \ 'do': 'yarn install --frozen-lockfile --production',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 ```
 
@@ -50,7 +50,7 @@ or simply enable for all formats by:
 
 ```vim
 " post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 ```
 
 For those using [vim-pathogen](https://github.com/tpope/vim-pathogen), you can run the following in a terminal:

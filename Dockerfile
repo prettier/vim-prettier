@@ -36,7 +36,7 @@ ENV PACKAGES="\
     ruby \
     ruby-dev \
     ruby-json \
-    python \
+    python2 \
     python3 \
     py-pip \
     nodejs \

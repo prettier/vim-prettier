@@ -50,7 +50,9 @@ function! s:TraverseAncestorDirSearch(rootDir) abort
   while 1
     let l:searchDir = l:root . '/' . l:dir
     if isdirectory(l:searchDir)
-      return l:searchDir
+      if executable(s:GetExecPath(l:searchDir))
+        return l:searchDir
+      endif
     endif
 
     let l:parent = fnamemodify(l:root, ':h')

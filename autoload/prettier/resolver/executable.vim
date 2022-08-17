@@ -12,7 +12,7 @@ function! prettier#resolver#executable#getPath() abort
     return l:user_defined_exec_path
   endif
 
-  let l:localExec = s:ResolveExecutable(getcwd())
+  let l:localExec = s:ResolveExecutable(expand('%:p:h'))
   if executable(l:localExec)
     return fnameescape(l:localExec)
   endif

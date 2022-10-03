@@ -46,7 +46,11 @@ For those using [vim-pathogen](https://github.com/tpope/vim-pathogen), you can r
 ```
 cd ~/.vim/bundle
 git clone https://github.com/prettier/vim-prettier
+cd vim-prettier
+yarn # mandatory to use yarn over npm here because of the lock fil
 ```
+
+Make sure that the prettier CLI component is available at roughly version 1.x.x.
 
 If using other vim plugin managers or doing manual setup make sure to have
 `prettier` installed globally or go to your vim-prettier directory and either do

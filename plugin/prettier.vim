@@ -175,4 +175,5 @@ nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>
 augroup Prettier
   autocmd!
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.gql,*.markdown,*.md,*.mdown,*.mkd,*.mkdn,*.mdx,*.vue,*.svelte,*.yml,*.yaml,*.html,*.php,*.rb,*.ruby,*.xml noautocmd call prettier#Autoformat()
+  autocmd FileType javascript,typescript noautocmd BufWritePre <buffer> call prettier#Autoformat()
 augroup end

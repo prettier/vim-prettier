@@ -32,7 +32,7 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ get(a:config, 'requirePragma', g:prettier#config#require_pragma) .
           \ ' --end-of-line=' .
           \ get(a:config, 'endOfLine', g:prettier#config#end_of_line) .
-          \ ' --loglevel error '.
+          \ ' --log-level error '.
           \ ' --stdin '
 
   return l:cmd

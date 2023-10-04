@@ -8,7 +8,8 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ s:Flag_tab_width(a:config) . ' ' .
           \ s:Flag_print_width(a:config) . ' ' .
           \ s:Flag_parser(a:config) . ' ' .
-          \ s:Flag_range_delimiter(a:config, a:hasSelection, a:start, a:end) . ' ' .
+          \ s:Flag_range_start(a:config, a:hasSelection, a:start) . ' ' .
+          \ s:Flag_range_end(a:config, a:hasSelection, a:end) . ' ' .
           \ ' --semi=' .
           \ get(a:config, 'semi', g:prettier#config#semi) .
           \ ' --single-quote=' .
@@ -38,15 +39,26 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
   return l:cmd
 endfunction
 
-" Returns either '--range-start X --range-end Y' or an empty string.
-function! s:Flag_range_delimiter(config, partialFormatEnabled, start, end) abort
+" Returns either '--range-start X' or an empty string.
+function! s:Flag_range_start(config, partialFormatEnabled, start) abort
   if (!a:partialFormatEnabled)
     return ''
   endif
 
-  let l:range = prettier#utils#buffer#getCharRange(a:start, a:end)
+  let l:rangeStart = prettier#utils#buffer#getCharRangeStart(a:start)
 
-  return '--range-start=' . l:range[0] . ' --range-end=' . l:range[1]
+  return '--range-start=' . l:rangeStart
+endfunction
+
+" Returns either '--range-end Y' or an empty string.
+function! s:Flag_range_end(config, partialFormatEnabled, end) abort
+  if (!a:partialFormatEnabled)
+    return ''
+  endif
+
+  let l:rangeEnd = prettier#utils#buffer#getCharRangeEnd(a:end)
+
+  return '--range-end=' . l:rangeEnd
 endfunction
 
 " Returns '--tab-width=NN'

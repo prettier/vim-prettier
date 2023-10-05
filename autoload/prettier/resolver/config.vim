@@ -28,7 +28,7 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
           \ ' --html-whitespace-sensitivity ' .
           \ get(a:config, 'htmlWhitespaceSensitivity', g:prettier#config#html_whitespace_sensitivity) .
-          \ ' --stdin-filepath="'.simplify(expand('%:p')).'"' .
+          \ ' ' . s:Flag_stdin_filepath() .
           \ ' --require-pragma=' .
           \ get(a:config, 'requirePragma', g:prettier#config#require_pragma) .
           \ ' --end-of-line=' .
@@ -110,4 +110,11 @@ function! s:Flag_parser(config) abort
   else
     return ''
   endif
+endfunction
+
+" Returns '--stdin-filepath=' concatenated with the full path of the opened
+" file.
+function! s:Flag_stdin_filepath() abort
+  let l:current_file = simplify(expand('%:p'))
+  return '--stdin-filepath="' . l:current_file . '"'
 endfunction

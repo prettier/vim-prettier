@@ -34,7 +34,7 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ ' --end-of-line=' .
           \ get(a:config, 'endOfLine', g:prettier#config#end_of_line) .
           \ ' ' . s:Flag_loglevel() .
-          \ ' --stdin '
+          \ ' ' . s:Flag_stdin()
 
   return l:cmd
 endfunction
@@ -123,4 +123,9 @@ endfunction
 function! s:Flag_loglevel() abort
   let l:level = 'error'
   return '--loglevel ' . l:level
+endfunction
+
+" Returns '--stdin'.
+function! s:Flag_stdin() abort
+  return '--stdin '
 endfunction

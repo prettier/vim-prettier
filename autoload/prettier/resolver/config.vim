@@ -33,7 +33,7 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ get(a:config, 'requirePragma', g:prettier#config#require_pragma) .
           \ ' --end-of-line=' .
           \ get(a:config, 'endOfLine', g:prettier#config#end_of_line) .
-          \ ' --loglevel error '.
+          \ ' ' . s:Flag_loglevel() .
           \ ' --stdin '
 
   return l:cmd
@@ -117,4 +117,10 @@ endfunction
 function! s:Flag_stdin_filepath() abort
   let l:current_file = simplify(expand('%:p'))
   return '--stdin-filepath="' . l:current_file . '"'
+endfunction
+
+" Returns '--loglevel error'.
+function! s:Flag_loglevel() abort
+  let l:level = 'error'
+  return '--loglevel ' . l:level
 endfunction

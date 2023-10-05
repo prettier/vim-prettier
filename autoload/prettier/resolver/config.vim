@@ -4,12 +4,18 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
   " Allow params to be passed as json format
   " convert bellow usage of globals to a get function o the params defaulting to global
   " TODO: Use a list, filter() and join() to get a nicer list of args.
-  let l:cmd = s:Flag_use_tabs(a:config) . ' ' .
-          \ s:Flag_tab_width(a:config) . ' ' .
-          \ s:Flag_print_width(a:config) . ' ' .
-          \ s:Flag_parser(a:config) . ' ' .
-          \ s:Flag_range_start(a:config, a:hasSelection, a:start) . ' ' .
-          \ s:Flag_range_end(a:config, a:hasSelection, a:end) . ' ' .
+  let l:config_and_sel = {
+          \ 'config': a:config,
+          \ 'hasSelection': a:hasSelection,
+          \ 'start': a:start,
+          \ 'end': a:end}
+
+  let l:cmd = s:Flag_use_tabs(l:config_and_sel, '--use-tabs', {}) . ' ' .
+          \ s:Flag_tab_width(l:config_and_sel, '--tab-width', {}) . ' ' .
+          \ s:Flag_print_width(l:config_and_sel, '--print-width', {}) . ' ' .
+          \ s:Flag_parser(l:config_and_sel, '--parser', {}) . ' ' .
+          \ s:Flag_range_start(l:config_and_sel, '', {}) . ' ' .
+          \ s:Flag_range_end(l:config_and_sel, '', {}) . ' ' .
           \ ' --semi=' .
           \ get(a:config, 'semi', g:prettier#config#semi) .
           \ ' --single-quote=' .
@@ -28,42 +34,47 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
           \ ' --html-whitespace-sensitivity ' .
           \ get(a:config, 'htmlWhitespaceSensitivity', g:prettier#config#html_whitespace_sensitivity) .
-          \ ' ' . s:Flag_stdin_filepath() .
+          \ ' ' . s:Flag_stdin_filepath(l:config_and_sel, '--stdin-filepath', {}) .
           \ ' --require-pragma=' .
           \ get(a:config, 'requirePragma', g:prettier#config#require_pragma) .
           \ ' --end-of-line=' .
           \ get(a:config, 'endOfLine', g:prettier#config#end_of_line) .
-          \ ' ' . s:Flag_loglevel() .
-          \ ' ' . s:Flag_stdin()
+          \ ' ' . s:Flag_loglevel(l:config_and_sel, '--loglevel', {}) .
+          \ ' ' . s:Flag_stdin(l:config_and_sel, '--stdin', {})
 
   return l:cmd
 endfunction
 
 " Returns either '--range-start X' or an empty string.
-function! s:Flag_range_start(config, partialFormatEnabled, start) abort
-  if (!a:partialFormatEnabled)
+function! s:Flag_range_start(config_and_sel, ...) abort
+  if (!a:config_and_sel.hasSelection)
     return ''
   endif
 
-  let l:rangeStart = prettier#utils#buffer#getCharRangeStart(a:start)
+  let l:rangeStart =
+          \ prettier#utils#buffer#getCharRangeStart(a:config_and_sel.start)
 
   return '--range-start=' . l:rangeStart
 endfunction
 
 " Returns either '--range-end Y' or an empty string.
-function! s:Flag_range_end(config, partialFormatEnabled, end) abort
-  if (!a:partialFormatEnabled)
+function! s:Flag_range_end(config_and_sel, ...) abort
+  if (!a:config_and_sel.hasSelection)
     return ''
   endif
 
-  let l:rangeEnd = prettier#utils#buffer#getCharRangeEnd(a:end)
+  let l:rangeEnd =
+          \ prettier#utils#buffer#getCharRangeEnd(a:config_and_sel.end)
 
   return '--range-end=' . l:rangeEnd
 endfunction
 
 " Returns '--tab-width=NN'
-function! s:Flag_tab_width(config) abort
-  let l:value = get(a:config, 'tabWidth', g:prettier#config#tab_width)
+function! s:Flag_tab_width(config_and_sel, ...) abort
+  let l:value = get(
+          \ a:config_and_sel.config,
+          \ 'tabWidth',
+          \ g:prettier#config#tab_width)
 
   if (l:value ==# 'auto')
     let l:value = prettier#utils#shim#shiftwidth()
@@ -73,8 +84,12 @@ function! s:Flag_tab_width(config) abort
 endfunction
 
 " Returns either '--use-tabs' or an empty string.
-function! s:Flag_use_tabs(config) abort
-  let l:value = get(a:config, 'useTabs', g:prettier#config#use_tabs)
+function! s:Flag_use_tabs(config_and_sel, ...) abort
+  let l:value = get(
+          \ a:config_and_sel.config,
+          \ 'useTabs',
+          \ g:prettier#config#use_tabs)
+
   if (l:value ==# 'auto')
     let l:value = &expandtab ? 'false' : 'true'
   endif
@@ -87,8 +102,11 @@ function! s:Flag_use_tabs(config) abort
 endfunction
 
 " Returns '--print-width=NN' or ''
-function! s:Flag_print_width(config) abort
-  let l:value = get(a:config, 'printWidth', g:prettier#config#print_width)
+function! s:Flag_print_width(config_and_sel, ...) abort
+  let l:value = get(
+          \ a:config_and_sel.config,
+          \ 'printWidth',
+          \ g:prettier#config#print_width)
 
   if (l:value ==# 'auto')
     let l:value = &textwidth
@@ -102,8 +120,11 @@ function! s:Flag_print_width(config) abort
 endfunction
 
 " Returns '--parser=PARSER' or ''
-function! s:Flag_parser(config) abort
-  let l:value = get(a:config, 'parser', g:prettier#config#parser)
+function! s:Flag_parser(config_and_sel, ...) abort
+  let l:value = get(
+          \ a:config_and_sel.config,
+          \ 'parser',
+          \ g:prettier#config#parser)
 
   if (l:value !=# '')
     return '--parser=' . l:value
@@ -114,19 +135,19 @@ endfunction
 
 " Returns '--stdin-filepath=' concatenated with the full path of the opened
 " file.
-function! s:Flag_stdin_filepath() abort
+function! s:Flag_stdin_filepath(...) abort
   let l:current_file = simplify(expand('%:p'))
   return '--stdin-filepath="' . l:current_file . '"'
 endfunction
 
 " Returns '--loglevel error'.
-function! s:Flag_loglevel() abort
+function! s:Flag_loglevel(config_and_sel, flag, props) abort
   let l:level = 'error'
   return '--loglevel ' . l:level
 endfunction
 
 " Returns '--stdin'.
-function! s:Flag_stdin() abort
+function! s:Flag_stdin(...) abort
   return '--stdin '
 endfunction
 

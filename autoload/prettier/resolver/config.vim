@@ -129,3 +129,18 @@ endfunction
 function! s:Flag_stdin() abort
   return '--stdin '
 endfunction
+
+" Returns a flag name concantenated with its value in the JSON config object or
+" in the default global Prettier config.
+function! s:Concat_value_to_flag(config_and_sel, flag, props) abort
+  let l:global_value = get(g:, 'prettier#config#' . a:props.global_name, "")
+
+  let l:value = get(a:config_and_sel.config, a:props.json_name, l:global_value)
+
+  return a:flag . '=' . l:value
+endfunction
+
+" Maps a flag name to a part of a command.
+function! s:Map_flag_to_cmd_part(config_and_sel, flag, props) abort
+  return a:props.mapper(a:config_and_sel, a:flag, a:props)
+endfunction

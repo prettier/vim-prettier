@@ -45,6 +45,7 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
   return l:cmd
 endfunction
 
+" Mapper functions: {{{
 " Returns either '--range-start X' or an empty string.
 function! s:Flag_range_start(config_and_sel, ...) abort
   if (!a:config_and_sel.hasSelection)
@@ -165,6 +166,9 @@ endfunction
 function! s:Map_flag_to_cmd_part(config_and_sel, flag, props) abort
   return a:props.mapper(a:config_and_sel, a:flag, a:props)
 endfunction
+" }}}
+
+" Constants: {{{
 let s:concat_value = function('s:Concat_value_to_flag')
 
 let s:FLAGS = {
@@ -266,7 +270,9 @@ let s:FLAGS = {
         \   'global_name': '',
         \   'mapper': function('s:Flag_stdin'),
         \   'deprecated': '2.0.0'}}
+" }}}
 
+" Flags selector: {{{
 " Returns the argument string with unprintable characters represented in Vim
 " internal format removed from both ends.
 function! s:Trim_internal_unprintable(text) abort
@@ -324,3 +330,6 @@ function! s:Get_current_version_flags(flags) abort
   let b:prettier_last_used_cli_version = l:prettier_version
   return l:compatible_flags->copy()
 endfunction
+" }}}
+
+" vim:foldmethod=marker:foldmarker={{{,}}}:

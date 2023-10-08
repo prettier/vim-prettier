@@ -305,3 +305,22 @@ function! s:Filter_uncompatible_flag(version, _, flag) abort
   endif
   return 1
 endfunction
+
+" Returns an object with the flags from the argument object that are compatible
+" with the version of the Prettier CLI being used.
+function! s:Get_current_version_flags(flags) abort
+  let l:prettier_version = s:Get_prettier_cli_version()
+
+  let l:is_cached = exists('b:prettier_cached_flags')
+          \ && exists('b:prettier_last_used_cli_version')
+          \ && b:prettier_last_used_cli_version ==# l:prettier_version
+  if l:is_cached
+    return b:prettier_cached_flags->copy()
+  endif
+
+  let l:compatible_flags = a:flags->copy()->filter(
+          \ function('s:Filter_uncompatible_flag', [l:prettier_version]))
+  let b:prettier_cached_flags = l:compatible_flags
+  let b:prettier_last_used_cli_version = l:prettier_version
+  return l:compatible_flags->copy()
+endfunction

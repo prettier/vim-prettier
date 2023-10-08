@@ -266,3 +266,23 @@ let s:FLAGS = {
         \   'global_name': '',
         \   'mapper': function('s:Flag_stdin'),
         \   'deprecated': '2.0.0'}}
+
+" Returns the argument string with unprintable characters represented in Vim
+" internal format removed from both ends.
+function! s:Trim_internal_unprintable(text) abort
+  let l:char_patt = '\%(\%(\^\m.\)\|\%(<\x\x>\)\)\{}'
+  let l:patt_at_ends = '^' . l:char_patt . '\|' . l:char_patt . '$'
+  let l:trimmed_text = a:text->substitute(l:patt_at_ends, '', 'g')
+  return l:trimmed_text
+endfunction
+
+" Returns the version of the Prettier CLI as a string.
+function! s:Get_prettier_cli_version() abort
+  let l:output = ''
+  redir => l:output
+    silent call prettier#PrettierCli('--version')
+  redir END
+  " The shell sends the string with whitespaces at both ends.
+  let l:prettier_cli_version = s:Trim_internal_unprintable(trim(l:output))
+  return l:prettier_cli_version
+endfunction

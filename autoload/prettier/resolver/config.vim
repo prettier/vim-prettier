@@ -3,7 +3,6 @@
 function! prettier#resolver#config#resolve(config, hasSelection, start, end) abort
   " Allow params to be passed as json format
   " convert bellow usage of globals to a get function o the params defaulting to global
-  " TODO: Use a list, filter() and join() to get a nicer list of args.
   let l:config_and_sel = {
           \ 'config': a:config,
           \ 'hasSelection': a:hasSelection,

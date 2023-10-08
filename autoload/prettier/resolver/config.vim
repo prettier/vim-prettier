@@ -286,3 +286,22 @@ function! s:Get_prettier_cli_version() abort
   let l:prettier_cli_version = s:Trim_internal_unprintable(trim(l:output))
   return l:prettier_cli_version
 endfunction
+
+" Returns 1 if the version of the flag argument is compatible with the
+" version argument, otherwise returns 0.
+function! s:Filter_uncompatible_flag(version, _, flag) abort
+  let l:is_deprecated = exists('a:flag.deprecated')
+          \ && prettier#utils#version#Is_greater_or_equal_version(
+          \   a:version, a:flag.deprecated)
+  if l:is_deprecated
+    return 0
+  endif
+
+  let l:is_added = !exists('a:flag.since')
+          \ || prettier#utils#version#Is_greater_or_equal_version(
+          \   a:version, a:flag.since)
+  if !l:is_added
+    return 0
+  endif
+  return 1
+endfunction

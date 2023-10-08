@@ -140,10 +140,10 @@ function! s:Flag_stdin_filepath(...) abort
   return '--stdin-filepath="' . l:current_file . '"'
 endfunction
 
-" Returns '--loglevel error'.
+" Returns '--loglevel error' or '--log-level error'.
 function! s:Flag_loglevel(config_and_sel, flag, props) abort
   let l:level = 'error'
-  return '--loglevel ' . l:level
+  return a:flag . ' ' . l:level
 endfunction
 
 " Returns '--stdin'.

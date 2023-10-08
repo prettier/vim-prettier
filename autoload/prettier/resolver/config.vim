@@ -10,37 +10,10 @@ function! prettier#resolver#config#resolve(config, hasSelection, start, end) abo
           \ 'start': a:start,
           \ 'end': a:end}
 
-  let l:cmd = s:Flag_use_tabs(l:config_and_sel, '--use-tabs', {}) . ' ' .
-          \ s:Flag_tab_width(l:config_and_sel, '--tab-width', {}) . ' ' .
-          \ s:Flag_print_width(l:config_and_sel, '--print-width', {}) . ' ' .
-          \ s:Flag_parser(l:config_and_sel, '--parser', {}) . ' ' .
-          \ s:Flag_range_start(l:config_and_sel, '', {}) . ' ' .
-          \ s:Flag_range_end(l:config_and_sel, '', {}) . ' ' .
-          \ ' --semi=' .
-          \ get(a:config, 'semi', g:prettier#config#semi) .
-          \ ' --single-quote=' .
-          \ get(a:config, 'singleQuote', g:prettier#config#single_quote) .
-          \ ' --bracket-spacing=' .
-          \ get(a:config, 'bracketSpacing', g:prettier#config#bracket_spacing) .
-          \ ' --jsx-bracket-same-line=' .
-          \ get(a:config, 'jsxBracketSameLine', g:prettier#config#jsx_bracket_same_line) .
-          \ ' --arrow-parens=' .
-          \ get(a:config, 'arrowParens', g:prettier#config#arrow_parens) .
-          \ ' --trailing-comma=' .
-          \ get(a:config, 'trailingComma', g:prettier#config#trailing_comma) .
-          \ ' --config-precedence=' .
-          \ get(a:config, 'configPrecedence', g:prettier#config#config_precedence) .
-          \ ' --prose-wrap=' .
-          \ get(a:config, 'proseWrap', g:prettier#config#prose_wrap) .
-          \ ' --html-whitespace-sensitivity ' .
-          \ get(a:config, 'htmlWhitespaceSensitivity', g:prettier#config#html_whitespace_sensitivity) .
-          \ ' ' . s:Flag_stdin_filepath(l:config_and_sel, '--stdin-filepath', {}) .
-          \ ' --require-pragma=' .
-          \ get(a:config, 'requirePragma', g:prettier#config#require_pragma) .
-          \ ' --end-of-line=' .
-          \ get(a:config, 'endOfLine', g:prettier#config#end_of_line) .
-          \ ' ' . s:Flag_loglevel(l:config_and_sel, '--loglevel', {}) .
-          \ ' ' . s:Flag_stdin(l:config_and_sel, '--stdin', {})
+  let l:cmd = ' ' . s:Get_current_version_flags(s:FLAGS)
+          \ ->map(function('s:Map_flag_to_cmd_part', [l:config_and_sel]))
+          \ ->values()
+          \ ->join(' ')
 
   return l:cmd
 endfunction

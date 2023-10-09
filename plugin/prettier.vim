@@ -113,6 +113,7 @@ let g:prettier#config#bracket_spacing = get(g:,'prettier#config#bracket_spacing'
 " default: 'false'
 " See more: https://prettier.io/docs/en/options.html#jsx-brackets
 let g:prettier#config#jsx_bracket_same_line = get(g:,'prettier#config#jsx_bracket_same_line', 'false')
+" This option has another name for Prettier versions 2.4.0 and higher:
 let g:prettier#config#bracket_same_line = get(g:, 'prettier#config#bracket_same_line', 'false')
 
 " avoid wrapping a single arrow function param in parens

@@ -1,6 +1,6 @@
 NAME=vim-prettier
 
-VERSION=1.0.0-beta
+VERSION=1.0.0
 
 build: 
 	docker build -t mitermayer/vim-test-bed .

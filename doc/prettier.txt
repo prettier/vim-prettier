@@ -8,7 +8,7 @@ Author: Mitermayer Reis <mitermayer.reis@gmail.com>
 WebSite: https://prettier.io/
 Repository: https://github.com/prettier/vim-prettier
 License: MIT style license
-Version: 1.0.0-beta
+Version: 1.0.0
 
 ==============================================================================
 CONTENTS                                                *vim-prettier-contents*

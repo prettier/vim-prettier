@@ -282,6 +282,13 @@ let g:prettier#config#require_pragma = 'false'
 let g:prettier#config#end_of_line = get(g:, 'prettier#config#end_of_line', 'lf')
 ```
 
+To ignore vim-prettier default settings when a config file is found, set `config_precedence` to
+[`file-override`](https://prettier.io/docs/en/cli.html#--config-precedence):
+
+```
+let g:prettier#config#config_precedence = 'file-override'
+```
+
 ### REQUIREMENT(S)
 
 If the `prettier` executable can't be found by Vim, no code formatting will happen

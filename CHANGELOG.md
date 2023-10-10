@@ -1,5 +1,63 @@
 # Changelog
 
+## [Unreleased](https://github.com/prettier/vim-prettier/tree/HEAD)
+
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/1.0.0...HEAD)
+
+**Closed issues:**
+
+- Keep show warning after save! [\#347](https://github.com/prettier/vim-prettier/issues/347)
+- Prettier auto format on Save not working. [\#342](https://github.com/prettier/vim-prettier/issues/342)
+
+## [1.0.0](https://github.com/prettier/vim-prettier/tree/1.0.0) (2023-10-10)
+
+[Full Changelog](https://github.com/prettier/vim-prettier/compare/1.0.0-beta...1.0.0)
+
+**Closed issues:**
+
+- Deprecated / Unknown options when using Prettier v3 [\#346](https://github.com/prettier/vim-prettier/issues/346)
+- Why prettier keeps adding warn messages on top of my document? [\#344](https://github.com/prettier/vim-prettier/issues/344)
+- plugin didn't work without installing eslint-config-prettier & eslint-plugin-prettier [\#339](https://github.com/prettier/vim-prettier/issues/339)
+- The same prettier doesn't work correctly on WSL  [\#338](https://github.com/prettier/vim-prettier/issues/338)
+- Cursor position lost when multiple panes open on same buffer [\#318](https://github.com/prettier/vim-prettier/issues/318)
+- Formating of an object removes " from some keys [\#312](https://github.com/prettier/vim-prettier/issues/312)
+- Add svelte support [\#303](https://github.com/prettier/vim-prettier/issues/303)
+- issue with installing plugin [\#288](https://github.com/prettier/vim-prettier/issues/288)
+- Writing a buffer prints the current line in the command line area [\#284](https://github.com/prettier/vim-prettier/issues/284)
+- markdown file: an unordered list and 3 spaces between dash and item [\#283](https://github.com/prettier/vim-prettier/issues/283)
+- Error on NeoVim nightly [\#276](https://github.com/prettier/vim-prettier/issues/276)
+- ftdetect collides with default filetype settings \(specifically typescriptreact or tsx\) [\#273](https://github.com/prettier/vim-prettier/issues/273)
+- Configuration file not loading correctly [\#269](https://github.com/prettier/vim-prettier/issues/269)
+- Prettier: failed to parse buffer [\#268](https://github.com/prettier/vim-prettier/issues/268)
+- auto save doesn't work for typescript [\#264](https://github.com/prettier/vim-prettier/issues/264)
+- trailing\_comma = 'es5' setting not working [\#258](https://github.com/prettier/vim-prettier/issues/258)
+- :Prettier fills the default register with “x” [\#244](https://github.com/prettier/vim-prettier/issues/244)
+
+**Merged pull requests:**
+
+- Fix/consider option version [\#348](https://github.com/prettier/vim-prettier/pull/348) ([victorspt](https://github.com/victorspt))
+- Improve install instruction [\#316](https://github.com/prettier/vim-prettier/pull/316) ([sharils](https://github.com/sharils))
+- readme: example config: autoformat on save without pragma [\#315](https://github.com/prettier/vim-prettier/pull/315) ([aaronArinder](https://github.com/aaronArinder))
+- Bump ws from 5.2.2 to 5.2.3 [\#305](https://github.com/prettier/vim-prettier/pull/305) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: Adding support for prettier svelte plugin [\#304](https://github.com/prettier/vim-prettier/pull/304) ([0x000def42](https://github.com/0x000def42))
+- Update prettier to latest version [\#301](https://github.com/prettier/vim-prettier/pull/301) ([fvictorio](https://github.com/fvictorio))
+- enh: save buffer marks between runs [\#300](https://github.com/prettier/vim-prettier/pull/300) ([rodrigolive](https://github.com/rodrigolive))
+- fix for \#287: update dependency \(prettier-php\) to fix build [\#299](https://github.com/prettier/vim-prettier/pull/299) ([laher](https://github.com/laher))
+- Bump hosted-git-info from 2.8.5 to 2.8.9 [\#297](https://github.com/prettier/vim-prettier/pull/297) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump lodash from 4.17.19 to 4.17.21 [\#296](https://github.com/prettier/vim-prettier/pull/296) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump handlebars from 4.7.2 to 4.7.7 [\#295](https://github.com/prettier/vim-prettier/pull/295) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump y18n from 3.2.1 to 3.2.2 [\#291](https://github.com/prettier/vim-prettier/pull/291) ([dependabot[bot]](https://github.com/apps/dependabot))
+- docs: Fixing typo in readme [\#289](https://github.com/prettier/vim-prettier/pull/289) ([rschristian](https://github.com/rschristian))
+- fix incorrect reference to PrettierFragment in readme [\#286](https://github.com/prettier/vim-prettier/pull/286) ([whatever555](https://github.com/whatever555))
+- Remove Pipe [\#285](https://github.com/prettier/vim-prettier/pull/285) ([wylie39](https://github.com/wylie39))
+- Add dein config to readme [\#282](https://github.com/prettier/vim-prettier/pull/282) ([Chocrates](https://github.com/Chocrates))
+- Autoformat MDX [\#281](https://github.com/prettier/vim-prettier/pull/281) ([roginfarrer](https://github.com/roginfarrer))
+- \#273 changed tsx filetype to typescriptreact [\#279](https://github.com/prettier/vim-prettier/pull/279) ([yzia2000](https://github.com/yzia2000))
+- Return cwd as default from s:ResolveExecutable [\#274](https://github.com/prettier/vim-prettier/pull/274) ([nhynes](https://github.com/nhynes))
+- Stop blowing away the BufWritePre augroup in ftplugins [\#272](https://github.com/prettier/vim-prettier/pull/272) ([johanventer](https://github.com/johanventer))
+- bump @prettier/plugin-php dep [\#271](https://github.com/prettier/vim-prettier/pull/271) ([hkennyv](https://github.com/hkennyv))
+- fixes \#244 [\#267](https://github.com/prettier/vim-prettier/pull/267) ([okkan](https://github.com/okkan))
+
 ## [1.0.0-beta](https://github.com/prettier/vim-prettier/tree/1.0.0-beta) (2020-09-07)
 
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/1.0.0-alpha...1.0.0-beta)
@@ -21,7 +79,7 @@
 - PrettierFragment not work  [\#241](https://github.com/prettier/vim-prettier/issues/241)
 - Error when running :Prettier on gvim [\#240](https://github.com/prettier/vim-prettier/issues/240)
 - Installation fails in post-update hook using vim plug [\#237](https://github.com/prettier/vim-prettier/issues/237)
-- `autoformat\_config\_present` does not re-evaluate the presence of the prettier config file after vim is started [\#233](https://github.com/prettier/vim-prettier/issues/233)
+- `autoformat_config_present` does not re-evaluate the presence of the prettier config file after vim is started [\#233](https://github.com/prettier/vim-prettier/issues/233)
 - Add support for `prettier 2.x`  [\#232](https://github.com/prettier/vim-prettier/issues/232)
 - PrettierAsync moves cursor to top of buffer [\#229](https://github.com/prettier/vim-prettier/issues/229)
 - Autoformatting Stops Working [\#228](https://github.com/prettier/vim-prettier/issues/228)
@@ -53,7 +111,7 @@
 - Add instructions for installing with vim 8+ [\#236](https://github.com/prettier/vim-prettier/pull/236) ([coolaj86](https://github.com/coolaj86))
 - Autoformat .rb files [\#235](https://github.com/prettier/vim-prettier/pull/235) ([jamesbvaughan](https://github.com/jamesbvaughan))
 - Force reevaluation of autoformat settings at buffer write time [\#234](https://github.com/prettier/vim-prettier/pull/234) ([cjlarose](https://github.com/cjlarose))
-- Fix readme to properly reflect how to downgrade [\#225](https://github.com/prettier/vim-prettier/pull/225) ([ParamagicDev](https://github.com/ParamagicDev))
+- Fix readme to properly reflect how to downgrade [\#225](https://github.com/prettier/vim-prettier/pull/225) ([KonnorRogers](https://github.com/KonnorRogers))
 - New option: prettier\#autoformat\_require\_pragma [\#224](https://github.com/prettier/vim-prettier/pull/224) ([simnalamburt](https://github.com/simnalamburt))
 
 ## [1.0.0-alpha](https://github.com/prettier/vim-prettier/tree/1.0.0-alpha) (2020-02-05)
@@ -98,7 +156,7 @@
 - Support prettier/prettier-ruby [\#172](https://github.com/prettier/vim-prettier/issues/172)
 - vim-prettier clobbering markdown files [\#166](https://github.com/prettier/vim-prettier/issues/166)
 - How to not always auto format by default [\#164](https://github.com/prettier/vim-prettier/issues/164)
-- `E121: Undefined variable: g:prettier\#autoformat` when executing `vi` [\#161](https://github.com/prettier/vim-prettier/issues/161)
+- `E121: Undefined variable: g:prettier#autoformat` when executing `vi` [\#161](https://github.com/prettier/vim-prettier/issues/161)
 - Error parsing Typescript [\#153](https://github.com/prettier/vim-prettier/issues/153)
 - Restarting development from today [\#152](https://github.com/prettier/vim-prettier/issues/152)
 - Unexpected cursor movement [\#151](https://github.com/prettier/vim-prettier/issues/151)
@@ -114,7 +172,7 @@
 
 **Merged pull requests:**
 
-- Use `get\(\)` to check `g:prettier\#autoformat` safely in ftplugin [\#217](https://github.com/prettier/vim-prettier/pull/217) ([hankchiutw](https://github.com/hankchiutw))
+- Use `get()` to check `g:prettier#autoformat` safely in ftplugin [\#217](https://github.com/prettier/vim-prettier/pull/217) ([hankchiutw](https://github.com/hankchiutw))
 - Toggle the autoformat setting based on config file presence. [\#212](https://github.com/prettier/vim-prettier/pull/212) ([atomdmac](https://github.com/atomdmac))
 - making-auto-format-disabled-by-default - Making autoformat disabled by [\#208](https://github.com/prettier/vim-prettier/pull/208) ([mitermayer](https://github.com/mitermayer))
 - Issues/184 fixing undo step [\#207](https://github.com/prettier/vim-prettier/pull/207) ([mitermayer](https://github.com/mitermayer))
@@ -426,10 +484,6 @@
 
 - should support filetype detection when none is available [\#23](https://github.com/prettier/vim-prettier/issues/23)
 
-**Merged pull requests:**
-
-- bugfix: json parser should not add extra comma to the end [\#27](https://github.com/prettier/vim-prettier/pull/27) ([mitermayer](https://github.com/mitermayer))
-
 ## [0.0.9](https://github.com/prettier/vim-prettier/tree/0.0.9) (2017-07-01)
 
 [Full Changelog](https://github.com/prettier/vim-prettier/compare/0.0.8...0.0.9)
@@ -458,6 +512,7 @@
 **Merged pull requests:**
 
 - Add JSON/GraphQL parser \(prettier 1.5\) [\#17](https://github.com/prettier/vim-prettier/pull/17) ([vutran](https://github.com/vutran))
+- Fix default settings [\#16](https://github.com/prettier/vim-prettier/pull/16) ([vutran](https://github.com/vutran))
 
 ## [0.0.7](https://github.com/prettier/vim-prettier/tree/0.0.7) (2017-06-20)
 
@@ -466,7 +521,7 @@
 **Merged pull requests:**
 
 - feature: enabling partial buffer conversion [\#15](https://github.com/prettier/vim-prettier/pull/15) ([mitermayer](https://github.com/mitermayer))
-- fixed typo [\#13](https://github.com/prettier/vim-prettier/pull/13) ([wangsongiam](https://github.com/wangsongiam))
+- fixed typo [\#13](https://github.com/prettier/vim-prettier/pull/13) ([casprwang](https://github.com/casprwang))
 
 ## [0.0.6](https://github.com/prettier/vim-prettier/tree/0.0.6) (2017-06-07)
 
@@ -510,7 +565,6 @@
 
 **Merged pull requests:**
 
-- Fix default settings [\#16](https://github.com/prettier/vim-prettier/pull/16) ([vutran](https://github.com/vutran))
 - Prettier CLI seems to expect 'false' for some parameters instead of 0 [\#10](https://github.com/prettier/vim-prettier/pull/10) ([mitermayer](https://github.com/mitermayer))
 - bugfix: fixing bug where prettier installation of the plugin was never [\#8](https://github.com/prettier/vim-prettier/pull/8) ([mitermayer](https://github.com/mitermayer))
 - Adding support for async formating and making it default for autosave [\#6](https://github.com/prettier/vim-prettier/pull/6) ([mitermayer](https://github.com/mitermayer))

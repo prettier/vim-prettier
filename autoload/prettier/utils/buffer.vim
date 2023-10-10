@@ -61,10 +61,12 @@ function! s:getCharPosition(line, col) abort
     return line2byte(a:line) + (a:col - 2)
 endfun
 
-" Returns [start, end] byte range when on visual mode
-function! prettier#utils#buffer#getCharRange(startSelection, endSelection) abort
-  let l:range = []
-  call add(l:range, s:getCharPosition(a:startSelection, col("'<")))
-  call add(l:range, s:getCharPosition(a:endSelection, col("'>")))
-  return l:range
+" Return the start byte when on visual mode
+function! prettier#utils#buffer#getCharRangeStart(startSelection) abort
+  return s:getCharPosition(a:startSelection, col("'<"))
+endfunction
+
+" Return the end byte when on visual mode
+function! prettier#utils#buffer#getCharRangeEnd(endSelection) abort
+  return s:getCharPosition(a:endSelection, col("'>"))
 endfunction

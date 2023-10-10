@@ -124,7 +124,7 @@ let g:prettier#config#arrow_parens = get(g:,'prettier#config#arrow_parens', 'alw
 
 " Define the flavor of line endings
 " lf|crlf|cr|all
-" defaut: 'lf' 
+" defaut: 'lf'
 let g:prettier#config#end_of_line = get(g:, 'prettier#config#end_of_line', 'lf')
 
 " Print trailing commas wherever possible when multi-line.
@@ -158,7 +158,7 @@ command! -nargs=? -range=% PrettierCliPath call prettier#PrettierCliPath()
 " sends selected text to prettier cli for formatting
 command! -nargs=? -range=% PrettierFragment call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, 0)
 
-" sends entire buffer to prettier cli but format just selection 
+" sends entire buffer to prettier cli but format just selection
 command! -nargs=? -range=% PrettierPartial call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, 1)
 
 " map command
@@ -177,4 +177,5 @@ nnoremap <silent> <Plug>(PrettierCliPath) :PrettierCliPath<CR>
 augroup Prettier
   autocmd!
   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.gql,*.markdown,*.md,*.mdown,*.mkd,*.mkdn,*.mdx,*.vue,*.svelte,*.yml,*.yaml,*.html,*.php,*.rb,*.ruby,*.xml noautocmd call prettier#Autoformat()
+  autocmd FileType javascript,typescript noautocmd BufWritePre <buffer> call prettier#Autoformat()
 augroup end

@@ -176,14 +176,22 @@ Allow auto formatting for files without "@format" or "@prettier" tag
 let g:prettier#autoformat_require_pragma = 0
 ```
 
-**NOTE** The previous two options can be used together for autoformatting files on save without `@format` or `@prettier` tags
+**NOTE** The previous two options can be used together for autoformatting files on save without `@format` or `@prettier` tags.
+In this case, all files are autoformatted despite a config file being present.
 
 ```vim
 let g:prettier#autoformat = 1
 let g:prettier#autoformat_require_pragma = 0
 ```
 
-Toggle the `g:prettier#autoformat` setting based on whether a config file can be found in the current directory or any parent directory. Note that this will override the `g:prettier#autoformat` setting!
+In case autoformatting is only desired when a config file is present:
+
+```
+let g:prettier#autoformat_config_present = 1
+let g:prettier#autoformat_require_pragma = 0
+```
+
+To toggle the `g:prettier#autoformat` setting based on whether a config file can be found in the current directory or any parent directoryy use `autoformat_config_present`. Note that this will override the `g:prettier#autoformat` setting!
 
 ```vim
 let g:prettier#autoformat_config_present = 1

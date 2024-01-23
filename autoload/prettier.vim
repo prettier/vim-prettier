@@ -80,8 +80,11 @@ function! prettier#Prettier(...) abort
       let l:endSelection = line('$')
     endif
 
-    " format buffer
-    call prettier#job#runner#run(l:cmd, l:startSelection, l:endSelection, l:async)
+    " only format files with extension js, jsx, ts, tsx
+    if expand('%:e') =~ '\v^js$|^jsx$|^ts$|^tsx$'
+        " format buffer
+        call prettier#job#runner#run(l:cmd, l:startSelection, l:endSelection, l:async)
+    endif
   else
     call prettier#logging#error#log('EXECUTABLE_NOT_FOUND_ERROR')
   endif

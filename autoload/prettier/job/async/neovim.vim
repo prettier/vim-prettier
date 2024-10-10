@@ -16,7 +16,14 @@ function! prettier#job#async#neovim#run(cmd, startSelection, endSelection) abort
   let l:out = []
   let l:err = []
 
-  let l:job = jobstart([&shell, &shellcmdflag, a:cmd], {
+  if has('win32') || has('win64')
+    " windows doesn't cope well with job cmd lists
+    let l:job_cmd = a:cmd
+  else
+    let l:job_cmd = [&shell, &shellcmdflag, a:cmd]
+  endif
+
+  let l:job = job_start(l:job_cmd, {
     \ 'stdout_buffered': 1,
     \ 'stderr_buffered': 1,
     \ 'on_stdout': {job_id, data, event -> extend(l:out, data)},

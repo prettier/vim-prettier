@@ -137,6 +137,16 @@ By default parsing errors will open the quickfix but can also be disabled
 >
   let g:prettier#quickfix_enabled  = 1
 <
+Running async commands in windows is tricky and usually requires running an extra shell.
+It is set up by default to use cmd as:
+>
+  let g:prettier#win_async_shell_cmds = 'cmd /c'
+<
+but it can be modified to use powershell (desktop or core) or powershell scripts as:
+>
+  let g:prettier#win_async_shell_cmds = 'powershell -Command'
+  let g:prettier#win_async_shell_cmds = 'pwsh -File'
+<
 By default we auto focus on the quickfix when there are errors but can also be disabled
 >
   let g:prettier#quickfix_auto_focus = 0

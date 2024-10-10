@@ -137,6 +137,10 @@ let g:prettier#config#trailing_comma = get(g:,'prettier#config#trailing_comma', 
 " See more: https://prettier.io/docs/en/options.html#require-pragma
 let g:prettier#config#require_pragma=  get(g:, 'prettier#config#require_pragma', 'false')
 
+" Commands to decorate the async job on windows
+" default: 'cmd /c'
+let g:prettier#win_async_shell_cmds = get(g: , 'prettier#win_async_shell_cmds', 'cmd /c')
+
 " synchronous by default
 command! -nargs=? -range=% Prettier call prettier#Prettier(g:prettier#exec_cmd_async, <line1>, <line2>, g:prettier#partial_format)
 

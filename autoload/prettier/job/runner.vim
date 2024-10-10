@@ -27,7 +27,7 @@ function! s:asyncFormat(cmd, startSelection, endSelection) abort
     " required for Windows support on async operations 
     let l:cmd = a:cmd
     if has('win32') || has('win64')
-      let l:cmd = 'cmd.exe /c ' . a:cmd
+        let l:cmd = g:prettier#win_async_shell_cmds . ' ' . a:cmd
     endif
 
     if s:isAsyncVim

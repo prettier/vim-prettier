@@ -14,18 +14,11 @@ function! prettier#utils#buffer#replace(lines, startSelection, endSelection) abo
   execute "normal! a\<BS>"
   try | silent undojoin | catch | endtry
 
-  " delete all lines on the current buffer
-  silent! execute 'lockmarks %delete _'
+  " insert all lines from prettier-ed buffer before the first line on the current buffer
+  silent! lockmarks call append(0, l:newBuffer)
 
-  " replace all lines from the current buffer with output from prettier
-  let l:idx = 0
-  for l:line in l:newBuffer
-    silent! lockmarks call append(l:idx, l:line)
-    let l:idx += 1
-  endfor
-
-  " delete trailing newline introduced by the above append procedure
-  silent! lockmarks execute '$delete _'
+  " then delete all the original lines on the current buffer
+  silent! lockmarks execute (len(l:newBuffer) + 1).',$delete _'
 
   " Restore view
   call winrestview(l:winview)

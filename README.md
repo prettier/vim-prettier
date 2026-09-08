@@ -224,6 +224,8 @@ let g:prettier#autoformat_require_pragma = 0
 
 Toggle the `g:prettier#autoformat` setting based on whether a config file can be found in the buffer's directory or any parent directory. Note that this will override the `g:prettier#autoformat` setting!
 
+Again, this setting will have no effect if not combined with `let g:prettier#autoformat_require_pragma = 0`.
+
 ```vim
 let g:prettier#autoformat_config_present = 1
 ```

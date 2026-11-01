@@ -1,5 +1,5 @@
 ansicolor==0.3.3
 chardet==5.2.0
 PyYAML==6.0.3
-setuptools==83.0.0
+setuptools==84.1.0
 vim-vint==0.3.21
